@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Produtos</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
+	<div class="container">
+		<h2>Lista de Produtos</h2>
+		<a href="/usuarios/inserir" class="btn btn-default">Adicionar Usuário</a>
+		<table class="table" id="tbl-usuario">
+			<thead>
+				<th>User</th>
+				<th>Senha</th>
+				<th>Ações</th>
+			</thead>
+			<tbody>
+				<tr th:each="usuario:  ${usuarios}">
+					<td th:text="${usuario.user}"></td>
+					<td th:text="${usuario.password}"></td>
+					<td><a class="btn btn-warning"
+						th:href="@{/usuarios/editar/{id}(id=${usuario.id})}">Editar</a> <a
+						class="btn btn-danger"
+						th:href="@{/usuarios/excluir/{id}(id=${usuario.id})}">Excluir</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>
