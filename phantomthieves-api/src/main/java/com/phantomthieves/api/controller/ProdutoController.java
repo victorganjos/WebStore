@@ -22,7 +22,7 @@ public class ProdutoController {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
-
+	
 	@GetMapping("/listar")
 	public ModelAndView listar() {
 		ModelAndView resultado = new ModelAndView("produtos/listar");
