@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,12 +44,12 @@ public class UploadController {
 
 	// POST: Do Upload
 	@PostMapping("/uploadMultiFile")
-	public ModelAndView uploadMultiFileHandlerPOST(HttpServletRequest request, @ModelAttribute("myUploadForm") Upload myUploadForm) {
+	public String uploadMultiFileHandlerPOST(HttpServletRequest request, @ModelAttribute("myUploadForm") Upload myUploadForm) {
 		return this.doUpload(request, myUploadForm);
 
 	}
 
-	private ModelAndView doUpload(HttpServletRequest request, //
+	private String doUpload(HttpServletRequest request, //
 			Upload myUploadForm) {
 		
 		Produto produto = new Produto();
@@ -58,13 +57,11 @@ public class UploadController {
 		Integer idProduto = produto.getId();
 		
 		String name = "";
-		
-		ModelAndView resultado = new ModelAndView("imagem/uploadResult");
 		String description = myUploadForm.getDescription();
 		System.out.println("Description: " + description);
 
 		// Root Directory.
-		String uploadRootPath = "C:\\Users\\fabio.msilva21\\Desktop\\tet";
+		String uploadRootPath = "C:\\Users\\Fabio\\Desktop\\Nova pasta (2)";
 		System.out.println("uploadRootPath=" + uploadRootPath);
 
 		File uploadRootDir = new File(uploadRootPath);
@@ -107,13 +104,7 @@ public class UploadController {
 		}
 		produtoRepository.save(produto);
 	
-		
-
-		
-		resultado.addObject("description", description);
-		resultado.addObject("uploadedFiles", uploadedFiles);
-		resultado.addObject("failedFiles", failedFiles);
-		return resultado;
+		return "redirect:/produtos/listar";
 	}
 
 }
