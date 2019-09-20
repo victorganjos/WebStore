@@ -45,7 +45,7 @@ public class ProdutoController {
 	@PostMapping("/inserir")
 	public String inserir(Produto produto) {
 		produtoRepository.save(produto);
-		return "redirect:/produtos/listar";
+		return "redirect:/imagem/uploadMultiFile";
 	}
 	
 	@GetMapping({"/pesquisarPorNome/{nomeProduto}", "/pesquisarPorNome"})

@@ -1,10 +1,17 @@
 package com.phantomthieves.api.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -41,6 +48,11 @@ public class Produto {
 	
 	@Column(name = "PRECO_PRODUTO")
 	private Double precoProduto;
+	
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="COD_PRODUTO")
+	private List<Imagem> imagens;
 	
 	public Produto() {
 	
@@ -125,10 +137,23 @@ public class Produto {
 	public void setPrecoProduto(Double precoProduto) {
 		this.precoProduto = precoProduto;
 	}
+
+	public List<Imagem> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<Imagem> imagens) {
+		this.imagens = imagens;
+	}
 	
 	
-	
-	
-	
+	public void addImagem(Imagem theImagem) {
+		
+		if(imagens == null) {
+			imagens = new ArrayList<>();
+		}
+		
+		imagens.add(theImagem);
+	}
 	
 }

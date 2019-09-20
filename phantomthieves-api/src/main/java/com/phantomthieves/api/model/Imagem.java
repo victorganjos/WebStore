@@ -1,27 +1,59 @@
 package com.phantomthieves.api.model;
 
-import org.springframework.web.multipart.MultipartFile;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="IMAGEM_PRODUTO")
 public class Imagem {
-	private String description;
-
-	// Upload files.
-	private MultipartFile[] fileDatas;
-
-	public String getDescription() {
-		return description;
+	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "COD_IMAGEM")
+	private Integer id;
+	
+	@Column(name = "NOME_ARQUIVO")
+	private String nomeArquivo;
+	
+	@Column(name = "LOCAL_ARQUIVO")
+	private String localArquivo;
+	
+	public Imagem() {
+		
+	}
+	
+	public Imagem(String nomeArquivo, String localArquivo) {
+		super();
+		this.nomeArquivo = nomeArquivo;
+		this.localArquivo = localArquivo;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Integer getId() {
+		return id;
 	}
 
-	public MultipartFile[] getFileDatas() {
-		return fileDatas;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public void setFileDatas(MultipartFile[] fileDatas) {
-		this.fileDatas = fileDatas;
+	public String getNomeArquivo() {
+		return nomeArquivo;
 	}
 
+	public void setNomeArquivo(String nomeArquivo) {
+		this.nomeArquivo = nomeArquivo;
+	}
+
+	public String getLocalArquivo() {
+		return localArquivo;
+	}
+
+	public void setLocalArquivo(String localArquivo) {
+		this.localArquivo = localArquivo;
+	}
 }

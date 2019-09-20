@@ -7,7 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.phantomthieves.api.model.Produto;
 
-public interface ProdutoRepository extends JpaRepository<Produto,Integer>{
-	
+public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
+
 	List<Produto> findByNomeProdutoContaining(String nomeProduto);
+
+	@Query(value = "SELECT * FROM PRODUTO ORDER BY COD_PRODUTO DESC LIMIT 1;", nativeQuery = true)
+	Produto findByLast();
+
 }
