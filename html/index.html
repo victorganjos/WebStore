@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<link rel="stylesheet" href=".\css\card.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Outworld Games</title>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.html">Outworld Games</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample" aria-controls="navbarsExample" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+     <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PS4  </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Consoles</a>
+          <a class="dropdown-item" href="#">Jogos</a>
+          <a class="dropdown-item" href="#">Acessórios</a>
+        </div>
+      </li>
+	  <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Xbox One  </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Consoles</a>
+          <a class="dropdown-item" href="#">Jogos</a>
+          <a class="dropdown-item" href="#">Acessórios</a>
+        </div>
+      </li>
+	  <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nintendo Switch  </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Consoles</a>
+          <a class="dropdown-item" href="#">Jogos</a>
+          <a class="dropdown-item" href="#">Acessórios</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-md-0">
+      <input class="form-control" type="text" placeholder="Buscar">
+    </form>
+  </div>
+</nav>
+</head>
+
+		<!--Corpo da Pag-->
+		<article>
+
+			<!--Local onde será criado as tags por javascript (Lazyload)-->
+
+			<!--O JS Vai criar aqui dentro!-->
+			<br>
+			<div id="botao">
+				<button type="button" class="btn btn-outline-dark" onclick=" OrdenaLista(arr, 'idPrec', 'ASC');">Ordena
+					por
+					PRECO Crescente</button>
+				<button type="button" class="btn btn-outline-dark" onclick=" OrdenaLista(arr, 'idPrec', 'DESC');">Ordena
+					por
+					PRECO Decrescente</button>
+			</div><br>
+			<div class="row" id="listadeItens">
+				<div class="col-md-4">
+					<figure class="card card-product" id="1">
+						<div class="img-wrap">
+							<a href=".\detalheProduto.html">
+								<img src="images/1.jpg">
+						</div>
+						<div class="col-md-12 text-center">
+							<figcaption>Playstation 3 - Super SLIM</figcaption>
+						</div>
+						<div class="price-wrap h5 text-center">
+							</a>
+							<span class="preco">972,94</span>
+						</div>
+					</figure>
+				</div>
+				<div class="col-md-4">
+					<figure class="card card-product" id="2">
+						<div class="img-wrap">
+							<a href=".\detalheProduto.html">
+								<img src="images/2.jpg">
+						</div>
+						<div class="col-md-12 text-center">
+							<figcaption>Playstation 4</figcaption>
+						</div>
+						<div class="price-wrap h5 text-center">
+							</a>
+							<span class="preco">1549,00</span>
+						</div>
+					</figure>
+				</div>
+				<div class="col-md-4">
+					<figure class="card card-product" id="3">
+						<div class="img-wrap">
+							<a href=".\detalheProduto.html">
+								<img src="images/3.jpg">
+						</div>
+						<div class="col-md-12 text-center">
+							<figcaption>Xbox One</figcaption>
+						</div>
+						<div class="price-wrap h5 text-center">
+							</a>
+							<span class="preco">1599,00</span>
+						</div>
+					</figure>
+				</div>
+				<div class="col-md-4">
+					<figure class="card card-product" id="4">
+						<div class="img-wrap">
+							<a href=".\detalheProduto.html">
+								<img src="images/4.jpg">
+						</div>
+						<div class="col-md-12 text-center">
+							<figcaption>Nintendo Switch</figcaption>
+						</div>
+						<div class="price-wrap h5 text-center">
+							</a>
+							<span class="preco">1664,00</span>
+						</div>
+					</figure>
+				</div>
+				<div class="col-md-4">
+					<figure class="card card-product" id="5">
+						<div class="img-wrap">
+							<a href=".\detalheProduto.html">
+								<img src="images/5.jpg">
+						</div>
+						<div class="col-md-12 text-center">
+							<figcaption>Zelda - Breath Of The Wild</figcaption>
+						</div>
+						<div class="price-wrap h5 text-center">
+							</a>
+							<span class="preco">295,00</span>
+						</div>
+					</figure>
+				</div>
+				<div class="col-md-4">
+					<figure class="card card-product" id="6">
+						<div class="img-wrap">
+							<a href=".\detalheProduto.html">
+								<img src="images/6.jpg">
+						</div>
+						<div class="col-md-12 text-center">
+							<figcaption>Resident Evil 2 (PS4)</figcaption>
+						</div>
+						<div class="price-wrap h5 text-center">
+							</a>
+							<span class="preco">140,94</span>
+						</div>
+					</figure>
+				</div>
+				<div class="col-md-4">
+					<figure class="card card-product" id="7">
+						<div class="img-wrap">
+							<a href=".\detalheProduto.html">
+								<img src="images/7.jpg">
+						</div>
+						<div class="col-md-12 text-center">
+							<figcaption>FIFA 19 (Xbox One)</figcaption>
+						</div>
+						<div class="price-wrap h5 text-center">
+							</a>
+							<span class="preco">120,34</span>
+						</div>
+					</figure>
+				</div>
+				<div class="col-md-4">
+					<figure class="card card-product" id="8">
+						<div class="img-wrap">
+							<a href=".\detalheProduto.html">
+								<img src="images/8.jpg">
+						</div>
+						<div class="col-md-12 text-center">
+							<figcaption>Red Dead Redemption 2 (All Platforms)</figcaption>
+						</div>
+						<div class="price-wrap h5 text-center">
+							</a>
+							<span class="preco">150,14</span>
+						</div>
+					</figure>
+				</div>
+				<div class="col-md-4">
+					<figure class="card card-product" id="9">
+						<div class="img-wrap">
+							<a href=".\detalheProduto.html">
+								<img src="images/9.jpg">
+						</div>
+						<div class="col-md-12 text-center">
+							<figcaption>God of War</figcaption>
+						</div>
+						<a>
+							<div class="price-wrap h5 text-center">
+								<span class="preco">89,99</span>
+							</div>
+					</figure>
+				</div>
+			</div>
+	</div>
+	</article>
+	</body>
+	</html>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ </div>
+ </main>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+<footer class="footer">
+      <div class="container">
+        <span class="text-muted">©OutworldGames - 2019 - All rights reserved.</span>
+      </div>
+    </footer>
+</body>
+</html>
