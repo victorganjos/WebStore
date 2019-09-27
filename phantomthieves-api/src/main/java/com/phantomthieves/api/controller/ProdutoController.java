@@ -62,13 +62,13 @@ public class ProdutoController {
 
 	}
 
-	@PostMapping("/editar/")
+	@PostMapping("/editar/{produto.id}")
 	public String alterar(Produto produto) {
 		produtoRepository.save(produto);
 		return "redirect:/produtos/listar";
 	}
 
-	@GetMapping({ "/pesquisarPorNome/{nomeProduto}", "/pesquisarPorNome" })
+	@GetMapping({ "/listar/{nomeProduto}", "/pesquisarPorNome" })
 	public @ResponseBody List<Produto> pesquisarPorNome(@PathVariable Optional<String> nomeProduto) {
 		if (nomeProduto.isPresent()) {
 			return produtoRepository.findByNomeProdutoContaining(nomeProduto.get());

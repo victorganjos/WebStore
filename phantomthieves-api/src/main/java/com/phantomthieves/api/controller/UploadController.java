@@ -61,7 +61,7 @@ public class UploadController {
 		System.out.println("Description: " + description);
 
 		// Root Directory.
-		String uploadRootPath = "C:\\Users\\Fabio\\Desktop\\Nova pasta (2)";
+		String uploadRootPath = "C:\\Users\\Caio\\Documents\\Web-Images";
 		System.out.println("uploadRootPath=" + uploadRootPath);
 
 		File uploadRootDir = new File(uploadRootPath);

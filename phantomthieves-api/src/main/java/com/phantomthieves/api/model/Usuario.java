@@ -19,7 +19,7 @@ public class Usuario {
 	
 	@Column(name = "USER", length = 50, nullable = false)
 	@NotNull(message = "O user é obrigatório")
-	@Length(max= 50, min = 3, message="O nome de usuário deve conter entrer 3 e 50 caracteres")
+	@Length(max= 50, min = 3, message="O email de usuário deve conter entrer 3 e 50 caracteres")
 	private String user;
 	
 	
@@ -27,7 +27,11 @@ public class Usuario {
 	@NotNull(message = "A senha é obrigatório")
 	private String password;
 
-
+	@Column(name = "PERFIL", length = 50, nullable = false)
+	@NotNull(message = "O perfil é obrigatório")
+	@Length(max= 50, min = 3, message="O perfil de usuário deve conter entrer 3 e 50 caracteres")
+	private String perfil;
+	
 	public Usuario() {
 		super();
 	}
@@ -35,11 +39,12 @@ public class Usuario {
 
 	public Usuario(Integer id,
 			@NotNull(message = "O user é obrigatório") @Length(max = 50, min = 3, message = "O nome de usuário deve conter entrer 3 e 50 caracteres") String user,
-			@NotNull(message = "A senha é obrigatório") String password) {
+			@NotNull(message = "A senha é obrigatório") String password, @NotNull(message = "O perfil é obrigatório") String perfil) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.password = password;
+		this.perfil = perfil;
 	}
 
 
@@ -62,7 +67,14 @@ public class Usuario {
 		this.user = user;
 	}
 
-
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+	
+	public String getPerfil() {
+		return perfil;
+	}
+	
 	public String getPassword() {
 		return password;
 	}

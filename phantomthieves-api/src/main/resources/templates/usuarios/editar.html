@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Incluir Usuário</title>
+<title>Alterar Usuário</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -12,28 +12,29 @@
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container mt-4 border">
-		<h3>Inserção de novo Usuário</h3>
-		<form class="form-horizontal" action="/usuarios/inserir" method="post"
+		<h3>Edição de usuário</h3>
+		<form class="form-horizontal" action="/usuarios/editar/{usuario.id}" method="post"
 			th:object="${usuario}">
 			<div class="row">
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-3">
 					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('user')}">
-						<label th:errors="*{user}" class="validation-message"></label>
+						th:if="${#fields.hasErrors('id')}">
+						<label th:errors="*{id}" class="validation-message"></label>
 					</div>
+					<label>Id:</label> <input type="text" class="form-control"
+						th:field="*{id}" ReadOnly>
+				</div>
+			
+				<div class="form-group col-md-3">
 					<label>E-mail usuário:</label> <input type="email" class="form-control"
 						th:field="*{user}" required>
 				</div>
-				<div class="form-group col-md-4">
-					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('password')}">
-						<label th:errors="*{password}" class="validation-message"></label>
-					</div>
-					<label>Password:</label> <input type="password" class="form-control"
+				<div class="form-group col-md-3">
+					<label>Password:</label> <input type="text" class="form-control"
 						th:field="*{password}" required>
 				</div>
 				
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-3">
 					<label>Perfil:</label>
 					<select class="form-control" th:field="*{perfil}" required>
 					  <option value="Administrador">Administrador</option>
@@ -41,8 +42,8 @@
 					</select>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary ">Salvar</button>
-			<button type="reset" class="btn btn-danger">Cancelar</button>
+			<button type="submit" class="btn btn-primary mb-1">Salvar</button>
+			<button type="reset" class="btn btn-danger mb-1">Cancelar</button>
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

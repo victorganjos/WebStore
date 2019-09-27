@@ -2,33 +2,41 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
 <meta charset="UTF-8"></meta>
-<title>Produtos</title>
+<title>Usuários</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 
-
+<script>
+	function ConfirmaExclusao(){
+		if(confirm("Deseja excluir o usuário selecionado ?"))
+			return true;
+		else
+			return false;
+	}
+</script>
 </head>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container">
-		<h2>Lista de Produtos</h2>
-		<a href="/usuarios/inserir" class="btn btn-default">Adicionar Usuário</a>
+		<h2>Lista de Usuários</h2>
+		<a href="/usuarios/inserir" class="btn btn-outline-dark">Adicionar Usuário</a>
 		<table class="table" id="tbl-usuario">
 			<thead>
+				<th>Id</th>
 				<th>User</th>
-				<th>Senha</th>
+				<th>Perfil</th>
 				<th>Ações</th>
 			</thead>
 			<tbody>
 				<tr th:each="usuario:  ${usuarios}">
+					<td th:text="${usuario.id}"></td>
 					<td th:text="${usuario.user}"></td>
-					<td th:text="${usuario.password}"></td>
-					<td><a class="btn btn-warning"
-						th:href="@{/usuarios/editar/{id}(id=${usuario.id})}">Editar</a> <a
-						class="btn btn-danger"
-						th:href="@{/usuarios/excluir/{id}(id=${usuario.id})}">Excluir</a>
+					<td th:text="${usuario.perfil}"></td>
+					<td>
+					<a class="btn btn-warning" th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" >Editar</a> 
+					<a class="btn btn-danger" th:href="@{/usuarios/excluir/{id}(id=${usuario.id})}" onClick="return ConfirmaExclusao();">Excluir</a>
 					</td>
 				</tr>
 			</tbody>
