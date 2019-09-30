@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.phantomthieves.api.model.Produto;
 import com.phantomthieves.api.model.Usuario;
 import com.phantomthieves.api.repository.UsuarioRepository;
 

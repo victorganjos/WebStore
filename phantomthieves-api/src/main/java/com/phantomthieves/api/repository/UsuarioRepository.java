@@ -1,6 +1,7 @@
 package com.phantomthieves.api.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,4 +16,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer>{
 	@Modifying
 	@Query(value = "UPDATE USUARIO SET ATIVO = FALSE WHERE COD_USUARIO = ?;", nativeQuery = true)
 	void deleteDesativo(Integer id);
+	
+	public Optional<Usuario> findByUser(String user);
 }
