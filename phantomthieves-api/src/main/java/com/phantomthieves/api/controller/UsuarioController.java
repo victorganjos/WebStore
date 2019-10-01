@@ -3,6 +3,7 @@ package com.phantomthieves.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,10 @@ import com.phantomthieves.api.repository.UsuarioRepository;
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
-
+	
+	@Autowired
+	private BCryptPasswordEncoder bc;
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
@@ -40,6 +44,7 @@ public class UsuarioController {
 	
 	@PostMapping("/inserir")
 	public String inserir(Usuario usuario) {
+		usuario.setPassword(bc.encode(usuario.getPassword()));
 		usuarioRepository.save(usuario);
 		return "redirect:/usuarios/listar";
 	}

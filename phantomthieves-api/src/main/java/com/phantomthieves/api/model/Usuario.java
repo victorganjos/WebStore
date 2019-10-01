@@ -18,6 +18,8 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 public class Usuario {
 	
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "COD_USUARIO")
