@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	 
 
 	String[] resources = new String[]{
-	            "/include/**","/css/**","/icons/**","/images/**","/js/**","/layer/**"
+	            "/include/**","/css/**","/icons/**","/images/**","/js/**","/layer/**","C:/**"
 	};
 		
 	private static final String[] PUBLIC_MATHCERS = {

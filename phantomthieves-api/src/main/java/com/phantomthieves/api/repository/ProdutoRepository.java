@@ -18,6 +18,9 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 	@Query(value = "SELECT * FROM PRODUTO WHERE ativo = true;", nativeQuery = true)
 	List<Produto> findAllAtivo();
 	
+	@Query(value = "SELECT * FROM PRODUTO WHERE 1=2;", nativeQuery = true)
+	List<Produto> findAllProduto();
+	
 	@Modifying
 	@Query(value = "UPDATE Produto SET ativo = false where COD_PRODUTO = ?;", nativeQuery = true)
 	void deleteDesativo(Integer id);

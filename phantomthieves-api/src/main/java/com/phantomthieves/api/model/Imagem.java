@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +24,10 @@ public class Imagem {
 	
 	@Column(name = "LOCAL_ARQUIVO")
 	private String localArquivo;
+	
+	@ManyToOne
+	@JoinColumn(name= "COD_PRODUTO", referencedColumnName = "COD_PRODUTO")
+	private Produto codProduto;
 	
 	public Imagem() {
 		
@@ -56,4 +62,5 @@ public class Imagem {
 	public void setLocalArquivo(String localArquivo) {
 		this.localArquivo = localArquivo;
 	}
+	
 }
