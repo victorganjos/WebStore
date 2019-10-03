@@ -13,9 +13,13 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer>{
 	@Query(value = "SELECT * FROM USUARIO WHERE ATIVO = TRUE;", nativeQuery = true)
 	List<Usuario> findAllAtivo();
 	
-	@Modifying
+	
 	@Query(value = "UPDATE USUARIO SET ATIVO = FALSE WHERE COD_USUARIO = ?;", nativeQuery = true)
 	void deleteDesativo(Integer id);
+	
+	@Modifying
+	@Query(value = "INSERT ROLE_USERS(COD_USUARIO, COD_ROLE) VALUES(?, ?);", nativeQuery = true)
+	void incluiRegra(Integer idUsuario, Integer idRegra);
 	
 	public Optional<Usuario> findByUser(String user);
 }
