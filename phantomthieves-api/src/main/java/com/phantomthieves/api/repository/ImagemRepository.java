@@ -12,6 +12,8 @@ public interface ImagemRepository extends JpaRepository<Imagem, Integer>{
 	
 	@Query(value = "SELECT * FROM PRODUTO ORDER BY COD_IMAGEM DESC LIMIT 1;", nativeQuery = true)
 	Imagem findByLast();
-
+	
+	@Query(value = "SELECT * FROM VW_PRODUTO_IMAGEM;", nativeQuery = true)
+	List<Imagem> findImg();
 
 }

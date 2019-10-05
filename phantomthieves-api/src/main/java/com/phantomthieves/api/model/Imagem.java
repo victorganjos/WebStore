@@ -25,6 +25,13 @@ public class Imagem {
 	@Column(name = "LOCAL_ARQUIVO")
 	private String localArquivo;
 	
+	@Column(name = "PRECO_PRODUTO")
+	private Double precoProduto;	
+
+	@Column(name = "NOME_PRODUTO")
+	private String nomeProduto;
+	
+	
 	@ManyToOne
 	@JoinColumn(name= "COD_PRODUTO", referencedColumnName = "COD_PRODUTO")
 	private Produto codProduto;
@@ -47,6 +54,22 @@ public class Imagem {
 		this.id = id;
 	}
 
+	public Double getPrecoProduto() {
+		return precoProduto;
+	}
+
+	public void setPrecoProduto(Double precoProduto) {
+		this.precoProduto = precoProduto;
+	}
+	
+	public String getNomeProduto() {
+		return nomeProduto;
+	}
+
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
+	
 	public String getNomeArquivo() {
 		return nomeArquivo;
 	}

@@ -2,20 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Incluir Produto</title>
+<title>Phantom Thieves</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 
 </head>
+
+
+
+<style>
+    
+    img{
+
+    	width: 150px;
+    	height: 150px;
+    }
+    
+    .card{
+    font-weight: 700;
+    text-align: center;
+    border:double;
+	margin-left: 100px;
+    margin-top: 100px;
+    }
+    
+</style>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
-	<div class="container mt-5">
-		<div class="row" id="listadeItens">
-			<div class="col-md-4 mt-1">
-				<div th:each="produto: ${produtos}">
-				<img th:src="${produto.localArquivo}">
+		<div class="row">	
+		<div th:each="imagem:  ${imagem}">
+			<div class="col-md-12 ">
+			<div class="card">
+				<div class="card-header">
+				<img th:src="${imagem.localArquivo}">
+				</div>
+				<div class="card-body">
+				<p th:text="${imagem.nomeProduto}">
+				</p><p th:text="${imagem.precoProduto}">
+					</div>
 					</div>
 					</div>
 					</div>

@@ -30,8 +30,7 @@ public class UploadController {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
-	@Autowired
-	private ImagemRepository imagemRepository;
+	
 	
 	@GetMapping("/uploadMultiFile")
 	public ModelAndView uploadMultiFileHandler() {
@@ -54,14 +53,14 @@ public class UploadController {
 		
 		Produto produto = new Produto();
 		produto = produtoRepository.findByLast();
-		Integer idProduto = produto.getId();
+
 		
 		String name = "";
 		String description = myUploadForm.getDescription();
 		System.out.println("Description: " + description);
 
 		// Root Directory.
-		String uploadRootPath = "C:\\Users\\Caio\\Documents\\Web-Images";
+		String uploadRootPath = "/images/";
 		System.out.println("uploadRootPath=" + uploadRootPath);
 
 		File uploadRootDir = new File(uploadRootPath);
@@ -77,8 +76,8 @@ public class UploadController {
 		for (MultipartFile fileData : fileDatas) {
 
 			// Client File Name
-			name = idProduto +fileData.getOriginalFilename();
-			img.add(new Imagem(name, uploadRootPath));
+			name = fileData.getOriginalFilename();
+			img.add(new Imagem(name, uploadRootPath+name));
 		
 			if (name != null && name.length() > 0) {
 				try {

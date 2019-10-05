@@ -18,19 +18,10 @@
 			enctype="multipart/form-data">
 			<div class="row">
 				<div class="mb-1 ml-1 col-md-6">
-					<label>File to upload (1):</label> <input th:field="*{fileDatas}" type="file" />
+					<label>Escolha a Imagem:</label> <input th:field="*{fileDatas}" type="file" />
 				</div>
 			</div>
-			<div class="row">
-				<div class="mb-1 ml-1 col-md-6">
-					<label>File to upload (2): </label> <input th:field="*{fileDatas}" type="file" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="mb-1 ml-1 col-md-6">
-					<label>File to upload (3): </label> <input th:field="*{fileDatas}" type="file" />
-				</div>
-			</div>
+			
 			<input type="submit" class="btn btn-success mb-1" value="Upload">
 			
 		</form>
