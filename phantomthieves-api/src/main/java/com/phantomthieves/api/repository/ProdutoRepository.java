@@ -24,5 +24,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 	@Modifying
 	@Query(value = "UPDATE Produto SET ativo = false where COD_PRODUTO = ?;", nativeQuery = true)
 	void deleteDesativo(Integer id);
-
+	
+	@Query(value = "SELECT * FROM PRODUTO WHERE NOME_PRODUTO LIKE %?1% AND ATIVO = TRUE", nativeQuery = true)
+	List<Produto> findAllNomeProduto(String nome);
 }

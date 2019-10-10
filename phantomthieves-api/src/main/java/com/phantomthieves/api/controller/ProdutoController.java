@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -76,5 +77,13 @@ public class ProdutoController {
 			return produtoRepository.findAll();
 		}
 
+	}
+	
+	@PostMapping("/listar")
+	public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomePessoa) {
+		ModelAndView resultado = new ModelAndView("produtos/listar");
+		List<Produto> produtos = produtoRepository.findAllNomeProduto(nomePessoa);
+		resultado.addObject("produtos", produtos);
+		return resultado;
 	}
 }
