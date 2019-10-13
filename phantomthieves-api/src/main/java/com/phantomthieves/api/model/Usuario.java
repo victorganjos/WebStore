@@ -17,43 +17,42 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Usuario {
-	
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "COD_USUARIO")
 	private Integer id;
-	
+
 	@Column(name = "USER", length = 50, nullable = false)
 	@NotNull(message = "O user é obrigatório")
-	@Length(max= 50, min = 3, message="O email de usuário deve conter entrer 3 e 50 caracteres")
+	@Length(max = 50, min = 3, message = "O email de usuário deve conter entrer 3 e 50 caracteres")
 	private String user;
-	
-	
+
 	@Column(name = "PASSWORD", length = 50, nullable = false)
 	@NotNull(message = "A senha é obrigatório")
 	private String password;
+	
+	@Column(name = "PASSWORD_CONFIRM", length = 50, nullable = false)
+	@NotNull(message = "A senha confirmação de senha é obrigatória")
+	private String passwordConfirm;
 
 	@Column(name = "PERFIL", length = 50, nullable = false)
 	@NotNull(message = "O perfil é obrigatório")
-	@Length(max= 50, min = 3, message="O perfil de usuário deve conter entrer 3 e 50 caracteres")
+	@Length(max = 50, min = 3, message = "O perfil de usuário deve conter entrer 3 e 50 caracteres")
 	private String perfil;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name="ROLE_USERS",
-	joinColumns=@JoinColumn(name="COD_USUARIO"),
-	inverseJoinColumns=@JoinColumn(name="COD_ROLE"))
+	@JoinTable(name = "ROLE_USERS", joinColumns = @JoinColumn(name = "COD_USUARIO"), inverseJoinColumns = @JoinColumn(name = "COD_ROLE"))
 	private Set<Roles> roles;
-	
+
 	public Usuario() {
 		super();
 	}
 
-
 	public Usuario(Integer id,
 			@NotNull(message = "O user é obrigatório") @Length(max = 50, min = 3, message = "O nome de usuário deve conter entrer 3 e 50 caracteres") String user,
-			@NotNull(message = "A senha é obrigatório") String password, @NotNull(message = "O perfil é obrigatório") String perfil) {
+			@NotNull(message = "A senha é obrigatório") String password,
+			@NotNull(message = "O perfil é obrigatório") String perfil) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -61,21 +60,17 @@ public class Usuario {
 		this.perfil = perfil;
 	}
 
-
 	public Integer getId() {
 		return id;
 	}
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
 	public String getUser() {
 		return user;
 	}
-
 
 	public void setUser(String user) {
 		this.user = user;
@@ -84,30 +79,36 @@ public class Usuario {
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
-	
+
 	public String getPerfil() {
 		return perfil;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
-
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
 	public Set<Roles> getRoles() {
 		return roles;
 	}
 
-
 	public void setRoles(Set<Roles> roles) {
 		this.roles = roles;
 	}
+	
+	
 
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
 
 	@Override
 	public int hashCode() {
@@ -116,7 +117,6 @@ public class Usuario {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -134,7 +134,5 @@ public class Usuario {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }

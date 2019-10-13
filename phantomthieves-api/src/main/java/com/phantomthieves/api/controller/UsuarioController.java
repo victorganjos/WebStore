@@ -24,13 +24,13 @@ import com.phantomthieves.api.repository.UsuarioRepository;
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bc;
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@GetMapping("/listar")
 	public ModelAndView listar() {
 		ModelAndView resultado = new ModelAndView("usuarios/listar");
@@ -38,35 +38,34 @@ public class UsuarioController {
 		resultado.addObject("usuarios", usuarios);
 		return resultado;
 	}
-	
-	
+
 	@GetMapping("/inserir")
 	public ModelAndView inserir() {
 		ModelAndView resultado = new ModelAndView("usuarios/inserir");
 		resultado.addObject("usuario", new Usuario());
 		return resultado;
-		
+
 	}
-	
+
 	@PostMapping("/inserir")
 	@Transactional
 	public String inserir(Usuario usuario) {
 		usuario.setPassword(bc.encode(usuario.getPassword()));
-	
-		//Set<Roles> roles = new HashSet<Roles>(); 
-		//Roles aux;
-		
+
+		// Set<Roles> roles = new HashSet<Roles>();
+		// Roles aux;
+
 		usuarioRepository.save(usuario);
-		
-		if(usuario.getPerfil().equals("Administrador")) {
+
+		if (usuario.getPerfil().equals("Administrador")) {
 			usuarioRepository.incluiRegra(usuario.getId(), 1);
-		}else {
+		} else {
 			usuarioRepository.incluiRegra(usuario.getId(), 2);
 		}
-		
+
 		return "redirect:/usuarios/listar";
 	}
-	
+
 	@GetMapping("/editar/{id}")
 	public ModelAndView editar(@PathVariable Integer id) {
 		ModelAndView resultado = new ModelAndView("usuarios/editar");
@@ -75,13 +74,13 @@ public class UsuarioController {
 		return resultado;
 
 	}
-	
+
 	@PostMapping("/editar/{usuario.id}")
 	public String alterar(Usuario usuario) {
 		usuarioRepository.save(usuario);
 		return "redirect:/usuarios/listar";
 	}
-	
+
 	@GetMapping("/excluir/{id}")
 	@Transactional
 	public String excluir(@PathVariable Integer id) {
@@ -89,7 +88,7 @@ public class UsuarioController {
 		return "redirect:/usuarios/listar";
 
 	}
-	
+
 	@PostMapping("/listar")
 	public ModelAndView pesquisar(@RequestParam("nomePesquisaUsu") String nomeUsu) {
 		ModelAndView resultado = new ModelAndView("usuarios/listar");
