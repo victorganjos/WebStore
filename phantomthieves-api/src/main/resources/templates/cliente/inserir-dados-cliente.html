@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Novo Cadastro</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
+	<div class="container mt-4 border">
+		<h3>Cadastro de Novo Usuário</h3><br>
+		<form class="form-horizontal" action="/cliente/inserir-dados-cliente"
+			method="post" th:object="${cliente}">
+			<div class="row">
+				<div class="form-group col-md-10">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('name')}">
+						<label th:errors="*{name}" class="validation-message"></label>
+					</div>
+					<label>Nome Completo*:</label> <input type="text"
+						class="form-control" th:field="*{name}"
+						placeholder="Digite aqui o seu nome completo" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-3">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('birthdate')}">
+						<label th:errors="*{birthdate}" class="validation-message"></label>
+					</div>
+					<label>Data de Nascimento*:</label> <input type="date"
+						class="form-control" th:field="*{birthdate}"
+						placeholder="Escolha a data correspondente" required>
+				</div>
+				<div class="form-group col-md-3">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('cpf')}">
+						<label th:errors="*{cpf}" class="validation-message"></label>
+					</div>
+					<label>CPF*:</label> <input type="text" id="cpf"
+						class="form-control" th:field="*{cpf}"
+						placeholder="Digite aqui o seu CPF" required>
+				</div>
+				<div class="form-group col-md-4">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('user')}">
+						<label th:errors="*{user}" class="validation-message"></label>
+					</div>
+					<label>E-mail*:</label> <input type="email" id="user"
+						class="form-control" th:field="*{user}"
+						placeholder="Digite aqui o seu CPF" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-1">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('ddd')}">
+						<label th:errors="*{ddd}" class="validation-message"></label>
+					</div>
+					<label>DDD*:</label> <input type="text" class="form-control"
+						th:field="*{ddd}" placeholder="DDD" required>
+				</div>
+				<div class="form-group col-md-3">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('telephone')}">
+						<label th:errors="*{telephone}" class="validation-message"></label>
+					</div>
+					<label>Contato 1*:</label> <input type="text" class="form-control"
+						th:field="*{telephone}" placeholder="Digite o número telefone"
+						required>
+				</div>
+				<div class="form-group col-md-1">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('dddContactTwo')}">
+						<label th:errors="*{dddContactTwo}" class="validation-message"></label>
+					</div>
+					<label>DDD:</label> <input type="text" class="form-control"
+						th:field="*{dddContactTwo}" placeholder="DDD">
+				</div>
+				<div class="form-group col-md-3">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('telephoneContactTwo')}">
+						<label th:errors="*{telephoneContactTwo}"
+							class="validation-message"></label>
+					</div>
+					<label>Contato 2:</label> <input type="text" class="form-control"
+						th:field="*{telephoneContactTwo}"
+						placeholder="Digite o número telefone">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('address')}">
+						<label th:errors="*{address}" class="validation-message"></label>
+					</div>
+					<label>Logradouro*:</label> <input type="text" class="form-control"
+						th:field="*{address}" placeholder="Digite aqui seu o logradouro"
+						required>
+				</div>
+				<div class="form-group col-md-2">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('addressNumber')}">
+						<label th:errors="*{addressNumber}" class="validation-message"></label>
+					</div>
+					<label>Nº*:</label> <input type="text" class="form-control"
+						th:field="*{addressNumber}" placeholder="ex: A18" required>
+				</div>
+				<div class="form-group col-md-2">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('cep')}">
+						<label th:errors="*{cep}" class="validation-message"></label>
+					</div>
+					<label>CEP*:</label> <input type="text" class="form-control"
+						th:field="*{cep}" placeholder="ex: 04855-070" required>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary ">Salvar</button>
+			<button type="reset" class="btn btn-danger">Cancelar</button>
+		</form>
+		<br>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

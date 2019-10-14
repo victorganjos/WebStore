@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Incluir Produto</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
+	<div class="container mt-4 border">
+		<h3>Inserção de novo Produto</h3>
+		<form class="form-horizontal" action="/produtos/editar/{produto.id}" method="post"
+			th:object="${produto}">
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('id')}">
+						<label th:errors="*{id}" class="validation-message"></label>
+					</div>
+					<label>Id:</label> <input type="text" class="form-control"
+						th:field="*{id}" ReadOnly>
+				</div>
+			
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('nomeProduto')}">
+						<label th:errors="*{nomeProduto}" class="validation-message"></label>
+					</div>
+					<label>Nome:</label> <input type="text" class="form-control"
+						th:field="*{nomeProduto}">
+				</div>
+				<div class="form-group col-md-3">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('quantidadeProduto')}">
+						<label th:errors="*{quantidadeProduto}" class="validation-message"></label>
+					</div>
+					<label>Quantidade:</label> <input type="text" class="form-control"
+						th:field="*{quantidadeProduto}">
+				</div>
+				<div class="form-group col-md-3">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('precoProduto')}">
+						<label th:errors="*{precoProduto}" class="validation-message"></label>
+					</div>
+					<label>Preço:</label> <input type="text" class="form-control"
+						th:field="*{precoProduto}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('categoriaProduto')}">
+						<label th:errors="*{categoriaProduto}" class="validation-message"></label>
+					</div>
+					<label>Categoria:</label> <input type="text" class="form-control"
+						th:field="*{categoriaProduto}">
+				</div>
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('descricaoResumida')}">
+						<label th:errors="*{descricaoResumida}" class="validation-message"></label>
+					</div>
+					<label>Descrição resumida:</label> <input type="text"
+						class="form-control" th:field="*{descricaoResumida}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-12">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('descricaoDetalhada')}">
+						<label th:errors="*{descricaoDetalhada}" class="validation-message"></label>
+					</div>
+					<label>Descrição Detalhada:</label>
+					<textarea class="form-control"
+						th:field="*{descricaoDetalhada}"
+						rows="4"></textarea>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary mb-1">Salvar</button>
+			<button type="reset" class="btn btn-danger mb-1">Cancelar</button>
+		</form>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

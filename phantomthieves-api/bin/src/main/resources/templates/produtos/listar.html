@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Produtos</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<script>
+	function ConfirmaExclusao(){
+		if(confirm("Deseja excluir o produto selecionado ?"))
+			return true;
+		else
+			return false;
+	}
+</script>
+
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
+	<div class="container">
+		<h2>Lista de Produtos</h2>
+		<a href="/produtos/inserir" class="btn btn-outline-dark">Adicionar Produto</a>
+		<div class="row">
+			<div class="form-group col-md-12">
+				<form action = "" method ="post">
+					<label for="txt-pesquisa-produto">Produto a ser pesquisada</label>
+					<input name = "nomepesquisa" type="text" id="txt-pesquisa-produto" class="form-control" />
+					<button type="submit" class="btn btn-success mt-1" id="btn-pesquisa-produto">Pesquisa</button>
+				</form>
+			</div>
+		</div>
+		<table class="table" id="tbl-produto">
+			<thead>
+				<th>Nome do Produto</th>
+				<th>Categoria Produto</th>
+				<th>Ações</th>
+			</thead>
+			<tbody>
+				<tr th:each="produto:  ${produtos}">
+					<td th:text="${produto.nomeProduto}"></td>
+					<td th:text="${produto.categoriaProduto}"></td>
+					<td><a class="btn btn-warning"
+						th:href="@{/produtos/editar/{id}(id=${produto.id})}">Editar</a> <a
+						class="btn btn-danger"
+						th:href="@{/produtos/excluir/{id}(id=${produto.id})}" onClick="return ConfirmaExclusao();">Excluir</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>
