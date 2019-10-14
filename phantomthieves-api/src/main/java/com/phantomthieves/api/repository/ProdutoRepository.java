@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import com.phantomthieves.api.model.Cliente;
 import com.phantomthieves.api.model.Produto;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
@@ -27,4 +28,5 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 	
 	@Query(value = "SELECT * FROM PRODUTO WHERE NOME_PRODUTO LIKE %?1% AND ATIVO = TRUE", nativeQuery = true)
 	List<Produto> findAllNomeProduto(String nome);
+	
 }

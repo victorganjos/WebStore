@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import com.phantomthieves.api.model.Cliente;
 import com.phantomthieves.api.model.Produto;
 import com.phantomthieves.api.model.Usuario;
 
@@ -24,6 +25,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer>{
 	
 	@Query(value = "SELECT * FROM USUARIO WHERE USER LIKE %?1% AND ATIVO = TRUE", nativeQuery = true)
 	List<Usuario> findAllNomeUsuario(String nomeUsu);
+	
+	@Query(value = "SELECT * FROM USUARIO WHERE USER = ?;", nativeQuery = true)
+	Usuario findByUsername(String username);
 	
 	public Optional<Usuario> findByUser(String user);
 }

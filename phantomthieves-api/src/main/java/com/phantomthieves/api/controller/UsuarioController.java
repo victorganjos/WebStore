@@ -1,11 +1,8 @@
 package com.phantomthieves.api.controller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Role;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.phantomthieves.api.model.Produto;
-import com.phantomthieves.api.model.Roles;
 import com.phantomthieves.api.model.Usuario;
 import com.phantomthieves.api.repository.UsuarioRepository;
 
