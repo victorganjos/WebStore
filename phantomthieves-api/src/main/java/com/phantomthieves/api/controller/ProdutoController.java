@@ -55,7 +55,7 @@ public class ProdutoController {
 
 	}
 
-	@GetMapping("/excluir/{id}")
+	@RequestMapping("/excluir/{id}")
 	@Transactional
 	public String excluir(@PathVariable Integer id) {
 		produtoRepository.deleteDesativo(id);

@@ -1,15 +1,19 @@
 package com.phantomthieves.api.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-@Entity
+@Entity(name = "ENDERECO_ENTREGA")
 public class Endereco {
 
 	@Id
@@ -17,22 +21,45 @@ public class Endereco {
 	@Column(name = "COD_ENDERECO")
 	private Integer id;
 
-	@Column(name = "LOGRADOURO", length = 150, nullable = false)
+	@Column(name = "LOGRADOURO_ENDERECO", length = 150, nullable = false)
 	@NotNull(message = "O logradouro é obrigatório")
 	@Length(max = 150, min = 5, message = "O logradouro do usuário deve conter entrer 5 e 150 caracteres")
 	private String address;
 
-	@Column(name = "CEP", length = 9, nullable = false)
+	@Column(name = "CEP_ENDERECO", length = 9, nullable = false)
 	@NotNull(message = "O CEP é obrigatório")
 	@Length(max = 9, min = 8, message = "O campo CEP deve ser preenchido corretamente (Excesso ou ausência de dígitos)")
 	private String cep;
 
-	@Column(name = "NUMERO_RES", nullable = false)
+	@Column(name = "NUMERO_RES_ENDERECO", nullable = false)
 	@NotNull(message = "O número da residência é obrigatório")
 	@Length(min = 1, message = "O campo de número da residência deve ser preenchido corretamente (Excesso ou ausência de dígitos)")
 	private String addressNumber;
 
-	// private Cliente cod_cliente;
+	@Column(name = "ATIVO", nullable = false)
+	private int ativo;
+
+	@ManyToOne
+	@JoinColumn(name = "COD_CLIENTE", referencedColumnName = "COD_CLIENTE")
+	private Cliente codCliente;
+
+	public Endereco(Integer id,
+			@NotNull(message = "O logradouro é obrigatório") @Length(max = 150, min = 5, message = "O logradouro do usuário deve conter entrer 5 e 150 caracteres") String address,
+			@NotNull(message = "O CEP é obrigatório") @Length(max = 9, min = 8, message = "O campo CEP deve ser preenchido corretamente (Excesso ou ausência de dígitos)") String cep,
+			@NotNull(message = "O número da residência é obrigatório") @Length(min = 1, message = "O campo de número da residência deve ser preenchido corretamente (Excesso ou ausência de dígitos)") String addressNumber,
+			int ativo, Cliente codCliente) {
+		super();
+		this.id = id;
+		this.address = address;
+		this.cep = cep;
+		this.addressNumber = addressNumber;
+		this.ativo = ativo;
+		this.codCliente = codCliente;
+	}
+
+	public Endereco() {
+
+	}
 
 	public Integer getId() {
 		return id;
@@ -64,6 +91,38 @@ public class Endereco {
 
 	public void setNumero(String numero) {
 		this.addressNumber = numero;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getAddressNumber() {
+		return addressNumber;
+	}
+
+	public void setAddressNumber(String addressNumber) {
+		this.addressNumber = addressNumber;
+	}
+
+	public Cliente getCodCliente() {
+		return codCliente;
+	}
+
+	public void setCodCliente(Cliente codCliente) {
+		this.codCliente = codCliente;
+	}
+
+	public int getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(int ativo) {
+		this.ativo = ativo;
 	}
 
 }
