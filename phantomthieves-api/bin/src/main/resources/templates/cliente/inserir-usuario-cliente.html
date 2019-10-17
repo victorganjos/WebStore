@@ -7,24 +7,15 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+
 </head>
-<style>
-	body {
-	min-height: 75rem;
-	padding-top: 4.5rem;
-	}
-</style>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container mt-4 border">
 		<h3>Inserção de novo Usuário</h3>
-		<form class="form-horizontal" action="/cliente/editar-usuario-cliente"
-			method="post" th:object="${usuario}">
+		<form class="form-horizontal" action="/cliente/inserir-usuario-cliente" method="post"
+			th:object="${usuario}">
 			<div class="row">
-				<div>
-					<input type="text" class="form-control" th:field="*{id}" required
-						value="${usuario.id}" hidden="true" readonly="readonly">
-				</div>
 				<div class="form-group col-md-4">
 					<div class="alert alert-danger" role="alert"
 						th:if="${#fields.hasErrors('user')}">
@@ -40,7 +31,7 @@
 						<label th:errors="*{password}" class="validation-message"></label>
 					</div>
 					<label>Senha:</label> <input type="password" class="form-control"
-						th:field="*{password}" value="${usuario.password}" required>
+						th:field="*{password}" required>
 				</div>
 				<div class="form-group col-md-4">
 					<div class="alert alert-danger" role="alert"
@@ -48,10 +39,9 @@
 						<label th:errors="*{passwordConfirm}" class="validation-message"></label>
 					</div>
 					<label>Confirmação de Senha:</label> <input type="password"
-						class="form-control" th:field="*{passwordConfirm}"
-						value="${usuario.passwordConfirm}" required>
+						class="form-control" th:field="*{passwordConfirm}" required>
 				</div>
-				<div class="form-group col-md-4">
+					<div class="form-group col-md-4">
 					<label>Perfil:</label> <select class="form-control"
 						th:field="*{perfil}" required>
 						<option value="Cliente">Cliente</option>

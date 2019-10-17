@@ -9,47 +9,42 @@
 	crossorigin="anonymous">
 
 </head>
-<style>
-	body {
-	min-height: 75rem;
-	padding-top: 4.5rem;
-	}
-</style>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container mt-4 border">
-		<h3>Edição de usuário</h3>
-		<form class="form-horizontal" action="/usuarios/excluir/{usuario.id}" method="post"
-			th:object="${usuario}">
+		<h3>Menu</h3>
+		<form class="form-horizontal" action="/cliente/editar-dados/" 
+			method="get" th:object="${cliente}">
+			<br>
 			<div class="row">
 				<div class="form-group col-md-3">
-					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('id')}">
-						<label th:errors="*{id}" class="validation-message"></label>
-					</div>
-					<label>Id:</label> <input type="text" class="form-control"
-						th:field="*{id}" ReadOnly>
+					<button type="submit" class="btn btn-primary btn-md">
+						&nbsp &nbsp Editar Cadastro &nbsp &nbsp</button>
 				</div>
-			
-				<div class="form-group col-md-3">
-					<label>E-mail usuário:</label> <input type="email" class="form-control"
-						th:field="*{user}" required>
-				</div>
-				<div class="form-group col-md-3">
-					<label>Password:</label> <input type="text" class="form-control"
-						th:field="*{password}" required>
-				</div>
-				
-				<div class="form-group col-md-3">
-					<label>Perfil:</label>
-					<select class="form-control" th:field="*{perfil}" required>
-					  <option value="Administrador">Administrador</option>
-					  <option value="Auxiliar">Auxiliar</option>
-					</select>
-				</div>
+				<label>Aqui você poderá editar facilmente os seus dados
+					pessoais.</label>
 			</div>
-			<button type="submit" class="btn btn-primary mb-1">Salvar</button>
-			<button type="reset" class="btn btn-danger mb-1">Cancelar</button>
+		</form>
+		<form class="form-horizontal" action="/cliente/editar-usuario-cliente/"
+			method="get" th:object="${usuario}">
+			<div class="row">
+				<div class="form-group col-md-3">
+					<button type="submit" class="btn btn-primary btn-md">
+						&nbsp &nbsp &nbsp Editar Login &nbsp &nbsp &nbsp &nbsp</button>
+				</div>
+				<label>Aqui você poderá editar facilmente a sua senha de usuário.</label>
+			</div>
+		</form>
+		<form class="form-horizontal" action="/cliente/enderecos/"
+			method="get" th:object="${endereco}">
+			<div class="row">
+				<div class="form-group col-md-3">
+					<button type="submit" class="btn btn-primary btn-md">
+						Endereço de Entrega</button>
+				</div>
+				<label>Adicione um novo endereço de entrega, ou edite os já
+					existentes</label>
+			</div>
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
