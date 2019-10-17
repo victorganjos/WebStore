@@ -8,9 +8,49 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 </head>
+
 <body>
-	<!-- **Cabeçalho -->
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark"
+
+<!-- Cabeçalho fixo -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
+th:fragment="cabecalho">
+    <a class="navbar-brand" href="#">Phatom Thieves</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarsExample04" aria-controls="navbarsExample04"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarsExample04">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="/">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Console</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Jogos</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Acessórios</a></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="dropdown04"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+					sec:authorize="hasRole('ROLE_ADMIN')">Cadastros</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown04">
+						<a class="dropdown-item" href="/produtos/listar">Produtos</a> <a
+							class="dropdown-item" href="/usuarios/listar">Usuários</a>
+					</div></li>
+			</ul>
+			<a class="nav-link" href="/login" sec:authorize="!isAuthenticated()">Entrar</a>
+			<a class="nav-link" href="/cliente/meus-dados/" sec:authorize="isAuthenticated()">Meus Dados</a>
+			<a class="nav-link" href="/logout" sec:authorize="isAuthenticated()">Sair</a>
+			<form class="form-inline my-2 my-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Buscar">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+      </form>
+    </div>
+  </nav>
+ 
+ 
+<!-- **Cabeçalho old -->
+	<!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark"
 		th:fragment="cabecalho">
 		<a class="navbar-brand" href="#">Phatom Thieves</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -43,7 +83,7 @@
 				<input class="form-control" type="text" placeholder="Search">
 			</form>
 		</div>
-	</nav>
+	</nav> -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
