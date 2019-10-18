@@ -18,6 +18,12 @@
 </script>
 
 </head>
+<style>
+	body {
+	min-height: 75rem;
+	padding-top: 4.5rem;
+	}
+</style>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container">
@@ -26,7 +32,7 @@
 		<div class="row">
 			<div class="form-group col-md-12">
 				<form action = "" method ="post">
-					<label for="txt-pesquisa-produto">Produto a ser pesquisada</label>
+					<label for="txt-pesquisa-produto">Produto a ser pesquisado</label>
 					<input name = "nomepesquisa" type="text" id="txt-pesquisa-produto" class="form-control" />
 					<button type="submit" class="btn btn-success mt-1" id="btn-pesquisa-produto">Pesquisa</button>
 				</form>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Novo Cadastro</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<script>
+	var id = 0;
+	function createNewAddressField() {
+		id = id + 1
+		
+		if(id<3){
+		$("#insertNewFields")
+				.append(
+						"<div class=\"row\" id=\""+id+"\">"
+								+ "<div class=\"form-group col-md-6\">"
+								+ "<div class=\"alert alert-danger\" role=\"alert\""
+								+ "th:if=\"${#fields.hasErrors('address')}\">"
+								+ "<label th:errors=\"*{address}\" class=\"validation-message\"></label>"
+								+ "</div>"
+								+ "<label>Logradouro:</label> <input type=\"text\" class=\"form-control\""+
+				"th:field=\"*{address}\" placeholder=\"Digite aqui seu o logradouro\""+
+				"required>"
+								+ "</div>"
+								+ "<div class=\"form-group col-md-2\">"
+								+ "<div class=\"alert alert-danger\" role=\"alert\""
+								+ "th:if=\"${#fields.hasErrors('addressNumber')}\">"
+								+ "<label th:errors=\"*{addressNumber}\" class=\"validation-message\"></label>"
+								+ "</div>"
+								+ "<label>Nº:</label> <input type=\"text\" class=\"form-control\""+
+				"th:field=\"*{addressNumber}\" placeholder=\"ex: A18\" required>"
+								+ "</div>"
+								+ "<div class=\"form-group col-md-2\">"
+								+ "<div class=\"alert alert-danger\" role=\"alert\""
+								+ "th:if=\"${#fields.hasErrors('cep')}\">"
+								+ "<label th:errors=\"*{cep}\" class=\"validation-message\"></label>"
+								+ "</div>"
+								+ "<label>CEP:</label> <input type=\"text\" class=\"form-control\""+
+				"th:field=\"*{cep}\" placeholder=\"ex: 04855-070\" required>"
+								+ "</div>" + "</div>")
+	}
+	}
+
+	function removeAddressField() {
+
+		var node = document.getElementById(id);
+		if (node.parentNode) {
+			node.parentNode.removeChild(node);
+			id = id - 1;
+		}
+
+	}
+</script>
+</head>
+<style>
+	body {
+	min-height: 75rem;
+	padding-top: 4.5rem;
+	}
+</style>
+<body>
+	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
+	<div class="container mt-4 border">
+		<h3>Cadastro de Endereço de Entrega</h3>
+		<form class="form-horizontal" action="/cliente/inserir-dados-endereco"
+			method="post" th:object="${form}">
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('address')}">
+						<label th:errors="*{address}" class="validation-message"></label>
+					</div>
+					<label>Logradouro:</label> <input type="text" class="form-control"
+						th:field="*{address}" placeholder="Digite aqui seu o logradouro"
+						required>
+				</div>
+				<div class="form-group col-md-2">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('addressNumber')}">
+						<label th:errors="*{addressNumber}" class="validation-message"></label>
+					</div>
+					<label>Nº:</label> <input type="text" class="form-control"
+						th:field="*{addressNumber}" placeholder="ex: A18" required>
+				</div>
+				<div class="form-group col-md-2">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('cep')}">
+						<label th:errors="*{cep}" class="validation-message"></label>
+					</div>
+					<label>CEP:</label> <input type="text" class="form-control"
+						th:field="*{cep}" placeholder="ex: 04855-070" required>
+				</div>
+			</div>
+			<div id="insertNewFields"></div>
+			<div class="row">
+				<div class="form-group col-md-2">
+					<button type="button" class="btn btn-success"
+						onclick="createNewAddressField()">+</button>
+					<button type="button" class="btn btn-danger"
+						onclick="removeAddressField()">-</button>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary ">Avançar</button>
+			<button type="reset" class="btn btn-danger">Cancelar</button>
+		</form>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

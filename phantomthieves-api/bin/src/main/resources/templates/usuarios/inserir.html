@@ -9,6 +9,12 @@
 	crossorigin="anonymous">
 
 </head>
+<style>
+	body {
+	min-height: 75rem;
+	padding-top: 4.5rem;
+	}
+</style>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container mt-4 border">
@@ -21,23 +27,30 @@
 						th:if="${#fields.hasErrors('user')}">
 						<label th:errors="*{user}" class="validation-message"></label>
 					</div>
-					<label>E-mail usuário:</label> <input type="email" class="form-control"
-						th:field="*{user}" required>
+					<label>E-mail usuário:</label> <input type="email"
+						class="form-control" th:field="*{user}" required>
 				</div>
 				<div class="form-group col-md-4">
 					<div class="alert alert-danger" role="alert"
 						th:if="${#fields.hasErrors('password')}">
 						<label th:errors="*{password}" class="validation-message"></label>
 					</div>
-					<label>Password:</label> <input type="password" class="form-control"
-						th:field="*{password}" required>
+					<label>Senha:</label> <input type="password"
+						class="form-control" th:field="*{password}" required>
 				</div>
-				
 				<div class="form-group col-md-4">
-					<label>Perfil:</label>
-					<select class="form-control" th:field="*{perfil}" required>
-					  <option value="Administrador">Administrador</option>
-					  <option value="Auxiliar">Auxiliar</option>
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('passwordConfirm')}">
+						<label th:errors="*{passwordConfirm}" class="validation-message"></label>
+					</div>
+					<label>Confirmação de Senha:</label> <input type="password"
+						class="form-control" th:field="*{passwordConfirm}" required>
+				</div>
+				<div class="form-group col-md-4">
+					<label>Perfil:</label> <select class="form-control"
+						th:field="*{perfil}" required>
+						<option value="Administrador">Administrador</option>
+						<option value="Auxiliar">Auxiliar</option>
 					</select>
 				</div>
 			</div>

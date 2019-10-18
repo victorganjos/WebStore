@@ -9,11 +9,17 @@
 	crossorigin="anonymous">
 
 </head>
+<style>
+	body {
+	min-height: 75rem;
+	padding-top: 4.5rem;
+	}
+</style>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container mt-4 border">
 		<h3>Edição de usuário</h3>
-		<form class="form-horizontal" action="/usuarios/editar/{usuario.id}" method="post"
+		<form class="form-horizontal" action=/cliente/inserir-usuario-cliente/{user} method="post"
 			th:object="${usuario}">
 			<div class="row">
 				<div class="form-group col-md-3">

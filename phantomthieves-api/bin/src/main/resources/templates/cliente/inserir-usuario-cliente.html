@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Incluir Usuário</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+</head>
+<style>
+	body {
+	min-height: 75rem;
+	padding-top: 4.5rem;
+	}
+</style>
+<body>
+	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
+	<div class="container mt-4 border">
+		<h3>Inserção de novo Usuário</h3>
+		<form class="form-horizontal" action="/cliente/inserir-usuario-cliente" method="post"
+			th:object="${usuario}">
+			<div class="row">
+				<div class="form-group col-md-4">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('user')}">
+						<label th:errors="*{user}" class="validation-message"></label>
+					</div>
+					<label>E-mail usuário:</label> <input type="email"
+						class="form-control" th:field="*{user}" required
+						value="${usuario.user}" readonly="readonly">
+				</div>
+				<div class="form-group col-md-4">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('password')}">
+						<label th:errors="*{password}" class="validation-message"></label>
+					</div>
+					<label>Senha:</label> <input type="password" class="form-control"
+						th:field="*{password}" required>
+				</div>
+				<div class="form-group col-md-4">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('passwordConfirm')}">
+						<label th:errors="*{passwordConfirm}" class="validation-message"></label>
+					</div>
+					<label>Confirmação de Senha:</label> <input type="password"
+						class="form-control" th:field="*{passwordConfirm}" required>
+				</div>
+					<div class="form-group col-md-4">
+					<label>Perfil:</label> <select class="form-control"
+						th:field="*{perfil}" required>
+						<option value="Cliente">Cliente</option>
+					</select>
+				</div>
+			</div>
+			<div></div>
+			<button type="submit" class="btn btn-primary ">Salvar</button>
+			<button type="reset" class="btn btn-danger">Cancelar</button>
+		</form>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>
