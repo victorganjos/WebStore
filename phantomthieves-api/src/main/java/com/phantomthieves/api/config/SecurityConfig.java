@@ -39,10 +39,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.cors().and().csrf().disable();
 		http.authorizeRequests()
 			.antMatchers(PUBLIC_MATHCERS).permitAll()
-			.antMatchers(resources).permitAll() 
+			.antMatchers(resources).permitAll()
 			.antMatchers(HttpMethod.GET, "/").permitAll()
 			.antMatchers(HttpMethod.GET, "/produtos/**").hasRole("ADMIN")
 			.antMatchers(HttpMethod.POST, "/produtos/**").hasRole("ADMIN")
+			.antMatchers(HttpMethod.GET, "/cliente/**").hasRole("CLIENT")
+			.antMatchers(HttpMethod.POST, "/cliente/**").hasRole("CLIENT")
 			.anyRequest().authenticated()
 			.and().formLogin().permitAll().defaultSuccessUrl("/")
 			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");

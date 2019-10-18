@@ -1,7 +1,5 @@
 package com.phantomthieves.api.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,6 +37,21 @@ public class Endereco {
 	@Column(name = "ATIVO", nullable = false)
 	private int ativo;
 
+	@Column(name = "BAIRRO_ENDERECO", nullable = false)
+	@NotNull(message = "O bairro da residência é obrigatório")
+	private String bairro;
+
+	@Column(name = "COMPLEMENTO_ENDERECO", nullable = false)
+	private String complemento;
+
+	@Column(name = "CIDADE_ENDERECO", nullable = false)
+	@NotNull(message = "A cidade da residência é obrigatório")
+	private String city;
+
+	@Column(name = "UF_ENDERECO", nullable = false)
+	@NotNull(message = "O Estado da residência é obrigatório")
+	private String uf;
+
 	@ManyToOne
 	@JoinColumn(name = "COD_CLIENTE", referencedColumnName = "COD_CLIENTE")
 	private Cliente codCliente;
@@ -47,13 +60,19 @@ public class Endereco {
 			@NotNull(message = "O logradouro é obrigatório") @Length(max = 150, min = 5, message = "O logradouro do usuário deve conter entrer 5 e 150 caracteres") String address,
 			@NotNull(message = "O CEP é obrigatório") @Length(max = 9, min = 8, message = "O campo CEP deve ser preenchido corretamente (Excesso ou ausência de dígitos)") String cep,
 			@NotNull(message = "O número da residência é obrigatório") @Length(min = 1, message = "O campo de número da residência deve ser preenchido corretamente (Excesso ou ausência de dígitos)") String addressNumber,
-			int ativo, Cliente codCliente) {
+			int ativo, @NotNull(message = "O bairro da residência é obrigatório") String bairro, String complemento,
+			@NotNull(message = "O número da residência é obrigatório") String city,
+			@NotNull(message = "O número da residência é obrigatório") String uf, Cliente codCliente) {
 		super();
 		this.id = id;
 		this.address = address;
 		this.cep = cep;
 		this.addressNumber = addressNumber;
 		this.ativo = ativo;
+		this.bairro = bairro;
+		this.complemento = complemento;
+		this.city = city;
+		this.uf = uf;
 		this.codCliente = codCliente;
 	}
 
@@ -123,6 +142,38 @@ public class Endereco {
 
 	public void setAtivo(int ativo) {
 		this.ativo = ativo;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 
 }

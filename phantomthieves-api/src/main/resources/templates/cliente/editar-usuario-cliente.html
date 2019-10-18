@@ -8,6 +8,18 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 
+<script>
+	function passwordValidator(){
+		var password = document.getElementById("password").value;
+		var passwordConfirm = document.getElementById("passwordConfirm").value;
+		
+		if(password == passwordConfirm){
+			return true;
+		}
+		alert("A senha inserida não confere com a confirmação!");
+		return false;
+	}
+</script>
 </head>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
@@ -34,7 +46,7 @@
 						th:if="${#fields.hasErrors('password')}">
 						<label th:errors="*{password}" class="validation-message"></label>
 					</div>
-					<label>Senha:</label> <input type="password" class="form-control"
+					<label>Senha:</label> <input id="password" type="password" class="form-control"
 						th:field="*{password}" value="${usuario.password}" required>
 				</div>
 				<div class="form-group col-md-4">
@@ -42,7 +54,7 @@
 						th:if="${#fields.hasErrors('passwordConfirm')}">
 						<label th:errors="*{passwordConfirm}" class="validation-message"></label>
 					</div>
-					<label>Confirmação de Senha:</label> <input type="password"
+					<label>Confirmação de Senha:</label> <input id="passwordConfirm" type="password"
 						class="form-control" th:field="*{passwordConfirm}"
 						value="${usuario.passwordConfirm}" required>
 				</div>
@@ -54,20 +66,20 @@
 				</div>
 			</div>
 			<div></div>
-			<button type="submit" class="btn btn-primary ">Salvar</button>
+			<button type="submit" class="btn btn-primary "  onclick="return passwordValidator()">Salvar</button>
 			<button type="reset" class="btn btn-danger">Cancelar</button>
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
 </body>
 </html>

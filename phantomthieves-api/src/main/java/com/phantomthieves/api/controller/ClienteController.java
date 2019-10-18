@@ -38,6 +38,9 @@ public class ClienteController {
 	@Autowired
 	private BCryptPasswordEncoder bc;
 
+	@Autowired
+	private UsuarioController userControl = new UsuarioController();
+
 	@GetMapping("/inserir-dados-cliente")
 	public ModelAndView inserir() {
 		ModelAndView resultado = new ModelAndView("cliente/inserir-dados-cliente");
@@ -64,8 +67,7 @@ public class ClienteController {
 	@PostMapping("/inserir-usuario-cliente")
 	public String inserir(Usuario cliente) {
 
-		cliente.setPassword(bc.encode(cliente.getPassword()));
-		usuarioRepository.save(cliente);
+		userControl.inserir(cliente);
 
 		return "redirect:/";
 	}
@@ -159,6 +161,10 @@ public class ClienteController {
 				address.get(0).setCep(userData.getCep());
 				address.get(0).setLogradouro(userData.getAddress());
 				address.get(0).setNumero(userData.getAddressNumber());
+				address.get(0).setBairro(userData.getBairro());
+				address.get(0).setCity(userData.getCity());
+				address.get(0).setComplemento(userData.getComplemento());
+				address.get(0).setUf(userData.getUf());
 			}
 
 		} catch (Exception userNotFound) {
@@ -195,6 +201,18 @@ public class ClienteController {
 		String userAuthenticated = userDetails.getUsername();
 		Cliente cliente = clienteRepository.findByUser(userAuthenticated);
 
+		List<Endereco> address = enderecoRepository.findAll();
+		if (!address.equals(null)) {
+
+			for (int i = 0; i < address.size(); i++) {
+				if (address.get(i).getAddress().equals(endereco.getAddress())
+						&& address.get(i).getAddressNumber().equals(endereco.getAddressNumber())) {
+
+					endereco.setId(address.get(i).getId());
+					endereco.setAtivo(1);
+				}
+			}
+		}
 		endereco.setCodCliente(cliente);
 		endereco.setAtivo(1);
 		enderecoRepository.save(endereco);
@@ -206,7 +224,7 @@ public class ClienteController {
 	@Transactional
 	public String enderecosInativar(@PathVariable Integer id) {
 		System.out.println(id);
-		 enderecoRepository.inativarIdEndereco(id);
+		enderecoRepository.inativarIdEndereco(id);
 		return "redirect:/cliente/meus-dados/";
 	}
 

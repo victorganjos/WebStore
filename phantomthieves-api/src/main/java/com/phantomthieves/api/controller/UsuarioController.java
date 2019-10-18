@@ -54,10 +54,11 @@ public class UsuarioController {
 
 		if (usuario.getPerfil().equals("Administrador")) {
 			usuarioRepository.incluiRegra(usuario.getId(), 1);
-		} else {
+		} else if (usuario.getPerfil().equals("Usuario")) {
 			usuarioRepository.incluiRegra(usuario.getId(), 2);
+		}else {
+			usuarioRepository.incluiRegra(usuario.getId(), 3);
 		}
-
 		return "redirect:/usuarios/listar";
 	}
 

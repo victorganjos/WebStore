@@ -73,6 +73,21 @@ public class Cliente {
 	@NotNull(message = "O número de cep do endereço é um campo obrigátório")
 	@Length(min = 8, message = "Digite um número de cep do endereço válido")
 	private String cep;
+	
+	@Column(name = "BAIRRO_CLIENTE", nullable = false)
+	@NotNull(message = "O bairro da residência é obrigatório")
+	private String bairro;
+
+	@Column(name = "COMPLEMENTO_CLIENTE", nullable = false)
+	private String complemento;
+
+	@Column(name = "CIDADE_CLIENTE", nullable = false)
+	@NotNull(message = "A cidade da residência é obrigatório")
+	private String city;
+
+	@Column(name = "UF_CLIENTE", nullable = false)
+	@NotNull(message = "O Estado da residência é obrigatório")
+	private String uf;
 
 	@Column(name = "USER_CLIENTE", length = 50, nullable = false)
 	@NotNull(message = "O email é obrigatório")
@@ -190,6 +205,46 @@ public class Cliente {
 
 	public void setUser(String user) {
 		this.user = user;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 }
