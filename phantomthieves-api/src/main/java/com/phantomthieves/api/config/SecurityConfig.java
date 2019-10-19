@@ -31,7 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 	private static final String[] PUBLIC_MATHCERS = {
 			"//**",
-			"/usuarios/**"
+			"/usuarios/**",
+			"/cliente/inserir-dados-cliente",
+			"/cliente/inserir-usuario-cliente"
 	};
 	
 	@Override
@@ -43,8 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers(HttpMethod.GET, "/").permitAll()
 			.antMatchers(HttpMethod.GET, "/produtos/**").hasRole("ADMIN")
 			.antMatchers(HttpMethod.POST, "/produtos/**").hasRole("ADMIN")
-			.antMatchers(HttpMethod.GET, "/cliente/**").hasRole("CLIENT")
-			.antMatchers(HttpMethod.POST, "/cliente/**").hasRole("CLIENT")
+			.antMatchers(HttpMethod.GET, "/cliente/meus-dados").hasRole("CLIENT")
+			.antMatchers(HttpMethod.POST, "/cliente/meus-dados").hasRole("CLIENT")
 			.anyRequest().authenticated()
 			.and().formLogin().permitAll().defaultSuccessUrl("/")
 			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");

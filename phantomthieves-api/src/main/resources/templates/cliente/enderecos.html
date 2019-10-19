@@ -21,6 +21,13 @@
 		else
 			return false;
 	}
+	
+	function confirm(){
+		alert("Alterado com sucesso!");
+	}
+	function salvo(){
+		alert("Salvo com sucesso!");
+	}
 </script>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
@@ -125,7 +132,7 @@
 					</select>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary ">&nbsp Alterar
+			<button type="submit" class="btn btn-primary " onclick="confirm()">&nbsp Alterar
 				&nbsp &nbsp</button>
 		</form>
 		<br>
@@ -250,7 +257,7 @@
 					</select>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary ">Adicionar
+			<button type="submit" class="btn btn-primary " onclick="salvo()">Adicionar
 				&nbsp</button>
 		</form>
 		<br>

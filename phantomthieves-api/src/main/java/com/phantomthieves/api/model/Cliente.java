@@ -25,55 +25,60 @@ public class Cliente {
 	private Integer id;
 
 	@Column(name = "NOME_CLIENTE", length = 100, nullable = false)
-	@NotNull(message = "O nome completo  é um campo obrigatório")
-	@Length(max = 50, min = 3, message = "O nome completo deve conter entre 7 e 100 caracteres")
+	@NotNull(message = "O primeiro nome é um campo obrigatório")
+	//@Length(max = 50, min = 3, message = "O nome completo deve conter entre 7 e 100 caracteres")
 	private String name;
+
+	@Column(name = "SOBRENOME_CLIENTE", length = 100, nullable = false)
+	@NotNull(message = "O sobrenome é um campo obrigatório")
+	//@Length(max = 50, min = 3, message = "O nome completo deve conter entre 7 e 100 caracteres")
+	private String sirName;
 
 	@Column(name = "CPF_CLIENTE", length = 14, nullable = false)
 	@NotNull(message = "O CPF é um campo obrigatório")
-	@Length(max = 14, min = 11, message = "O CPF válido é obrigatório")
+	//@Length(max = 14, min = 11, message = "O CPF válido é obrigatório")
 	private String cpf;
 
 	@Column(name = "DDD_CLIENTE", length = 3, nullable = false)
 	@NotNull(message = "O DDD é um campo obrigatório")
-	@Length(max = 3, min = 2, message = "O DDD deve conter entre 2 e 3 dígitos")
+	//@Length(max = 3, min = 2, message = "O DDD deve conter entre 2 e 3 dígitos")
 	private String ddd;
 
 	@Column(name = "TELEPHONE_CLIENTE", length = 9, nullable = false)
 	@NotNull(message = "O Telefone é um campo obrigatório")
-	@Length(max = 9, min = 8, message = "O telefone deve conter entre 8 e 9 dígitos")
+	//@Length(max = 9, min = 8, message = "O telefone deve conter entre 8 e 9 dígitos")
 	private String telephone;
 
 	@Column(name = "DDD_CONTACT_CLIENTE", length = 3, nullable = false)
 	@NotNull(message = "O DDD é um campo obrigatório")
-	@Length(max = 3, min = 2, message = "O DDD deve conter entre 2 e 3 dígitos")
+	//@Length(max = 3, min = 2, message = "O DDD deve conter entre 2 e 3 dígitos")
 	private String dddContactTwo;
 
 	@Column(name = "TELEPHONE_CONTACT_CLIENTE", length = 9, nullable = false)
 	@NotNull(message = "O Telefone é um campo obrigatório")
-	@Length(max = 9, min = 8, message = "O telefone deve conter entre 8 e 9 dígitos")
+	//@Length(max = 9, min = 8, message = "O telefone deve conter entre 8 e 9 dígitos")
 	private String telephoneContactTwo;
 
 	@Column(name = "DATA_NASCIMENTO_CLIENTE", length = 10, nullable = false)
 	@NotNull(message = "A data de nascimento é um campo obrigatório")
-	@Length(min = 10, message = "Selecione um valor válido através do calendário")
+	//@Length(min = 10, message = "Selecione um valor válido através do calendário")
 	private String birthdate;
 
 	@Column(name = "ENDERECO_CLIENTE", length = 150, nullable = false)
 	@NotNull(message = "O endereço é um campo obrigatório")
-	@Length(min = 5, message = "Digite um endereço válido")
+	//@Length(min = 5, message = "Digite um endereço válido")
 	private String address;
 
 	@Column(name = "NUMERO_END_CLIENTE", length = 6, nullable = false)
 	@NotNull(message = "O número do endereço é um campo obrigátório")
-	@Length(min = 1, message = "Digite o número de endereço válido")
+	//@Length(min = 1, message = "Digite o número de endereço válido")
 	private String addressNumber;
 
 	@Column(name = "CEP_CLIENTE", length = 9, nullable = false)
 	@NotNull(message = "O número de cep do endereço é um campo obrigátório")
-	@Length(min = 8, message = "Digite um número de cep do endereço válido")
+	//@Length(min = 8, message = "Digite um número de cep do endereço válido")
 	private String cep;
-	
+
 	@Column(name = "BAIRRO_CLIENTE", nullable = false)
 	@NotNull(message = "O bairro da residência é obrigatório")
 	private String bairro;
@@ -93,9 +98,9 @@ public class Cliente {
 	@NotNull(message = "O email é obrigatório")
 	@Length(max = 50, min = 3, message = "O email de usuário deve conter entrer 3 e 50 caracteres")
 	private String user;
-	
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="COD_CLIENTE")
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "COD_CLIENTE")
 	private List<Endereco> enderecos;
 
 	// Constructors
@@ -245,6 +250,14 @@ public class Cliente {
 
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	public String getSirName() {
+		return sirName;
+	}
+
+	public void setSirName(String sirName) {
+		this.sirName = sirName;
 	}
 
 }

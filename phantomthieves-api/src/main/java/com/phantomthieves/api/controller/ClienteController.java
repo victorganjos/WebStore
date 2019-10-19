@@ -192,7 +192,7 @@ public class ClienteController {
 
 		clienteRepository.save(cliente);
 
-		return "redirect:/cliente/meus-dados/";
+		return "redirect:/cliente/enderecos";
 	}
 
 	@PostMapping("/enderecos/adicionar")
@@ -217,7 +217,7 @@ public class ClienteController {
 		endereco.setAtivo(1);
 		enderecoRepository.save(endereco);
 
-		return "redirect:/cliente/meus-dados/";
+		return "redirect:/cliente/enderecos";
 	}
 
 	@RequestMapping(value = "/enderecos/inativar/{id}")
@@ -225,7 +225,7 @@ public class ClienteController {
 	public String enderecosInativar(@PathVariable Integer id) {
 		System.out.println(id);
 		enderecoRepository.inativarIdEndereco(id);
-		return "redirect:/cliente/meus-dados/";
+		return "redirect:/cliente/enderecos";
 	}
 
 }

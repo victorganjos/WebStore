@@ -7,12 +7,25 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+<script>
+	function nameValidator() {
+		var nome = document.getElementById("nome").value;
+		var sobrenome = document.getElementById("sobrenome").value;
+
+		if (nome.length > 3 && sobrenome.length > 3) {
+			return true;
+		}
+		alert("O nome e o sobrenome devem conter no minímo 3 caracteres!");
+		return false;
+
+	}
+</script>
 </head>
 <style>
-	body {
+body {
 	min-height: 75rem;
 	padding-top: 4.5rem;
-	}
+}
 </style>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
@@ -22,14 +35,23 @@
 		<form class="form-horizontal" action="/cliente/inserir-dados-cliente"
 			method="post" th:object="${cliente}">
 			<div class="row">
-				<div class="form-group col-md-10">
+				<div class="form-group col-md-4">
 					<div class="alert alert-danger" role="alert"
 						th:if="${#fields.hasErrors('name')}">
 						<label th:errors="*{name}" class="validation-message"></label>
 					</div>
-					<label>Nome Completo*:</label> <input type="text"
+					<label>Nome*:</label> <input id="nome" type="text"
 						class="form-control" th:field="*{name}"
-						placeholder="Digite aqui o seu nome completo" required>
+						placeholder="Digite aqui o seu nome" required>
+				</div>
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('sirName')}">
+						<label th:errors="*{sirName}" class="validation-message"></label>
+					</div>
+					<label>Sobrenome*:</label> <input id="sobrenome" type="text"
+						class="form-control" th:field="*{sirName}"
+						placeholder="Digite aqui o seu sobrenomme" required>
 				</div>
 			</div>
 			<div class="row">
@@ -99,24 +121,6 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-md-6">
-					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('address')}">
-						<label th:errors="*{address}" class="validation-message"></label>
-					</div>
-					<label>Logradouro*:</label> <input id="address" type="text"
-						class="form-control" th:field="*{address}"
-						placeholder="Digite aqui seu o logradouro" required>
-				</div>
-				<div class="form-group col-md-2">
-					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('addressNumber')}">
-						<label th:errors="*{addressNumber}" class="validation-message"></label>
-					</div>
-					<label>Nº*:</label> <input id="addressNumber" type="text"
-						class="form-control" th:field="*{addressNumber}"
-						placeholder="ex: A18" required>
-				</div>
 				<div class="form-group col-md-2">
 					<div class="alert alert-danger" role="alert"
 						th:if="${#fields.hasErrors('cep')}">
@@ -125,6 +129,24 @@
 					<label>CEP*:</label> <input id="cep" name="cep" type="text"
 						class="form-control" th:field="*{cep}" required>
 				</div>
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('address')}">
+						<label th:errors="*{address}" class="validation-message"></label>
+					</div>
+					<label>Logradouro*:</label> <input id="address" name="address"
+						type="text" class="form-control" th:field="*{address}"
+						placeholder="Digite aqui seu o logradouro" required>
+				</div>
+				<div class="form-group col-md-2">
+					<div class="alert alert-danger" role="alert"
+						th:if="${#fields.hasErrors('addressNumber')}">
+						<label th:errors="*{addressNumber}" class="validation-message"></label>
+					</div>
+					<label>Nº*:</label> <input id="addressNumber" name="addressNumber"
+						type="text" class="form-control" th:field="*{addressNumber}"
+						placeholder="ex: A18" required>
+				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-md-6">
@@ -132,17 +154,18 @@
 						th:if="${#fields.hasErrors('complemento')}">
 						<label th:errors="*{complemento}" class="validation-message"></label>
 					</div>
-					<label>Complemento:</label> <input id="complemento" type="text"
-						class="form-control" th:field="*{complemento}"
-						placeholder="Digite aqui o complemento" required>
+					<label>Complemento:</label> <input id="complemento"
+						name="complemento" type="text" class="form-control"
+						th:field="*{complemento}" placeholder="Digite aqui o complemento"
+						required>
 				</div>
 				<div class="form-group col-md-4">
 					<div class="alert alert-danger" role="alert"
 						th:if="${#fields.hasErrors('bairro')}">
 						<label th:errors="*{bairro}" class="validation-message"></label>
 					</div>
-					<label>Bairro*:</label> <input id="bairro" type="text"
-						class="form-control" th:field="*{bairro}"
+					<label>Bairro*:</label> <input id="bairro" name="bairro"
+						type="text" class="form-control" th:field="*{bairro}"
 						placeholder="Digite aqui o bairro de sua residência" required>
 				</div>
 			</div>
@@ -152,67 +175,52 @@
 						th:if="${#fields.hasErrors('city')}">
 						<label th:errors="*{city}" class="validation-message"></label>
 					</div>
-					<label>Cidade*:</label> <input type="text" id="city"
+					<label>Cidade*:</label> <input type="text" id="city" name="city"
 						class="form-control" th:field="*{city}"
 						placeholder="Ex: São Paulo" required>
 				</div>
 				<div class="form-group col-md-3">
-					<label>UF*:</label> <select id="uf" class="form-control"
-						th:field="*{uf}" required>
-						<option value="SP">SP</option>
-						<option value="AC">AC</option>
-						<option value="AL">AL</option>
-						<option value="AM">AM</option>
-						<option value="AP">AP</option>
-						<option value="BA">BA</option>
-						<option value="CE">CE</option>
-						<option value="DF">DF</option>
-						<option value="ES">ES</option>
-						<option value="GO">GO</option>
-						<option value="MA">MA</option>
-						<option value="MG">MG</option>
-						<option value="MS">MS</option>
-						<option value="MT">MT</option>
-						<option value="PA">PA</option>
-						<option value="PB">PB</option>
-						<option value="PE">PE</option>
-						<option value="PI">PI</option>
-						<option value="PR">PR</option>
-						<option value="RJ">RJ</option>
-						<option value="RN">RN</option>
-						<option value="RO">RO</option>
-						<option value="RR">RR</option>
-						<option value="RS">RS</option>
-						<option value="SC">SC</option>
-						<option value="SE">SE</option>
-						<option value="TO">TO</option>
-					</select>
+					<label>UF*:</label> <input type="text" id="uf" name="uf"
+						class="form-control" th:field="*{uf}" placeholder="SP" required>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary ">Salvar</button>
+			<button type="submit" class="btn btn-primary "
+				onclick="return nameValidator()">Salvar</button>
 			<button type="reset" class="btn btn-danger">Cancelar</button>
 		</form>
 		<br>
 	</div>
 	<script th:inline="javascript">
+		//estamos usando uma api gratuita para a consulta de CEPs
 		$("#cep").focusout(
 				function() {
-					
-					alert("OIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
 					if ($("#cep").val() === '00000-000'
 							|| $("#cep").val() === '11111-111') {
 						cepInvalido();
 					} else {
+						//Início do Comando AJAX
 						$.ajax({
+							//O campo URL diz o caminho de onde virá os dados
+							//É importante concatenar o valor digitado no CEP
 							url : 'https://viacep.com.br/ws/' + $(this).val()
 									+ '/json/unicode/',
+							//Aqui você deve preencher o tipo de dados que será lido,
+							//no caso, estamos lendo JSON.
 							dataType : 'json',
+							//SUCESS é referente a função que será executada caso
+							//ele consiga ler a fonte de dados com sucesso.
+							//O parâmetro dentro da função se refere ao nome da variável
+							//que você vai dar para ler esse objeto.
 							success : function(resposta) {
-								$("#address").val(resposta.logradouro);
+								//Agora basta definir os valores que você deseja preencher
+								//automaticamente nos campos acima.
+								$("#address").val(resposta.address);
 								$("#complemento").val(resposta.complemento);
 								$("#bairro").val(resposta.bairro);
 								$("#city").val(resposta.localidade);
 								$("#uf").val(resposta.uf);
+								//Vamos incluir para que o Número seja focado automaticamente
+								//melhorando a experiência do usuário
 								$("#addressNumber").focus();
 							},
 							error : function(resposta) {
@@ -221,6 +229,7 @@
 						});
 					}
 				});
+
 		function cepInvalido() {
 			alert('Cep inválido');
 			$('#cep').val('');
