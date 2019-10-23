@@ -11,7 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -48,10 +51,10 @@ public class Produto {
 	
 	@Column(name = "PRECO_PRODUTO")
 	private Double precoProduto;
-	
-	
+
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="COD_PRODUTO")
+	@JoinColumn(name = "COD_PRODUTO") 
+	
 	private List<Imagem> imagens;
 	
 	public Produto() {

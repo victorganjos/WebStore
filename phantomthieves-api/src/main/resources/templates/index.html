@@ -12,113 +12,145 @@
 
 
 <style>
-
-	body {
+body {
 	min-height: 75rem;
 	padding-top: 4.5rem;
-	}
-	
-	img{
+}
+
+img {
 	border-radius: 10px;
 	width: 120px;
 	height: 300px;
-	}
-    
-    .img-card{
-		border-radius: 10px;
-    	width: 150px;
-    	height: 160px;
-    }
-    
- .card {	
- text-align: center;
-  background: #fff;
-  border-radius: 2px;
-  display: inline-block;
-  height: 350px;
-  margin:30px;
-  position: relative;
-  width: 200px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
-    
-.card:hover{
-box-shadow: 0 28px 36px rgba(0,0,0,0.25), 0 10px 10px
-rgba(0,0,0,0.22);
+
+.img-card {
+	border-radius: 10px;
+	width: 150px;
+	height: 160px;
 }
-    
+
+.card {
+	text-align: center;
+	background: #fff;
+	border-radius: 2px;
+	display: inline-block;
+	height: 390px;
+	margin: 30px;
+	position: relative;
+	width: 200px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.card:hover {
+	box-shadow: 0 28px 36px rgba(0, 0, 0, 0.25), 0 10px 10px
+		rgba(0, 0, 0, 0.22);
+}
 </style>
 
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
-	
-	
+
+
 
 	<main role="main" class="container">
 		<div class="row">
 			<div class="col-md-12 text-center">
-	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="padding-top: 20px;">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="https://poparteskins.vteximg.com.br/arquivos/ids/162108/categoria-ps4.jpg?v=636435146323630000" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img  src="https://poparteskins.vteximg.com.br/arquivos/ids/162116/categoria-xbox-one.jpg?v=636435153324570000" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://poparteskins.vteximg.com.br/arquivos/ids/162101/categoria-nintendo-switch.jpg?v=636435138257830000" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-</div>
-
-		<div class="row">	
-		<div th:each="imagem:  ${imagem}">
-			<div class="col-md-4">
-			<div class="card">
-				<div class="card-header">
-				<img class="img-card"th:src="${imagem.localArquivo}">
+				<div id="carouselExampleIndicators" class="carousel slide"
+					data-ride="carousel" style="padding-top: 20px;">
+					<ol class="carousel-indicators">
+						<li data-target="#carouselExampleIndicators" data-slide-to="0"
+							class="active"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+					</ol>
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img
+								src="https://poparteskins.vteximg.com.br/arquivos/ids/162108/categoria-ps4.jpg?v=636435146323630000"
+								class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+							<img
+								src="https://poparteskins.vteximg.com.br/arquivos/ids/162116/categoria-xbox-one.jpg?v=636435153324570000"
+								class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+							<img
+								src="https://poparteskins.vteximg.com.br/arquivos/ids/162101/categoria-nintendo-switch.jpg?v=636435138257830000"
+								class="d-block w-100" alt="...">
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#carouselExampleIndicators"
+						role="button" data-slide="prev"> <span
+						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+						class="sr-only">Previous</span>
+					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+						role="button" data-slide="next"> <span
+						class="carousel-control-next-icon" aria-hidden="true"></span> <span
+						class="sr-only">Next</span>
+					</a>
 				</div>
-				<div class="card-body">
-				<h5 class="card-title" th:text="${imagem.nomeProduto}"></h5>
-				<p class="card-title" th:text="${imagem.precoProduto}"></p>
-				<a href="#" class="card-link">Detalhes</a>
-    			<a href="#" class="card-link">Carrinho</a>
-					</div>
-					</div>
-					</div>
-					</div>
-					</div>
-					
-					
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+			</div>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+			<div class="row">
+				<div th:each="imagem:  ${imagem}">
+					<div class="col-md-4">
+						<div class="card">
+							<div class="card-header">
+								<img class="img-card" th:src="${imagem.localArquivo}">
+							</div>
+							<div class="card-body">
+								<h5 class="card-title" th:text="${imagem.nomeProduto}"></h5>
+								<p class="card-title" th:text="${imagem.precoProduto}"></p>
+								<p><p>
+								<button type="submit" class="btn btn-block"
+									th:style="'color: #fff; background-color: #48D1CC'">Detalhes</button>
+								<form method="post" th:action="@{/}">
+									<input type="hidden" name="imagemId" th:value="${imagem.id}" />
+									<button type="submit" class="btn btn-block"
+										th:style="'color: #fff; background-color: #32CD32'">Carrinho</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row"
+				th:unless="${#lists.isEmpty(session.itensSelecionados1)}">
+				<div class="col-12">
+					<table class="table table-striped table-sm table-responsive">
+						<thead class="thead-dark">
+							<tr>
+								<th>Item ID</th>
+								<th>Nome</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="sel : ${session.itensSelecionados1}">
+								<td th:text="${sel.item.id}"></td>
+								<td th:text="${sel.item.nomeProduto}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+				integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+				crossorigin="anonymous"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+				integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+				crossorigin="anonymous"></script>
+			<script
+				src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+				integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+				crossorigin="anonymous"></script>
+			<script type="text/javascript" src="js/script.js"></script>
+
+			<script
+				src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </body>
 </html>

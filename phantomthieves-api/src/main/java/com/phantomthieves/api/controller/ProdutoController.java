@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.phantomthieves.api.model.Produto;
+import com.phantomthieves.api.model.Imagem;
 import com.phantomthieves.api.repository.ProdutoRepository;
+import com.phantomthieves.api.repository.ImagemRepository;
 
 @Controller
 @RequestMapping("/produtos")
@@ -23,6 +25,9 @@ public class ProdutoController {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private ImagemRepository imgRepo;
 	
 	@GetMapping("/listar")
 	public ModelAndView listar() {
@@ -62,10 +67,14 @@ public class ProdutoController {
 		return "redirect:/produtos/listar";
 
 	}
-
+	
+	@Transactional
 	@PostMapping("/editar/{produto.id}")
-	public String alterar(Produto produto) {
-		produtoRepository.save(produto);
+	public String alterar(Produto produto) {	
+		Imagem img = imgRepo.findImgByIdProd(produto.getId());
+		produtoRepository.save(produto); 
+		imgRepo.updateImagemProd(produto.getId(), img.getId());
+		
 		return "redirect:/produtos/listar";
 	}
 
