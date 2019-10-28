@@ -7,7 +7,19 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-
+<script>
+	function passwordValidator(){
+		var password = document.getElementById("password").value;
+		var passwordConfirm = document.getElementById("passwordConfirm").value;
+		
+		if(password == passwordConfirm){
+			alert("Cadastro efetuado com sucesso!");
+			return true;
+		}
+		alert("A senha inserida não confere com a confirmação!");
+		return false;
+	}
+</script>
 </head>
 <style>
 	body {
@@ -19,7 +31,8 @@
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container mt-4 border">
 		<h3>Inserção de novo Usuário</h3>
-		<form class="form-horizontal" action="/cliente/inserir-usuario-cliente" method="post"
+		<form class="form-horizontal"
+			action="/cliente/inserir-usuario-cliente" method="post"
 			th:object="${usuario}">
 			<div class="row">
 				<div class="form-group col-md-4">
@@ -36,7 +49,7 @@
 						th:if="${#fields.hasErrors('password')}">
 						<label th:errors="*{password}" class="validation-message"></label>
 					</div>
-					<label>Senha:</label> <input type="password" class="form-control"
+					<label>Senha:</label> <input id="password" type="password" class="form-control"
 						th:field="*{password}" required>
 				</div>
 				<div class="form-group col-md-4">
@@ -44,10 +57,10 @@
 						th:if="${#fields.hasErrors('passwordConfirm')}">
 						<label th:errors="*{passwordConfirm}" class="validation-message"></label>
 					</div>
-					<label>Confirmação de Senha:</label> <input type="password"
+					<label>Confirmação de Senha:</label> <input type="password" id="passwordConfirm"
 						class="form-control" th:field="*{passwordConfirm}" required>
 				</div>
-					<div class="form-group col-md-4">
+				<div class="form-group col-md-4">
 					<label>Perfil:</label> <select class="form-control"
 						th:field="*{perfil}" required>
 						<option value="Cliente">Cliente</option>
@@ -55,8 +68,8 @@
 				</div>
 			</div>
 			<div></div>
-			<button type="submit" class="btn btn-primary ">Salvar</button>
-			<button type="reset" class="btn btn-danger">Cancelar</button>
+			<button type="submit" class="btn btn-primary " onclick="return passwordValidator()">Salvar</button>
+			<button type="reset" class="btn btn-danger" >Cancelar</button>
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

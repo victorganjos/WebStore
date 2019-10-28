@@ -22,7 +22,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
 th:fragment="cabecalho">
 	<a href="/">
-	<img class="navbar-brand" src=".\images\logo.png" style="height:50px" onmouseover="this.style.cursor='pointer';" alt="HomePage">
+	<img class="navbar-brand" src="https://i.imgur.com/osAucyD.png" style="height:50px" onmouseover="this.style.cursor='pointer';" alt="HomePage">
 	</a>
     	<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarsExample04" aria-controls="navbarsExample04"
@@ -44,9 +44,10 @@ th:fragment="cabecalho">
 							class="dropdown-item" href="/usuarios/listar">Usuários</a>
 					</div></li>
 			</ul>
+			<a class="nav-link" th:href="@{/cliente/inserir-dados-cliente}"  sec:authorize="!isAuthenticated()">Inscrever-se</a>
+			<a class="nav-link" href="/cliente/meus-dados/" sec:authorize="hasRole('ROLE_CLIENT')">Meus Dados</a>
 			<a class="nav-link" href="/login" sec:authorize="!isAuthenticated()">Entrar</a>
-			<a class="nav-link" href="/cliente/meus-dados/" sec:authorize="isAuthenticated()">Meus Dados</a>
-			<a class="nav-link" href="/logout" sec:authorize="isAuthenticated()">Sair</a>
+			<a class="nav-link" href="/logout" onclick="alert('Sessão encerrada')" sec:authorize="isAuthenticated()">Sair</a>
 			<form class="form-inline my-2 my-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Buscar">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
