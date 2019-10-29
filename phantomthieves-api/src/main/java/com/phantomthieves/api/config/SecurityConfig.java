@@ -33,7 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			"//**",
 			"/usuarios/**",
 			"/cliente/inserir-dados-cliente",
-			"/cliente/inserir-usuario-cliente"
+			"/cliente/inserir-usuario-cliente",
+			"/carrinho/carrinho"
 	};
 	
 	@Override
@@ -43,6 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers(PUBLIC_MATHCERS).permitAll()
 			.antMatchers(resources).permitAll()
 			.antMatchers(HttpMethod.GET, "/").permitAll()
+			.antMatchers(HttpMethod.GET, "/carrinho/**").permitAll()
+			.antMatchers(HttpMethod.POST, "/carrinho/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/produtos/**").hasRole("ADMIN")
 			.antMatchers(HttpMethod.POST, "/produtos/**").hasRole("ADMIN")
 			.antMatchers(HttpMethod.GET, "/cliente/meus-dados").hasRole("CLIENT")
