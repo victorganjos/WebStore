@@ -92,17 +92,20 @@ img {
 					</a>
 				</div>
 				<br>
-				<form>
-   <div class="form-row align-items-center">
-    <div class="col-sm-11">
-      <input type="text" class="form-control" placeholder="Buscar">
-    </div>
-    <div class="col-auto">
-    	<button type="button" class="btn btn-success">Buscar</button>
-    </div>
-  </div>
-</div>
-</form>
+				<form action="index" method="post">
+					<div class="form-row align-items-center">
+						<div class="col-sm-11">
+							<input type="text" name="buscaProduto" class="form-control"
+								placeholder="Buscar">
+						</div>
+						<div class="col-auto">
+							<button type="submit" class="btn btn-success mt-1"
+								id="btn-pesquisa-produto">Buscar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
 			<div class="row">
 				<div th:each="imagem:  ${imagem}">
 					<div class="col-md-4">
@@ -113,9 +116,10 @@ img {
 							<div class="card-body">
 								<h5 class="card-title" th:text="${imagem.nomeProduto}"></h5>
 								<p class="card-title" th:text="${imagem.precoProduto}"></p>
-								<p><p>
-								<button type="submit" class="btn btn-block"
-									th:style="'color: #fff; background-color: #48D1CC'">Detalhes</button>
+								<p>
+								<p>
+									<button type="submit" class="btn btn-block"
+										th:style="'color: #fff; background-color: #48D1CC'">Detalhes</button>
 								<form method="post" th:action="@{/}">
 									<input type="hidden" name="imagemId" th:value="${imagem.id}" />
 									<button type="submit" class="btn btn-block"
@@ -135,12 +139,16 @@ img {
 							<tr>
 								<th>Item ID</th>
 								<th>Nome</th>
+								<th>Preço</th>
+								<th>Quantidade</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="sel : ${session.itensSelecionados1}">
 								<td th:text="${sel.item.id}"></td>
 								<td th:text="${sel.item.nomeProduto}"></td>
+								<td th:text="${sel.item.precoProduto}"></td>
+								<td th:text="${sel.qtCarrinho}"></td>
 							</tr>
 						</tbody>
 					</table>

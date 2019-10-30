@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.phantomthieves.api.model.Imagem;
+
 import com.phantomthieves.api.repository.ImagemRepository;
 
 import com.phantomthieves.api.controller.ItemSelecionado;
@@ -42,15 +44,32 @@ public class HomeController {
 			@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados,
 			RedirectAttributes redirAttr) {
 		
-		System.out.println("");
-		System.out.println("");
-		System.out.println(imagemId);
-		System.out.println("");
-		System.out.println("");
-		
 		Imagem carrinho = im.findImgByIdImage(imagemId);
-		itensSelecionados.add(new ItemSelecionado(carrinho));
-		redirAttr.addFlashAttribute("msg", "Imagem ID " + carrinho.getId() + " adicionado com sucesso");
+		
+		int qtSelecionada = 0;
+		boolean itemExiste = false;
+		int posicaoLista = 0;
+		
+		for(ItemSelecionado item: itensSelecionados) {
+			if (item.getItem().getId() == carrinho.getId()){
+				itemExiste = true;
+				item.setQtCarrinho(item.getQtCarrinho() + 1);
+				
+				break;
+			}
+		}
+		
+		if (!itemExiste) {
+			ItemSelecionado itemSel = new ItemSelecionado(carrinho);
+			qtSelecionada = itemSel.getQtCarrinho() + 1;
+			
+			itemSel.setQtCarrinho(qtSelecionada);
+			
+			itensSelecionados.add(itemSel); 
+		}
+			
+
+		
 		return new ModelAndView("redirect:/");
 	}
 	
@@ -58,4 +77,13 @@ public class HomeController {
 	public List<ItemSelecionado> getItensSelecionados() {
 		return new ArrayList<>();
 	}
+	
+	@PostMapping("index")
+	public ModelAndView pesquisar(@RequestParam("buscaProduto") String buscaProduto) {
+		ModelAndView resultado = new ModelAndView("index");
+		List<Imagem> imagens = im.findImgByNomeProduto(buscaProduto);
+		resultado.addObject("imagem", imagens);
+		return resultado;
+	}
+	
 }

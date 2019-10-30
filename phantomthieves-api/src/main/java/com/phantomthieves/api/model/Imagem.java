@@ -33,7 +33,6 @@ public class Imagem {
 	@Column(name = "NOME_PRODUTO")
 	private String nomeProduto;
 	
-	
 	@ManyToOne
 	@JoinColumn(name= "COD_PRODUTO", referencedColumnName = "COD_PRODUTO")
 	private Produto codProduto;
@@ -87,7 +86,7 @@ public class Imagem {
 	public void setLocalArquivo(String localArquivo) {
 		this.localArquivo = localArquivo;
 	}
-
+	
 	public Produto getCodProduto() {
 		return codProduto;
 	}

@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers(PUBLIC_MATHCERS).permitAll()
 			.antMatchers(resources).permitAll()
 			.antMatchers(HttpMethod.GET, "/").permitAll()
+			.antMatchers(HttpMethod.POST, "/index").permitAll()
 			.antMatchers(HttpMethod.GET, "/carrinho/**").permitAll()
 			.antMatchers(HttpMethod.POST, "/carrinho/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/produtos/**").hasRole("ADMIN")

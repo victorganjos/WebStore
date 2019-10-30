@@ -20,6 +20,9 @@ public interface ImagemRepository extends JpaRepository<Imagem, Integer>{
 	@Query(value = "SELECT * FROM VW_PRODUTO_IMAGEM WHERE COD_IMAGEM = ?1 ;", nativeQuery = true)
 	Imagem findImgByIdImage(Integer imagemId);
 	
+	@Query(value = "SELECT * FROM VW_PRODUTO_IMAGEM WHERE NOME_PRODUTO LIKE %?1% ;", nativeQuery = true)
+	List<Imagem> findImgByNomeProduto(String nomeProduto);
+	
 	@Query(value = "SELECT * FROM IMAGEM_PRODUTO WHERE COD_PRODUTO = ?1", nativeQuery = true)
 	Imagem findImgByIdProd(Integer prodId);
 	
