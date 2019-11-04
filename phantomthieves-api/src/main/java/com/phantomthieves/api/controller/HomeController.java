@@ -15,10 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.phantomthieves.api.model.Imagem;
-
+import com.phantomthieves.api.model.ItemSelecionado;
 import com.phantomthieves.api.repository.ImagemRepository;
-
-import com.phantomthieves.api.controller.ItemSelecionado;
 
 
 @Controller
@@ -53,7 +51,9 @@ public class HomeController {
 		for(ItemSelecionado item: itensSelecionados) {
 			if (item.getItem().getId() == carrinho.getId()){
 				itemExiste = true;
+				
 				item.setQtCarrinho(item.getQtCarrinho() + 1);
+				item.setValorTotal(item.getQtCarrinho() * item.getItem().getPrecoProduto());
 				
 				break;
 			}
@@ -64,6 +64,8 @@ public class HomeController {
 			qtSelecionada = itemSel.getQtCarrinho() + 1;
 			
 			itemSel.setQtCarrinho(qtSelecionada);
+			itemSel.setValorTotal(itemSel.getQtCarrinho() * itemSel.getItem().getPrecoProduto());
+			
 			
 			itensSelecionados.add(itemSel); 
 		}
@@ -85,5 +87,16 @@ public class HomeController {
 		resultado.addObject("imagem", imagens);
 		return resultado;
 	}
+	
+	
+	/*
+	@PostMapping("/carrinho/carrinho")
+	public ModelAndView carrinho(@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados) {
+		ModelAndView resultado = new ModelAndView("carrinho/carrinho");
+		resultado.addObject("itensSelecionados", itensSelecionados);
+
+		return resultado;
+	}
+	*/
 	
 }

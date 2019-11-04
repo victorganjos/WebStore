@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.phantomthieves.api.controller;
+package com.phantomthieves.api.model;
 
 
 import java.io.Serializable;
-
-import com.phantomthieves.api.model.Produto;
-import com.phantomthieves.api.model.Imagem;
 
 
 /**
@@ -23,6 +20,10 @@ public class ItemSelecionado {
 	private Imagem item;
     
 	private Integer qtCarrinho = 0;
+	
+	private Double valorTotal = 0.0;
+	
+	private Double totItens = 0.0;
 	
     public ItemSelecionado() {
         
@@ -53,5 +54,21 @@ public class ItemSelecionado {
 	public void setQtCarrinho(Integer qtCarrinho) {
 		this.qtCarrinho = qtCarrinho;
 	}
-   
+
+	public Double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public Double getTotItens() {
+		return totItens;
+	}
+
+	public void setTotItens(Double totItens) {
+		this.totItens = totItens;
+	}
+
 }
