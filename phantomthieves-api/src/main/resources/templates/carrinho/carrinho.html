@@ -62,7 +62,8 @@ html {
 							<td th:text="${iteSel.qtCarrinho}"></td>
 							<td th:text="${iteSel.valorTotal}"></td>
 							<form method="post" th:action="@{/carrinho/carrinho}">
-								<input type="hidden" name="imagemId" th:value="${iteSel.item.id}" />
+								<input type="hidden" name="imagemId"
+									th:value="${iteSel.item.id}" />
 								<td>
 									<button type="submit" name="remove" class="btn btn-danger">Remove</button>
 								</td>
@@ -74,8 +75,8 @@ html {
 			<div class="col-md-12">
 				<div class="float-right">
 					<a href="/" class="btn btn-back" style="margin-right: 15px;">Voltar</a>
-					<a href="#" class="btn btn-success"
-						onclick="alert('Em construção!')">Confirmar compra</a>
+					<a href="/carrinho/checkout" class="btn btn-success">Proceder
+						para Checkout</a>
 				</div>
 			</div>
 		</div>
