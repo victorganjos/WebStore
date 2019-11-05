@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -36,7 +37,7 @@ public class CheckoutController {
 	
 	@Autowired
 	private EnderecoRepository endereco;
-	
+
 	@Autowired
 	private ItemPedRepository itemPedido;
 	
@@ -48,10 +49,27 @@ public class CheckoutController {
 		
 		Cliente cliente= cli.findByUser(authentication.getName());
 		
-		Endereco ender = endereco.findByClientIdUlt(cliente.getId());
+		List<Endereco> enderecos = endereco.findByClientId(cliente.getId());
+
+		resultado.addObject("enderecoPrincipal", cliente.getAddress());
+		resultado.addObject("numeroEnderecoPrincipal", cliente.getAddressNumber());
+		resultado.addObject("enderecos", enderecos);
+		System.out.println("Vamos: "+ cliente.getId()+"\n\n\n\n\n");
+		return resultado; 
+	}
+	
+	
+	@GetMapping("/confirmaPedido")
+	public ModelAndView finalizarCompra(@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados1) {
+		ModelAndView resultado = new ModelAndView("carrinho/confirmaPedido");
+		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
 		
-		resultado.addObject("endereco", endereco);
-		
+		Cliente cliente= cli.findByUser(authentication.getName());
+
+		resultado.addObject("endereco", cliente.getAddress());
+		resultado.addObject("numero", cliente.getAddressNumber());
+		resultado.addObject("complemento", cliente.getComplemento());
+		resultado.addObject("cep", cliente.getCep());
 		return resultado; 
 	}
 
@@ -90,8 +108,9 @@ public class CheckoutController {
 			itemPedido.save(itemPed);
 		}
 		
+		
+		
 		return new ModelAndView("redirect:/");
 	}
-
 
 }

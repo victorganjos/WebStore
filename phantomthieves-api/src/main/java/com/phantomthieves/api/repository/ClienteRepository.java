@@ -12,4 +12,5 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 	@Query(value = "SELECT * FROM CLIENTE WHERE USER_CLIENTE = ?;", nativeQuery = true)
 	Cliente findByUser(String username);
 
+
 }

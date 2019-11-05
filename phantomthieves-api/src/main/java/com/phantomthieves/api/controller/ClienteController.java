@@ -217,7 +217,7 @@ public class ClienteController {
 		endereco.setAtivo(1);
 		enderecoRepository.save(endereco);
 
-		return "redirect:/cliente/enderecos";
+		return "redirect:/carrinho/checkout";
 	}
 
 	@RequestMapping(value = "/enderecos/inativar/{id}")

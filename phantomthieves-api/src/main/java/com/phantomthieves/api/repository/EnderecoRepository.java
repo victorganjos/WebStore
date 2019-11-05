@@ -9,8 +9,9 @@ import com.phantomthieves.api.model.Endereco;
 
 public interface EnderecoRepository  extends JpaRepository<Endereco, Integer> {
 	
+	
 	@Query(value = "SELECT * FROM ENDERECO_ENTREGA WHERE COD_CLIENTE = ? AND ATIVO = 1;", nativeQuery = true)
-	List<Endereco> findByClientId(int id);
+	List<Endereco> findByClientId(Integer id);
 	
 	@Query(value = "SELECT * FROM ENDERECO_ENTREGA WHERE COD_CLIENTE = ? AND ATIVO = 1 ORDER BY COD_ENDERECO DESC LIMIT 1;", nativeQuery = true)
 	Endereco findByClientIdUlt(int id);
