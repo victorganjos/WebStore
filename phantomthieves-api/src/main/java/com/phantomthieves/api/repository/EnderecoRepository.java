@@ -11,6 +11,9 @@ public interface EnderecoRepository  extends JpaRepository<Endereco, Integer> {
 	
 	@Query(value = "SELECT * FROM ENDERECO_ENTREGA WHERE COD_CLIENTE = ? AND ATIVO = 1;", nativeQuery = true)
 	List<Endereco> findByClientId(int id);
+	
+	@Query(value = "SELECT * FROM ENDERECO_ENTREGA WHERE COD_CLIENTE = ? AND ATIVO = 1 ORDER BY COD_ENDERECO DESC LIMIT 1;", nativeQuery = true)
+	Endereco findByClientIdUlt(int id);
 
 	@Modifying
 	@Query(value ="UPDATE ENDERECO_ENTREGA SET ATIVO = FALSE WHERE COD_ENDERECO = ?;", nativeQuery = true)

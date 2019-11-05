@@ -33,8 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			"//**",
 			"/usuarios/**",
 			"/cliente/inserir-dados-cliente",
-			"/cliente/inserir-usuario-cliente",
-			"/carrinho/**"
+			"/cliente/inserir-usuario-cliente"
 	};
 	
 	@Override
