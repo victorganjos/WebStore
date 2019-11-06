@@ -92,6 +92,7 @@ public class CheckoutController {
 		Cliente cliente= cli.findByUser(authentication.getName());
 		
 		ped.setCodCliente(cliente.getId());
+		ped.setCodEndereco(1);
 		
 		pedido.save(ped);
 		
@@ -110,7 +111,7 @@ public class CheckoutController {
 		
 		
 		
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/carrinho/confirmaPedido");
 	}
 
 }
