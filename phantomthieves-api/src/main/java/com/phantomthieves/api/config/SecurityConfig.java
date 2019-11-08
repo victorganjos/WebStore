@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private static final String[] PUBLIC_MATHCERS = {
 			"//**",
 			"/usuarios/**",
+			"/produtos/detalheProduto2",
 			"/cliente/inserir-dados-cliente",
 			"/cliente/inserir-usuario-cliente"
 	};
@@ -46,6 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers(HttpMethod.POST, "/index").permitAll()
 			.antMatchers(HttpMethod.GET, "/carrinho/**").permitAll()
 			.antMatchers(HttpMethod.POST, "/carrinho/**").permitAll()
+			.antMatchers(HttpMethod.GET, "/produtos/detalheProduto2").permitAll()
+			.antMatchers(HttpMethod.POST, "/produtos/detalheProduto2").permitAll()
 			.antMatchers(HttpMethod.GET, "/produtos/**").hasRole("ADMIN")
 			.antMatchers(HttpMethod.POST, "/produtos/**").hasRole("ADMIN")
 			.antMatchers(HttpMethod.GET, "/cliente/meus-dados").hasRole("CLIENT")

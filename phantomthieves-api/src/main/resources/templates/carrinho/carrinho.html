@@ -58,9 +58,9 @@ html {
 					<tbody>
 						<tr th:each="iteSel : ${session.itensSelecionados1}">
 							<td th:text="${iteSel.item.nomeProduto}"></td>
-							<td th:text="${iteSel.item.precoProduto}"></td>
+							<td th:text="'R$' + ${iteSel.item.precoProduto}"></td>
 							<td th:text="${iteSel.qtCarrinho}"></td>
-							<td th:text="${iteSel.valorTotal}"></td>
+							<td th:text="'R$' + ${iteSel.valorTotal}"></td>
 							<form method="post" th:action="@{/carrinho/carrinho}">
 								<input type="hidden" name="imagemId"
 									th:value="${iteSel.item.id}" />
