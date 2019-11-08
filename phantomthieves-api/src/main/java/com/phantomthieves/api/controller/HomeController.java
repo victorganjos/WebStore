@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.phantomthieves.api.model.Imagem;
 import com.phantomthieves.api.model.ItemSelecionado;
 import com.phantomthieves.api.repository.ImagemRepository;
+import com.phantomthieves.api.repository.ProdutoRepository;
 
 @Controller
 @RequestMapping("/")

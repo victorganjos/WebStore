@@ -23,7 +23,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
 th:fragment="cabecalho">
 	<a href="/">
-	<img class="navbar-brand" src="https://i.imgur.com/osAucyD.png" style="height:50px" onmouseover="this.style.cursor='pointer';" alt="HomePage">
+	<img class="navbar-brand" src="https://i.imgur.com/osAucyD.png" style="width:125px; height:50px"  onmouseover="this.style.cursor='pointer';" alt="HomePage">
 	</a>
     	<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarsExample04" aria-controls="navbarsExample04"
@@ -49,8 +49,6 @@ th:fragment="cabecalho">
 			<a class="nav-link" href="/cliente/meus-dados/" sec:authorize="hasRole('ROLE_CLIENT')">Meus Dados</a>
 			<a class="nav-link" href="/login" sec:authorize="!isAuthenticated()">Entrar</a>
 			<a class="nav-link" href="/logout" onclick="alert('Sessão encerrada')" sec:authorize="isAuthenticated()">Sair</a>
-			<a href="/carrinho/carrinho" class="btn btn-success" style="margin-right: 15px;">Carrinho
-			<img src="https://image.flaticon.com/icons/png/512/34/34627.png"  style="width: 25px; height: 25px;"/></a>
 	</div>
   </nav>
 </div>

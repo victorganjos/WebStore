@@ -69,9 +69,9 @@ html {
 			<div class="col-md-6">
 				<br> 
 				<br>
-				<h1 th:text="${nome_produto}"></h1>
-				<p th:text="${descricao_detalhada}"></p>
-				<h1 th:text="'Preço: R$' + ${preco_produto}"></h1>
+				<h1 th:text="${produto.nome_produto}"></h1>
+				<p th:text="${produto.descricao_detalhada}"></p>
+				<h1 th:text="'Preço: R$' + ${produto.preco_produto}"></h1>
 				<br>
 				<form method="post">
 					<p>Quantidade:</p>
