@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.phantomthieves.api.dto.EnderecoDTO;
 import com.phantomthieves.api.model.Cliente;
 import com.phantomthieves.api.model.Endereco;
 import com.phantomthieves.api.model.Usuario;
@@ -40,6 +41,9 @@ public class ClienteController {
 
 	@Autowired
 	private UsuarioController userControl = new UsuarioController();
+	
+	private EnderecoDTO endereco = new EnderecoDTO();
+	private Endereco address = new Endereco();
 
 	@GetMapping("/inserir-dados-cliente")
 	public ModelAndView inserir() {
@@ -50,7 +54,11 @@ public class ClienteController {
 
 	@PostMapping("/inserir-dados-cliente")
 	public String inserir(Cliente cliente) {
+
 		clienteRepository.save(cliente);
+
+		address = endereco.addressBuilder(cliente);
+		enderecoRepository.save(address);
 
 		return "redirect:/cliente/inserir-usuario-cliente";
 	}
@@ -60,6 +68,7 @@ public class ClienteController {
 		Usuario user = new Usuario();
 		ModelAndView resultado = new ModelAndView("cliente/inserir-usuario-cliente");
 		user.setUser(clienteRepository.findByLast().getUser());
+		System.out.println(user.getUser());
 		resultado.addObject("usuario", user);
 		return resultado;
 	}
