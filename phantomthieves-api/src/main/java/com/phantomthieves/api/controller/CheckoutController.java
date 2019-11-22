@@ -1,7 +1,5 @@
 package com.phantomthieves.api.controller;
 
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +7,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.phantomthieves.api.model.Cliente;
 import com.phantomthieves.api.model.Endereco;
@@ -87,14 +88,18 @@ public class CheckoutController {
 
 	@PostMapping("/checkout")
 	public ModelAndView salvar(@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados1, 
-			@ModelAttribute("enderecos")Endereco address) {
+			BindingResult bindingResult,
+            RedirectAttributes redirAttr,
+			@ModelAttribute("enderecos")Endereco address,
+			@RequestParam("paymentMethod") String formaPagamento, @RequestParam("radioEndereco") int idEndereco) {
 		ModelAndView resultado = new ModelAndView("carrinho/checkout");
-
+		System.out.println("FOMAR TESTE \n\n\n" +formaPagamento);
 		Double valorTotal = 5.0;
 
 		for (ItemSelecionado item : itensSelecionados1) {
 			valorTotal += item.getValorTotal();
 		}
+
 
 		Pedido ped = new Pedido();
 
@@ -110,6 +115,8 @@ public class CheckoutController {
 
 		java.sql.Date dataSql = new java.sql.Date(System.currentTimeMillis());
 		ped.setDataPed(dataSql);
+		ped.setCodEndereco(idEndereco);
+		ped.setFormaPagamento(formaPagamento);
 		pedido.save(ped);
 
 		Pedido ultPed = pedido.findByUltId();

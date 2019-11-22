@@ -7,11 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Pedido {
@@ -32,7 +27,10 @@ public class Pedido {
 	
 	@Column(name = "COD_CLIENTE")
 	private Integer  codCliente;
-
+	
+	@Column(name = "FORMAPAGAMENTO")
+	private String formaPagamento;
+	
 	public Pedido() {
 		
 	}
@@ -46,6 +44,7 @@ public class Pedido {
 		this.valorTotal = valorTotal;
 		this.codEndereco = codEndereco;
 		this.codCliente = codCliente;
+		this.formaPagamento = formaPagamento;
 	}
 
 	public Integer getId() {
@@ -87,5 +86,17 @@ public class Pedido {
 	public void setCodCliente(Integer codCliente) {
 		this.codCliente = codCliente;
 	}
+
+
+	public String getFormaPagamento() {
+		return formaPagamento;
+	}
+
+
+	public void setFormaPagamento(String formaPagamento) {
+		this.formaPagamento = formaPagamento;
+	}
+	
+	
 
 }
