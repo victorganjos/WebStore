@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,12 +65,27 @@ public class CheckoutController {
 		return resultado;
 	}
 
-	@GetMapping("/confirmaPedido")
+	@GetMapping("/confirmaPedido/{id}/{idVenda}")
 	public ModelAndView finalizarCompra(
-			@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados1) {
+			@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados1,
+			@PathVariable Integer id, @PathVariable Integer idVenda) {
 		ModelAndView resultado = new ModelAndView("carrinho/confirmaPedido");
 		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
 		Double soma = 5.0;
+		
+		for (ItemSelecionado item : itensSelecionados1) {
+			soma += item.getValorTotal();
+		}
+		
+		
+		Endereco end = new Endereco();
+		end = endereco.buscaPorId(id);
+		resultado.addObject("endereco", end.getAddress());
+		resultado.addObject("numero", end.getAddressNumber());
+		resultado.addObject("complemento", end.getComplemento());
+		resultado.addObject("cep", end.getCep());
+		resultado.addObject("valorTotal", soma);
+		resultado.addObject("numeroPedido", idVenda);
 		for (ItemSelecionado item : itensSelecionados1) {
 			soma += item.getValorTotal();
 		}
@@ -93,7 +109,6 @@ public class CheckoutController {
 			@ModelAttribute("enderecos")Endereco address,
 			@RequestParam("paymentMethod") String formaPagamento, @RequestParam("radioEndereco") int idEndereco) {
 		ModelAndView resultado = new ModelAndView("carrinho/checkout");
-		System.out.println("FOMAR TESTE \n\n\n" +formaPagamento);
 		Double valorTotal = 5.0;
 
 		for (ItemSelecionado item : itensSelecionados1) {
@@ -131,8 +146,8 @@ public class CheckoutController {
 
 			itemPedido.save(itemPed);
 		}
-
-		return new ModelAndView("redirect:/carrinho/confirmaPedido");
+		resultado.addObject("valorTotal", valorTotal);
+		return new ModelAndView("redirect:/carrinho/confirmaPedido/"+idEndereco+"/"+ultPed.getId()+"");
 	}
 	
 	

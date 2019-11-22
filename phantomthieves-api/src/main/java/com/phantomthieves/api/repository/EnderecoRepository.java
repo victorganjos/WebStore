@@ -19,4 +19,7 @@ public interface EnderecoRepository  extends JpaRepository<Endereco, Integer> {
 	@Modifying
 	@Query(value ="UPDATE ENDERECO_ENTREGA SET ATIVO = FALSE WHERE COD_ENDERECO = ?;", nativeQuery = true)
 	void inativarIdEndereco(Integer id);
+	
+	@Query(value = "SELECT * FROM ENDERECO_ENTREGA WHERE COD_ENDERECO = ?;", nativeQuery = true)
+	Endereco buscaPorId(Integer id);
 }
