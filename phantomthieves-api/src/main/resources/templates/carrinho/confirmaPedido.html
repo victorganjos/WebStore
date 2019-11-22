@@ -36,6 +36,7 @@ body {
 
 				<div class="container">
 					<h1 class="display-3">Obrigado pela sua compra!</h1>
+	
 					<p>Anote o número do seu pedido: <strong th:text="${numeroPedido}"></strong></p>
 				</div>
 
@@ -88,7 +89,14 @@ body {
 							</tr>
 						</tbody>
 						</table>
+						<div class="col-md-12">
+				<div class="float-right">
+					
+					<a href="/carrinho/finalizado" class="btn btn-success">Voltar Home</a>
+				</div>
+			</div>
 					</div>
+									
 					
 				</div>
 	</main>

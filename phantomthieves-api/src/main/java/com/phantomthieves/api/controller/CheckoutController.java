@@ -20,11 +20,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.phantomthieves.api.model.Cliente;
 import com.phantomthieves.api.model.Endereco;
+import com.phantomthieves.api.model.Imagem;
 import com.phantomthieves.api.model.ItemPedido;
 import com.phantomthieves.api.model.ItemSelecionado;
 import com.phantomthieves.api.model.Pedido;
 import com.phantomthieves.api.repository.ClienteRepository;
 import com.phantomthieves.api.repository.EnderecoRepository;
+import com.phantomthieves.api.repository.ImagemRepository;
 import com.phantomthieves.api.repository.ItemPedRepository;
 import com.phantomthieves.api.repository.PedidoRepository;
 
@@ -44,7 +46,19 @@ public class CheckoutController {
 
 	@Autowired
 	private ItemPedRepository itemPedido;
-
+	
+	@Autowired
+	private ImagemRepository im;
+	
+	@RequestMapping("/finalizado")
+	public ModelAndView volta(@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados1) {
+		ModelAndView resultado = new ModelAndView("index");
+		List<Imagem> imagem = im.findImg();
+		resultado.addObject("imagem", imagem);
+		itensSelecionados1.clear();
+		return resultado;
+	}
+	
 	@GetMapping("/checkout")
 	public ModelAndView inserir(@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados1) {
 		ModelAndView resultado = new ModelAndView("carrinho/checkout");
