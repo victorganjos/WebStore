@@ -29,6 +29,9 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 	@Query(value = "SELECT * FROM PRODUTO WHERE NOME_PRODUTO LIKE %?1% AND ATIVO = TRUE", nativeQuery = true)
 	List<Produto> findAllNomeProduto(String nome);
 	
+	@Query(value = "SELECT * FROM PRODUTO WHERE NOME_PRODUTO = ? AND ATIVO = TRUE", nativeQuery = true)
+	Produto findByNomeProduto(String nome);
+	
 	@Query(value = "SELECT * FROM PRODUTO WHERE COD_PRODUTO = ?1", nativeQuery = true)
 	Produto findAllByCodigo(Integer codProd);
 

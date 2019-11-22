@@ -143,7 +143,7 @@ public class CheckoutController {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userAuthenticated = userDetails.getUsername();
 		Cliente cliente = cli.findByUser(userAuthenticated);
-
+		
 		List<Endereco> address = endereco.findAll();
 		if (!address.equals(null)) {
 

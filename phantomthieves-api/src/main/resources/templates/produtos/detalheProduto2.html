@@ -1,19 +1,22 @@
-	<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="generator" content="Jekyll v3.8.5">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Jekyll v3.8.5">
 <title>Phantom Thieves</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 <style>
-	body {
+body {
 	min-height: 75rem;
 	padding-top: 4.5rem;
-	}
+}
+
 .carousel-inner img {
 	max-width: 100%;
 	max-height: 100%;
@@ -49,31 +52,31 @@ html {
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<main role="main" class="container">
-		<div class="row">
-			<div class="col-md-6 text-center">
-				<br> <br>
-				<div id="carouselExampleIndicators" class="carousel slide"
-					data-ride="carousel" data-interval="false">
-					<ol class="carousel-indicators"></ol>
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-						<div class="embed-responsive embed-responsive-1by1"
-								style="max-height: 500px;">
-								<iframe class="embed-responsive-item" allowfullscreen="" src="https://www.youtube.com/embed/Z3xSGv3Hfio"
-									alt="Fifth slide"></iframe>
+		<form method="post" th:object="${produto}">
+			<div class="row">
+				<div class="col-md-6 text-center">
+					<br> <br>
+					<div id="carouselExampleIndicators" class="carousel slide"
+						data-ride="carousel" data-interval="false">
+						<ol class="carousel-indicators"></ol>
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<div class="embed-responsive embed-responsive-1by1"
+									style="max-height: 500px;">
+									<iframe class="embed-responsive-item" allowfullscreen=""
+										src="https://www.youtube.com/embed/Z3xSGv3Hfio"
+										alt="Fifth slide"></iframe>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-6">
-				<br> 
-				<br>
-				<h1 th:text="${produto.nome_produto}"></h1>
-				<p th:text="${produto.descricao_detalhada}"></p>
-				<h1 th:text="'Preço: R$' + ${produto.preco_produto}"></h1>
-				<br>
-				<form method="post">
+				<div class="col-md-6">
+					<br> <br>
+					<h1 th:text="${produto.nomeProduto}"></h1>
+					<p th:text="${produto.descricaoDetalhada}"></p>
+					<h1 th:text="'Preço: R$' + ${produto.precoProduto}"></h1>
+					<br>
 					<p>Quantidade:</p>
 					<div class="form-row align-items-center">
 						<div class="col-auto my-1">
@@ -94,14 +97,32 @@ html {
 						<button type="button" class="btn btn-primary"
 							onclick="alert('Em construção!')">Adicionar ao carrinho</button>
 					</div>
-				</form>
+				</div>
 			</div>
-		</div>
+		</form>
 	</main>
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')
+	</script>
+	<script src="/docs/4.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		crossorigin="anonymous">
 </body>
 </html>
