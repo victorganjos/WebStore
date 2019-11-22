@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,14 +15,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.phantomthieves.api.model.Cliente;
+import com.phantomthieves.api.model.Pedido;
+import com.phantomthieves.api.model.ItemPedido;
+import com.phantomthieves.api.model.Produto;
 import com.phantomthieves.api.model.Endereco;
 import com.phantomthieves.api.model.Usuario;
 import com.phantomthieves.api.repository.ClienteRepository;
 import com.phantomthieves.api.repository.EnderecoRepository;
 import com.phantomthieves.api.repository.UsuarioRepository;
+import com.phantomthieves.api.repository.PedidoRepository;
+import com.phantomthieves.api.repository.ItemPedRepository;
 
 @Controller
 @RequestMapping("/cliente")
@@ -41,6 +48,12 @@ public class ClienteController {
 
 	@Autowired
 	private UsuarioController userControl = new UsuarioController();
+	
+	@Autowired
+	private PedidoRepository pedRepo;
+
+	@Autowired
+	private ItemPedRepository itePedRepo;
 
 	@GetMapping("/inserir-dados-cliente")
 	public ModelAndView inserir() {
@@ -81,11 +94,18 @@ public class ClienteController {
 
 	@GetMapping("/meus-dados")
 	public ModelAndView meusDados() {
+		
+		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
 
+		Cliente cliente = clienteRepository.findByUser(authentication.getName());
+		
+		List<Pedido> pedidos = pedRepo.findAllByCodUsu(cliente.getId());
+		
 		ModelAndView resultado = new ModelAndView("cliente/meus-dados");
 		resultado.addObject("cliente", new Cliente());
 		resultado.addObject("user", new Usuario());
 		resultado.addObject("endereco", new Endereco());
+		resultado.addObject("pedidos", pedidos);
 		return resultado;
 
 	}
@@ -229,5 +249,42 @@ public class ClienteController {
 		System.out.println(id);
 		enderecoRepository.inativarIdEndereco(id);
 		return enderecos("Operação realizada com sucesso!");
+	}
+	
+	@GetMapping("/listarPedidos")
+	public ModelAndView listar() {
+		ModelAndView resultado = new ModelAndView("cliente/listarPedidos");
+		
+		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
+
+		Cliente cliente = clienteRepository.findByUser(authentication.getName());
+		
+		List<Pedido> pedidos = pedRepo.findAllByCodUsu(cliente.getId());	
+		resultado.addObject("pedidos", pedidos);
+		
+		return resultado;
+	}
+	
+	@PostMapping("/listarPedidos")
+	public ModelAndView pesquisar(@RequestParam("pesquisaPed") Integer idPed) {
+		ModelAndView resultado = new ModelAndView("cliente/listarPedidos");
+		
+		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
+
+		Cliente cliente = clienteRepository.findByUser(authentication.getName());
+		
+		if(idPed == null) {
+			idPed = 0;
+		}
+		
+		if(idPed == 0) {
+			List<Pedido> pedido = pedRepo.findAllByCodUsu(cliente.getId());
+			resultado.addObject("pedidos", pedido);
+		}else {
+			Pedido pedido = pedRepo.findAllByCodPed(idPed, cliente.getId());
+			resultado.addObject("pedidos", pedido);
+		}
+
+		return resultado;
 	}
 }

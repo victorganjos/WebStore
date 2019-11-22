@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Usuários</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<script>
+	function ConfirmaExclusao() {
+		if (confirm("Deseja excluir o usuário selecionado ?"))
+			return true;
+		else
+			return false;
+	}
+</script>
+</head>
+<style>
+	body {
+	min-height: 75rem;
+	padding-top: 4.5rem;
+	}
+</style>
+<body>
+	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
+	<div class="container">
+		<h2>Lista de Pedidos</h2>
+		<div class="row">
+			<div class="form-group col-md-12">
+				<form action="" method="post">
+					<label for="txt-pesquisa-pedido">Pedido a ser pesquisado</label>
+					<input name="pesquisaPed" type="number" id="txt-pesquisa-pedido"
+						class="form-control" />
+					<button type="submit" class="btn btn-success mt-1"
+						id="btn-pesquisa-pedido">Pesquisa</button>
+				</form>
+			</div>
+		</div>
+		<table class="table" id="tbl-pedido">
+			<thead>
+				<th>Id</th>
+				<th>Data Pedido</th>
+				<th>Valor Total</th>
+				<th>Forma Pag.</th>
+			</thead>
+			<tbody>
+				<tr th:each="pedido: ${pedidos}">
+					<td th:text="${pedido.id}"></td>
+					<td th:text="${pedido.dataPed}"></td>
+					<td th:text="${pedido.valorTotal}"></td>
+					<td th:text="${pedido.formaPagamento}"></td>
+				</tr>
+			</tbody>
+		</table>	
+		
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>
