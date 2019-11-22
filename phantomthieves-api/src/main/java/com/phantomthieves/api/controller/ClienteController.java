@@ -10,12 +10,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.phantomthieves.api.dto.EnderecoDTO;
 import com.phantomthieves.api.model.Cliente;
 import com.phantomthieves.api.model.Endereco;
 import com.phantomthieves.api.model.Usuario;
@@ -41,23 +41,21 @@ public class ClienteController {
 
 	@Autowired
 	private UsuarioController userControl = new UsuarioController();
-	
-	private EnderecoDTO endereco = new EnderecoDTO();
-	private Endereco address = new Endereco();
 
 	@GetMapping("/inserir-dados-cliente")
 	public ModelAndView inserir() {
 		ModelAndView resultado = new ModelAndView("cliente/inserir-dados-cliente");
 		resultado.addObject("cliente", new Cliente());
+		resultado.addObject("endereco", new Endereco());
 		return resultado;
 	}
 
 	@PostMapping("/inserir-dados-cliente")
-	public String inserir(Cliente cliente) {
+	public String inserir(@ModelAttribute("cliente") Cliente cliente, @ModelAttribute("endereco") Endereco address) {
+		address.setAtivo(1);
+		address.setCodCliente(cliente);
 
 		clienteRepository.save(cliente);
-
-		address = endereco.addressBuilder(cliente);
 		enderecoRepository.save(address);
 
 		return "redirect:/cliente/inserir-usuario-cliente";
@@ -98,25 +96,36 @@ public class ClienteController {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userAuthenticated = userDetails.getUsername();
 		Cliente userData = new Cliente();
+		List<Endereco> enderecos = new ArrayList<Endereco>();
+		Endereco endereco = new Endereco();
 
 		try {
 			userData = clienteRepository.findByUser(userAuthenticated);
 			System.out.println(userData.getName());
-
+			enderecos = enderecoRepository.findByClientId(userData.getId());
+			endereco = enderecos.get(0);
 		} catch (Exception userNotFound) {
 			System.out.println("Usuário não encontrado");
 		}
 
 		ModelAndView resultado = new ModelAndView("cliente/editar-dados");
 		resultado.addObject("cliente", userData);
+		resultado.addObject("endereco", endereco);
 		return resultado;
 
 	}
 
 	@PostMapping("/editar-dados")
-	public String editarDadosCliente(Cliente cliente) {
+	public String editarDadosCliente(@ModelAttribute("cliente") Cliente cliente,
+			@ModelAttribute("endereco") Endereco address) {
 
-		clienteRepository.save(cliente);
+		clienteRepository.updateCliente(cliente.getName(), cliente.getSirName(), Integer.parseInt(cliente.getDdd()),
+				cliente.getTelephone(), Integer.parseInt(cliente.getDddContactTwo()), cliente.getTelephoneContactTwo(),
+				cliente.getBirthdate(), cliente.getId());
+
+		address.setCodCliente(cliente);
+		address.setAtivo(1);
+		enderecoRepository.save(address);
 
 		return "redirect:/cliente/meus-dados/";
 	}
@@ -142,64 +151,56 @@ public class ClienteController {
 
 	}
 
+	@Transactional
 	@PostMapping("/editar-usuario-cliente")
 	public String editarDadosUsuario(Usuario cliente) {
-
+		cliente.setPassword(bc.encode(cliente.getPassword()));
 		usuarioRepository.save(cliente);
+
+		usuarioRepository.incluiRegra(cliente.getId(), 3);
 
 		return "redirect:/cliente/meus-dados/";
 	}
 
 	@GetMapping("/enderecos")
-	public ModelAndView enderecos() {
+	public ModelAndView enderecos(@ModelAttribute("msg") String msg) {
 
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userAuthenticated = userDetails.getUsername();
 		Cliente userData = new Cliente();
 		List<Endereco> address = new ArrayList<Endereco>();
+		ModelAndView resultado = new ModelAndView("cliente/enderecos");
+
 		try {
 			userData = clienteRepository.findByUser(userAuthenticated);
-			System.out.println(userData.getId());
-
 			address = enderecoRepository.findByClientId(userData.getId());
-
-			System.out.println(address.get(0).getId());
-			if (address.equals(null)) {
-				address.add(new Endereco());
-				address.get(0).setId(userData.getId());
-				address.get(0).setCep(userData.getCep());
-				address.get(0).setLogradouro(userData.getAddress());
-				address.get(0).setNumero(userData.getAddressNumber());
-				address.get(0).setBairro(userData.getBairro());
-				address.get(0).setCity(userData.getCity());
-				address.get(0).setComplemento(userData.getComplemento());
-				address.get(0).setUf(userData.getUf());
-			}
 
 		} catch (Exception userNotFound) {
 			System.out.println("Usuário não encontrado");
 		}
 
-		ModelAndView resultado = new ModelAndView("cliente/enderecos");
-		resultado.addObject("clienteEndereco", userData);
+		if (address.isEmpty()) {
+			resultado.addObject("principal", new Endereco());
+		} else {
+			resultado.addObject("principal", address.get(0));
+		}
 		resultado.addObject("enderecos", address);
 		resultado.addObject("endereco", new Endereco());
+		resultado.addObject("msg", msg);
 
 		return resultado;
 
 	}
 
 	@PostMapping("/enderecos/editar-principal")
-	public String enderecosEditarPrincipal(Cliente clienteEndereco) {
+	public String enderecosEditarPrincipal(Endereco clienteEndereco) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userAuthenticated = userDetails.getUsername();
 		Cliente cliente = clienteRepository.findByUser(userAuthenticated);
 
-		cliente.setAddress(clienteEndereco.getAddress());
-		cliente.setAddressNumber(clienteEndereco.getAddressNumber());
-		cliente.setCep(clienteEndereco.getCep());
-
-		clienteRepository.save(cliente);
+		clienteEndereco.setCodCliente(cliente);
+		clienteEndereco.setAtivo(1);
+		enderecoRepository.save(clienteEndereco);
 
 		return "redirect:/cliente/enderecos";
 	}
@@ -210,31 +211,23 @@ public class ClienteController {
 		String userAuthenticated = userDetails.getUsername();
 		Cliente cliente = clienteRepository.findByUser(userAuthenticated);
 
-		List<Endereco> address = enderecoRepository.findAll();
-		if (!address.equals(null)) {
-
-			for (int i = 0; i < address.size(); i++) {
-				if (address.get(i).getAddress().equals(endereco.getAddress())
-						&& address.get(i).getAddressNumber().equals(endereco.getAddressNumber())) {
-
-					endereco.setId(address.get(i).getId());
-					endereco.setAtivo(1);
-				}
-			}
-		}
 		endereco.setCodCliente(cliente);
 		endereco.setAtivo(1);
 		enderecoRepository.save(endereco);
 
-		return "redirect:/carrinho/checkout";
+		return "redirect:/cliente/enderecos";
 	}
 
 	@RequestMapping(value = "/enderecos/inativar/{id}")
 	@Transactional
-	public String enderecosInativar(@PathVariable Integer id) {
+	public ModelAndView enderecosInativar(@PathVariable Integer id) {
+		List<Endereco> end = new ArrayList<Endereco>();
+		end = enderecoRepository.findAll();
+			if (end.get(0).getId() == id) {
+				return enderecos("Você deve manter ao menos um endereço cadastrado!");
+		}
 		System.out.println(id);
 		enderecoRepository.inativarIdEndereco(id);
-		return "redirect:/cliente/enderecos";
+		return enderecos("Operação realizada com sucesso!");
 	}
-
 }

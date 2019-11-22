@@ -74,11 +74,12 @@ public class CheckoutController {
 		}
 
 		Cliente cliente = cli.findByUser(authentication.getName());
-		resultado.addObject("valorTotal", soma);
-		resultado.addObject("endereco", cliente.getAddress());
-		resultado.addObject("numero", cliente.getAddressNumber());
-		resultado.addObject("complemento", cliente.getComplemento());
-		resultado.addObject("cep", cliente.getCep());
+		/*
+		 * resultado.addObject("valorTotal", soma); resultado.addObject("endereco",
+		 * cliente.getAddress()); resultado.addObject("numero",
+		 * cliente.getAddressNumber()); resultado.addObject("complemento",
+		 * cliente.getComplemento()); resultado.addObject("cep", cliente.getCep());
+		 */
 
 		return resultado;
 

@@ -64,42 +64,12 @@ public class Cliente {
 	//@Length(min = 10, message = "Selecione um valor válido através do calendário")
 	private String birthdate;
 
-	@Column(name = "ENDERECO_CLIENTE", length = 150, nullable = false)
-	@NotNull(message = "O endereço é um campo obrigatório")
-	//@Length(min = 5, message = "Digite um endereço válido")
-	private String address;
-
-	@Column(name = "NUMERO_END_CLIENTE", length = 6, nullable = false)
-	@NotNull(message = "O número do endereço é um campo obrigátório")
-	//@Length(min = 1, message = "Digite o número de endereço válido")
-	private String addressNumber;
-
-	@Column(name = "CEP_CLIENTE", length = 9, nullable = false)
-	@NotNull(message = "O número de cep do endereço é um campo obrigátório")
-	//@Length(min = 8, message = "Digite um número de cep do endereço válido")
-	private String cep;
-
-	@Column(name = "BAIRRO_CLIENTE", nullable = false)
-	@NotNull(message = "O bairro da residência é obrigatório")
-	private String bairro;
-
-	@Column(name = "COMPLEMENTO_CLIENTE", nullable = false)
-	private String complemento;
-
-	@Column(name = "CIDADE_CLIENTE", nullable = false)
-	@NotNull(message = "A cidade da residência é obrigatório")
-	private String city;
-
-	@Column(name = "UF_CLIENTE", nullable = false)
-	@NotNull(message = "O Estado da residência é obrigatório")
-	private String uf;
-
 	@Column(name = "USER_CLIENTE", length = 50, nullable = false)
 	@NotNull(message = "O email é obrigatório")
 	@Length(max = 50, min = 3, message = "O email de usuário deve conter entrer 3 e 50 caracteres")
 	private String user;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name = "COD_CLIENTE")
 	private List<Endereco> enderecos;
 
@@ -180,68 +150,12 @@ public class Cliente {
 		this.birthdate = birthdate;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getAddressNumber() {
-		return addressNumber;
-	}
-
-	public void setAddressNumber(String addressNumber) {
-		this.addressNumber = addressNumber;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
 	public String getUser() {
 		return user;
 	}
 
 	public void setUser(String user) {
 		this.user = user;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getUf() {
-		return uf;
-	}
-
-	public void setUf(String uf) {
-		this.uf = uf;
 	}
 
 	public List<Endereco> getEnderecos() {
