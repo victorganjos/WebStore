@@ -2,6 +2,8 @@ package com.phantomthieves.api.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,7 +41,7 @@ public class CheckoutController {
 	private ClienteRepository cli;
 
 	@Autowired
-	private PedidoRepository pedido;
+	private PedidoRepository pedidoRepository;
 
 	@Autowired
 	private EnderecoRepository endereco;
@@ -72,7 +74,8 @@ public class CheckoutController {
 		Cliente cliente = cli.findByUser(authentication.getName());
 
 		List<Endereco> enderecos = endereco.findByClientId(cliente.getId());
-
+		
+		resultado.addObject("pedido", new Pedido());
 		resultado.addObject("valorTotal", soma);
 		resultado.addObject("enderecos", enderecos);
 		System.out.println("Vamos: " + cliente.getId() + "\n\n\n\n\n");
@@ -115,20 +118,34 @@ public class CheckoutController {
 		return resultado;
 
 	}
-
-	@PostMapping("/checkout")
+	
+	@GetMapping("/escolhePagamento")
+	public ModelAndView escolhePagamento(@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados1, 
+			@ModelAttribute("pedido") Pedido pedido,
+			BindingResult bindingResult,
+            RedirectAttributes redirAttr) {
+		ModelAndView resultado = new ModelAndView("carrinho/escolhePagamento");
+		
+		resultado.addObject("codEndereco", pedido.getCodEndereco());
+		
+		System.out.println("\n\n\n Teste escolhe pedido: " +pedido.getCodEndereco());
+		
+		return resultado;
+		
+	}
+	
+	@PostMapping("/escolhePagamento")
 	public ModelAndView salvar(@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados1, 
+			@ModelAttribute("pedido") Pedido pedido,
 			BindingResult bindingResult,
             RedirectAttributes redirAttr,
-			@ModelAttribute("enderecos")Endereco address,
-			@RequestParam("paymentMethod") String formaPagamento, @RequestParam("radioEndereco") int idEndereco) {
-		ModelAndView resultado = new ModelAndView("carrinho/checkout");
+            @RequestParam("codigoEndereco") int codigoEndereco) {
+		ModelAndView resultado = new ModelAndView("carrinho/escolhePagamento");
 		Double valorTotal = 5.0;
 
 		for (ItemSelecionado item : itensSelecionados1) {
 			valorTotal += item.getValorTotal();
 		}
-
 
 		Pedido ped = new Pedido();
 
@@ -139,16 +156,17 @@ public class CheckoutController {
 		Cliente cliente = cli.findByUser(authentication.getName());
 
 		ped.setCodCliente(cliente.getId());
-		System.out.println("ID ADDRESS = "+address.getId());
-		ped.setCodEndereco(address.getId());
 
+		
 		java.sql.Date dataSql = new java.sql.Date(System.currentTimeMillis());
 		ped.setDataPed(dataSql);
-		ped.setCodEndereco(idEndereco);
-		ped.setFormaPagamento(formaPagamento);
-		pedido.save(ped);
+		ped.setCodEndereco(codigoEndereco);
+		ped.setFormaPagamento(pedido.getFormaPagamento());
+		pedidoRepository.save(ped);
+		
+		System.out.println("\n\n\n TESTE MODEL ATRIBUTE: " +codigoEndereco+ "vamos la " +pedido.getFormaPagamento());
 
-		Pedido ultPed = pedido.findByUltId();
+		Pedido ultPed = pedidoRepository.findByUltId();
 
 		for (ItemSelecionado item : itensSelecionados1) {
 			ItemPedido itemPed = new ItemPedido();
@@ -160,8 +178,10 @@ public class CheckoutController {
 
 			itemPedido.save(itemPed);
 		}
+		
+	
 		resultado.addObject("valorTotal", valorTotal);
-		return new ModelAndView("redirect:/carrinho/confirmaPedido/"+idEndereco+"/"+ultPed.getId()+"");
+		return new ModelAndView("redirect:/carrinho/confirmaPedido/"+codigoEndereco+"/"+ultPed.getId()+"");
 	}
 	
 	

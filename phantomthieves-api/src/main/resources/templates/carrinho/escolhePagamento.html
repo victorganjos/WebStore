@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Forma de Pagamento - Phantom Thieves</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<!-- Principal CSS do Bootstrap -->
+<link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<style>
+body {
+	min-height: 75rem;
+	padding-top: 6rem;
+}
+</style>
+
+<body class="bg-light">
+	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
+	
+	<div class="container  mt-4 border">
+	<h4>Pagamentos</h4>
+	<form id="checkout" class="form-horizontal"
+		th:action="@{/carrinho/escolhePagamento}" method="post" th:object="${pedido}">
+			<div class="row">
+		
+		
+			<input hidden name="codigoEndereco" th:value="${codEndereco}">
+				<fieldset>
+					<div class="custom-control custom-radio ">
+						<input  id="credito" th:field="*{formaPagamento}" name="paymentMethod" type="radio" th:value="CARTAO"
+							checked required> <label
+							 for="credito">Cartão
+							</label>
+					
+				
+						<input id="debito" th:field="*{formaPagamento}" name="paymentMethod" type="radio" th:value="DEBITO"
+							required> <label for="debito">Boleto</label>
+					</div>
+				
+				</fieldset>
+				</div>
+				<div class="row">
+				<div class="form-group col-md-6">
+					<label>Nome:</label> <input placeholder="Nome no cartão" type="text" class="form-control">
+				</div>
+				<div class="form-group col-md-3">
+					<label>Cpf:</label> <input placeholder="CPF" type="text" class="form-control">
+				</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label>Numero:</label> <input placeholder="Numero do cartão" type="text" class="form-control">
+					</div>
+					
+				
+				</div>
+				
+				<div class="row">
+					
+						<div class="form-group col-md-3">
+						<label>MM:</label>
+							<select class="form-control" 
+								value="${principal.uf}" required>
+								<option value="1">JANEIRO</option>
+								<option value="2">FEVEREIRO</option>
+								<option value="3">MARÇO</option>
+								<option value="4">ABRIL</option>
+								<option value="5">MAIO</option>
+								<option value="6">JUNHO</option>
+								<option value="7">JULHO</option>
+								<option value="8">AGOSTO</option>
+								<option value="9">SETEMBRO</option>
+								<option value="10">OUTUBRO</option>
+								<option value="11">NOVEMBRO</option>
+								<option value="12">DEZEMBRO</option>
+							</select>
+						</div>
+				
+					
+						<div class="form-group col-md-3">
+						<label>MM:</label>
+							<select class="form-control" 
+								value="${principal.uf}" required>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+								<option value="2022">2022</option>
+								<option value="2023">2023</option>
+								<option value="2024">2024</option>
+								<option value="2025">2025</option>
+								<option value="2026">2026</option>
+								<option value="2027">2027</option>
+								<option value="2028">2028</option>
+								<option value="2029">2029</option>
+								<option value="2030">2030</option>
+							</select>						
+					</div>
+					
+				</div>
+				
+			<div class="row">
+				<div class="col-md-12 mb-3">
+					<button type="submit" name="remove" class="btn btn-success">Finalizar Compra</button>
+				</div>
+			</div>
+	
+	</form>
+	</div>
+
+	<!-- Principal JavaScript do Bootstrap
+    ================================================== -->
+	<!-- Foi colocado no final para a página carregar mais rápido -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+	</script>
+	<script src="../../assets/js/vendor/popper.min.js"></script>
+	<script src="../../dist/js/bootstrap.min.js"></script>
+	<script src="../../assets/js/vendor/holder.min.js"></script>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		crossorigin="anonymous">
+</body>
+</html>
