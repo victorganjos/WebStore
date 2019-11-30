@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.util.StringUtils;
 
 import com.phantomthieves.api.model.Cliente;
 import com.phantomthieves.api.model.Pedido;
@@ -48,7 +49,7 @@ public class ClienteController {
 
 	@Autowired
 	private UsuarioController userControl = new UsuarioController();
-	
+
 	@Autowired
 	private PedidoRepository pedRepo;
 
@@ -64,14 +65,30 @@ public class ClienteController {
 	}
 
 	@PostMapping("/inserir-dados-cliente")
-	public String inserir(@ModelAttribute("cliente") Cliente cliente, @ModelAttribute("endereco") Endereco address) {
+	public ModelAndView inserir(@ModelAttribute("cliente") Cliente cliente,
+			@ModelAttribute("endereco") Endereco address) {
+		Usuario user = new Usuario();
+		Cliente existingUser = new Cliente();
+		existingUser = clienteRepository.findByUser(cliente.getUser());
+
+		if (!StringUtils.isEmpty(existingUser) && existingUser.getUser().equals(cliente.getUser())) {
+			ModelAndView resultado = new ModelAndView("cliente/inserir-dados-cliente");
+			resultado.addObject("msg", "Email de usuário inválido ou usuário já cadastrado na base.");
+			return resultado;
+		}
+
 		address.setAtivo(1);
 		address.setCodCliente(cliente);
+		user.setUser(cliente.getUser());
 
 		clienteRepository.save(cliente);
 		enderecoRepository.save(address);
+		ModelAndView resultado = new ModelAndView("cliente/inserir-usuario-cliente");
+		resultado.addObject("cliente", cliente);
+		resultado.addObject("endereco", address);
+		resultado.addObject("usuario", user);
 
-		return "redirect:/cliente/inserir-usuario-cliente";
+		return resultado;
 	}
 
 	@GetMapping("/inserir-usuario-cliente")
@@ -94,13 +111,13 @@ public class ClienteController {
 
 	@GetMapping("/meus-dados")
 	public ModelAndView meusDados() {
-		
+
 		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
 
 		Cliente cliente = clienteRepository.findByUser(authentication.getName());
-		
+
 		List<Pedido> pedidos = pedRepo.findAllByCodUsu(cliente.getId());
-		
+
 		ModelAndView resultado = new ModelAndView("cliente/meus-dados");
 		resultado.addObject("cliente", new Cliente());
 		resultado.addObject("user", new Usuario());
@@ -243,44 +260,44 @@ public class ClienteController {
 	public ModelAndView enderecosInativar(@PathVariable Integer id) {
 		List<Endereco> end = new ArrayList<Endereco>();
 		end = enderecoRepository.findAll();
-			if (end.get(0).getId() == id) {
-				return enderecos("Você deve manter ao menos um endereço cadastrado!");
+		if (end.get(0).getId() == id) {
+			return enderecos("Você deve manter ao menos um endereço cadastrado!");
 		}
 		System.out.println(id);
 		enderecoRepository.inativarIdEndereco(id);
 		return enderecos("Operação realizada com sucesso!");
 	}
-	
+
 	@GetMapping("/listarPedidos")
 	public ModelAndView listar() {
 		ModelAndView resultado = new ModelAndView("cliente/listarPedidos");
-		
+
 		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
 
 		Cliente cliente = clienteRepository.findByUser(authentication.getName());
-		
-		List<Pedido> pedidos = pedRepo.findAllByCodUsu(cliente.getId());	
+
+		List<Pedido> pedidos = pedRepo.findAllByCodUsu(cliente.getId());
 		resultado.addObject("pedidos", pedidos);
-		
+
 		return resultado;
 	}
-	
+
 	@PostMapping("/listarPedidos")
 	public ModelAndView pesquisar(@RequestParam("pesquisaPed") Integer idPed) {
 		ModelAndView resultado = new ModelAndView("cliente/listarPedidos");
-		
+
 		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
 
 		Cliente cliente = clienteRepository.findByUser(authentication.getName());
-		
-		if(idPed == null) {
+
+		if (idPed == null) {
 			idPed = 0;
 		}
-		
-		if(idPed == 0) {
+
+		if (idPed == 0) {
 			List<Pedido> pedido = pedRepo.findAllByCodUsu(cliente.getId());
 			resultado.addObject("pedidos", pedido);
-		}else {
+		} else {
 			Pedido pedido = pedRepo.findAllByCodPed(idPed, cliente.getId());
 			resultado.addObject("pedidos", pedido);
 		}

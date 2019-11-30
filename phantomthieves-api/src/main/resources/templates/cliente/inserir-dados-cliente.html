@@ -31,7 +31,7 @@ body {
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container mt-4 border">
 		<h3>Cadastro de Novo Usuário</h3>
-		<br>
+		<label th:text="${msg}" style="background-color: red;"></label>
 		<form class="form-horizontal" action="/cliente/inserir-dados-cliente"
 			method="post" th:object="${cliente}">
 			<div class="row">
