@@ -105,8 +105,52 @@ body {
 						</div>
 					</div>
 					<div class="row">
-						
-							<div class="form-group col-md-4">
+						<div class="form-group col-md-2">
+							
+							<div class="custom-control custom-radio ">
+								<div><input  id="master" name="bandeira" type="radio" th:value="mastercard"> <label for="master">Mastercar
+									</label><img src="/icon-cartao/master.png" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group col-md-2">
+							<div class="custom-control custom-radio ">
+								<div><input  id="vis"name="bandeira" type="radio" th:value="visa"> <label for="vis">Visa
+									</label><img src="/icon-cartao/visa.png" />
+								</div>
+							</div>
+				
+						</div>
+						<div class="form-group col-md-2">
+							<div class="custom-control custom-radio ">
+								<div><input  id="ame"name="bandeira" type="radio" th:value="american"> <label for="ame">American
+									</label><img src="/icon-cartao/ame.png" />
+								</div>
+							</div>
+						</div>
+						</div>
+					
+					<div class="row">
+							<div class="form-group col-md-3">
+							<label>Parcelas: </label>
+								<select class="form-control" 
+									value="${principal.uf}" required>
+									<option value="1">1x</option>
+									<option value="2">2x</option>
+									<option value="3">3x</option>
+									<option value="4">4x</option>
+									<option value="5">5x</option>
+									<option value="6">6x</option>
+									<option value="7">7x</option>
+									<option value="8">8x</option>
+									<option value="9">9x</option>
+									<option value="10">10x</option>
+									<option value="11">11x</option>
+									<option value="12">12x</option>
+								</select>
+								
+							</div>
+							<div class="form-group col-md-3">
 							<label>MM:</label>
 								<select class="form-control" 
 									value="${principal.uf}" required>
@@ -126,8 +170,8 @@ body {
 							</div>
 					
 						
-							<div class="form-group col-md-4">
-							<label>MM:</label>
+							<div class="form-group col-md-3">
+							<label>AA:</label>
 								<select class="form-control" 
 									value="${principal.uf}" required>
 									<option value="2019">2019</option>
@@ -144,7 +188,7 @@ body {
 									<option value="2030">2030</option>
 								</select>						
 						</div>
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-3">
 							<label>Valor Total:</label> <input th:value="${valor}" type="text" class="form-control" readonly="readonly">
 						</div>
 					</div>
