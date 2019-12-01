@@ -52,7 +52,7 @@ th:fragment="cabecalho">
 			<a class="nav-link btn-dark" href="/login" sec:authorize="!isAuthenticated()">Entrar</a>
 			<a class="nav-link btn-dark" href="/logout" onclick="alert('Sessão encerrada')" sec:authorize="isAuthenticated()">Sair</a>
 			<form th:action="@{/carrinho/carrinho}" method="post">
-		<a class="btn btn-success" th:href="@{/carrinho/carrinho}">Carrinho <img
+		<a class="btn btn-success" th:href="@{/carrinho/carrinho}">Carrinho<img
 			src="https://image.flaticon.com/icons/png/512/34/34627.png"
 			style="width: 25px; height: 25px; color: red;" /></a>
 	</form>

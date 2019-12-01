@@ -41,8 +41,6 @@ body {
 	<form id="checkout" class="form-horizontal"
 		th:action="@{/carrinho/escolhePagamento}" method="post" th:object="${pedido}">
 			<div class="row">
-		
-		
 			<input hidden name="codigoEndereco" th:value="${codEndereco}">
 				<fieldset>
 					<div class="custom-control custom-radio ">
@@ -59,27 +57,56 @@ body {
 				</fieldset>
 				
 				</div>
-				<div id="sh1" style="display:none;">Selecionado Boleto</div>
+				<div id="sh1" style="display:none;">
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label>Nome:</label> <input th:value="${name}" type="text" class="form-control" readonly="readonly">
+						</div>
+						<div class="form-group col-md-3">
+							<label>Cpf:</label> <input th:value="${cpf}" type="text" class="form-control" readonly="readonly">
+						</div>
+						<div class="form-group col-md-3">
+							<label>Telefone:</label> <input th:value="${telefone}" type="text" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label>Endereco:</label> <input th:value="${endereco}" type="text" class="form-control" readonly="readonly">
+						</div>
+						<div class="form-group col-md-3">
+							<label>Numero:</label> <input th:value="${numero}" type="text" class="form-control" readonly="readonly">
+						</div>
+						<div class="form-group col-md-3">
+							<label>Complemento:</label> <input th:value="${complemento}" type="text" class="form-control" readonly="readonly">
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-3">
+							<label>Valor Total:</label> <input th:value="${valor}" type="text" class="form-control" readonly="readonly">
+						</div>
+					</div>
+				</div>
 				<div id="sh2" style="display:none;">
 					<div class="row">
-					<div class="form-group col-md-6">
+					<div class="form-group col-md-8">
 						<label>Nome:</label> <input placeholder="Nome no cartão" type="text" class="form-control">
 					</div>
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-4">
 						<label>Cpf:</label> <input placeholder="CPF" type="text" class="form-control">
 					</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-8">
 							<label>Numero:</label> <input placeholder="Numero do cartão" type="text" class="form-control">
 						</div>
-						
-					
+						<div class="form-group col-md-4">
+							<label>Código Segurança:</label> <input placeholder="Código" type="text" class="form-control">
+						</div>
 					</div>
-					
 					<div class="row">
 						
-							<div class="form-group col-md-3">
+							<div class="form-group col-md-4">
 							<label>MM:</label>
 								<select class="form-control" 
 									value="${principal.uf}" required>
@@ -99,7 +126,7 @@ body {
 							</div>
 					
 						
-							<div class="form-group col-md-3">
+							<div class="form-group col-md-4">
 							<label>MM:</label>
 								<select class="form-control" 
 									value="${principal.uf}" required>
@@ -117,7 +144,9 @@ body {
 									<option value="2030">2030</option>
 								</select>						
 						</div>
-						
+						<div class="form-group col-md-4">
+							<label>Valor Total:</label> <input th:value="${valor}" type="text" class="form-control" readonly="readonly">
+						</div>
 					</div>
 				</div>
 			<div class="row">

@@ -124,8 +124,25 @@ public class CheckoutController {
             RedirectAttributes redirAttr) {
 		ModelAndView resultado = new ModelAndView("carrinho/escolhePagamento");
 		
-		resultado.addObject("codEndereco", pedido.getCodEndereco());
+		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
+		Endereco end = endereco.buscaPorId(pedido.getCodEndereco());
+		Cliente cliente = cli.findByUser(authentication.getName());
 		
+		Double soma = 5.0;
+		
+		for (ItemSelecionado item : itensSelecionados1) {
+			soma += item.getValorTotal();
+		}
+		
+		resultado.addObject("usuario", cliente);
+		resultado.addObject("name", cliente.getName());
+		resultado.addObject("cpf", cliente.getCpf());
+		resultado.addObject("telefone", cliente.getTelephone());
+		resultado.addObject("endereco", end.getAddress());
+		resultado.addObject("numero", end.getAddressNumber());
+		resultado.addObject("complemento", end.getComplemento());
+		resultado.addObject("codEndereco", pedido.getCodEndereco());
+		resultado.addObject("valor", soma);
 		System.out.println("\n\n\n Teste escolhe pedido: " +pedido.getCodEndereco());
 		
 		return resultado;

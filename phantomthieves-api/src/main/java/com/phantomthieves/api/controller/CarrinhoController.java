@@ -24,7 +24,9 @@ public class CarrinhoController {
 	public ModelAndView inserir(@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados1) {
 		ModelAndView resultado = new ModelAndView("carrinho/carrinho");
 		
+		
 		resultado.addObject("itensSelecionados1", itensSelecionados1);
+
 		
 		return resultado; 
 	}
