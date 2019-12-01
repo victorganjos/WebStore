@@ -19,9 +19,10 @@
 
 
 <!-- Cabeçalho fixo -->
-<div class="container" style="margin-top: 50px;">
+
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
 th:fragment="cabecalho">
+<div class="container">
 	<a href="/">
 	<img class="navbar-brand" src="https://i.imgur.com/osAucyD.png" style="width:100px; height:50px"  onmouseover="this.style.cursor='pointer';" alt="HomePage">
 	</a>
@@ -45,13 +46,20 @@ th:fragment="cabecalho">
 							class="dropdown-item" href="/usuarios/listar">Usuários</a>
 					</div></li>
 			</ul>
-			<a class="nav-link" th:href="@{/cliente/inserir-dados-cliente}"  sec:authorize="!isAuthenticated()">Inscrever-se</a>
-			<a class="nav-link" href="/cliente/meus-dados/" sec:authorize="hasRole('ROLE_CLIENT')">Meus Dados</a>
-			<a class="nav-link" href="/login" sec:authorize="!isAuthenticated()">Entrar</a>
-			<a class="nav-link" href="/logout" onclick="alert('Sessão encerrada')" sec:authorize="isAuthenticated()">Sair</a>
+				
+			<a class="nav-link btn-dark" th:href="@{/cliente/inserir-dados-cliente}"  sec:authorize="!isAuthenticated()">Inscrever-se</a>
+			<a class="nav-link btn-dark" href="/cliente/meus-dados/" sec:authorize="hasRole('ROLE_CLIENT')">Meus Dados</a>
+			<a class="nav-link btn-dark" href="/login" sec:authorize="!isAuthenticated()">Entrar</a>
+			<a class="nav-link btn-dark" href="/logout" onclick="alert('Sessão encerrada')" sec:authorize="isAuthenticated()">Sair</a>
+			<form th:action="@{/carrinho/carrinho}" method="post">
+		<a class="btn btn-success" th:href="@{/carrinho/carrinho}">Carrinho <img
+			src="https://image.flaticon.com/icons/png/512/34/34627.png"
+			style="width: 25px; height: 25px; color: red;" /></a>
+	</form>
+	</div>
 	</div>
   </nav>
-</div>
+
  
  
 <!-- **Cabeçalho old -->
