@@ -15,36 +15,27 @@
 	padding-top: 4.5rem;
 	}
 </style>
+
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container mt-4 border">
 		<h3>Inserção de novo Produto</h3>
 		<form class="form-horizontal" action="/produtos/inserir" method="post"
-			th:object="${produto}">
+			th:object="${produto}" novalidate>
 			<div class="row">
 				<div class="form-group col-md-6">
-					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('nomeProduto')}">
-						<label th:errors="*{nomeProduto}" class="validation-message"></label>
-					</div>
-					<label>Nome:</label> <input type="text" class="form-control"
-						th:field="*{nomeProduto}">
+					<label for="">Nome:</label> <input id="nomeProd" type="text" class="form-control" th:field="*{nomeProduto}" required>
+					<label class="invalid-feedback d-block" role="alert" th:if="${#fields.hasErrors('nomeProduto')}" th:errors="*{nomeProduto}"></label>
 				</div>
 				<div class="form-group col-md-3">
-					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('quantidadeProduto')}">
-						<label th:errors="*{quantidadeProduto}" class="validation-message"></label>
-					</div>
 					<label>Quantidade:</label> <input type="text" class="form-control"
 						th:field="*{quantidadeProduto}">
+						<label class="invalid-feedback d-block" role="alert" th:if="${#fields.hasErrors('quantidadeProduto')}" th:errors="*{quantidadeProduto}"></label>
 				</div>
 				<div class="form-group col-md-3">
-					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('precoProduto')}">
-						<label th:errors="*{precoProduto}" class="validation-message"></label>
-					</div>
 					<label>Preço:</label> <input type="text" class="form-control"
 						th:field="*{precoProduto}">
+						<label class="invalid-feedback d-block" role="alert" th:if="${#fields.hasErrors('precoProduto')}" th:errors="*{precoProduto}"></label>
 				</div>
 			</div>
 			<div class="row">

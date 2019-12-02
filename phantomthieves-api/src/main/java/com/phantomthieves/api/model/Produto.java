@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -26,12 +27,11 @@ public class Produto {
 	
 	@Column(name = "NOME_PRODUTO", length = 50, nullable = false)
 	@NotNull(message = "O nome é obrigatório")
-	@Length(max= 50, min = 3, message="O nome deve conter entrer 3 e 50 caracteres")
+	@NotBlank(message = "O nome é obrigatório")
 	private String nomeProduto;
 	
 	@Column(name = "CATEGORIA_PRODUTO", length = 50, nullable = false)
 	@NotNull(message = "A categoria é obrigatório")
-	@Length(max= 50, min = 3, message="A categoria deve conter entrer 3 e 50 caracteres")
 	private String categoriaProduto;
 	
 	@Column(name = "DESCRICAO_RESUMIDA")
@@ -44,9 +44,11 @@ public class Produto {
 	private boolean status= true;
 	
 	@Column(name = "QT_PRODUTO")
+	@NotNull(message = "Qtd obrigatória")
 	private Integer quantidadeProduto;
 	
 	@Column(name = "PRECO_PRODUTO")
+	@NotNull(message = "Preço Obrigatório")
 	private Double precoProduto;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)

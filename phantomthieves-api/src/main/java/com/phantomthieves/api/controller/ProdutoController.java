@@ -3,9 +3,12 @@ package com.phantomthieves.api.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.phantomthieves.api.model.Produto;
 import com.phantomthieves.api.model.Imagem;
-import com.phantomthieves.api.repository.ProdutoRepository;
+import com.phantomthieves.api.model.Produto;
 import com.phantomthieves.api.repository.ImagemRepository;
+import com.phantomthieves.api.repository.ProdutoRepository;
 
 @Controller
 @RequestMapping("/produtos")
@@ -25,10 +28,10 @@ public class ProdutoController {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	
+
 	@Autowired
 	private ImagemRepository imgRepo;
-	
+
 	@GetMapping("/listar")
 	public ModelAndView listar() {
 		ModelAndView resultado = new ModelAndView("produtos/listar");
@@ -46,9 +49,13 @@ public class ProdutoController {
 	}
 
 	@PostMapping("/inserir")
-	public String inserir(Produto produto) {
-		produtoRepository.save(produto);
-		return "redirect:/imagem/uploadMultiFile";
+	public String inserir(@Valid Produto produto, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "produtos/inserir";
+		} else {
+			produtoRepository.save(produto);
+			return "redirect:/imagem/uploadMultiFile";
+		}
 	}
 
 	@GetMapping("/editar/{id}")
@@ -67,14 +74,14 @@ public class ProdutoController {
 		return "redirect:/produtos/listar";
 
 	}
-	
+
 	@Transactional
 	@PostMapping("/editar/{produto.id}")
-	public String alterar(Produto produto) {	
+	public String alterar(Produto produto) {
 		Imagem img = imgRepo.findImgByIdProd(produto.getId());
-		produtoRepository.save(produto); 
+		produtoRepository.save(produto);
 		imgRepo.updateImagemProd(produto.getId(), img.getId());
-		
+
 		return "redirect:/produtos/listar";
 	}
 
@@ -87,7 +94,7 @@ public class ProdutoController {
 		}
 
 	}
-	
+
 	@PostMapping("/listar")
 	public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomePessoa) {
 		ModelAndView resultado = new ModelAndView("produtos/listar");
