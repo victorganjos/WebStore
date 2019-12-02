@@ -77,7 +77,11 @@ public class ProdutoController {
 
 	@Transactional
 	@PostMapping("/editar/{produto.id}")
-	public String alterar(Produto produto) {
+	public String alterar(@Valid Produto produto, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			return "produtos/editar";
+		}
 		Imagem img = imgRepo.findImgByIdProd(produto.getId());
 		produtoRepository.save(produto);
 		imgRepo.updateImagemProd(produto.getId(), img.getId());
