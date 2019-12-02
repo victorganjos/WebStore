@@ -56,7 +56,9 @@ public class UsuarioController {
 			usuarioRepository.incluiRegra(usuario.getId(), 1);
 		} else if (usuario.getPerfil().equals("Usuario")) {
 			usuarioRepository.incluiRegra(usuario.getId(), 2);
-		}else {
+		} else if (usuario.getPerfil().equals("Estoquista")) {
+			usuarioRepository.incluiRegra(usuario.getId(), 4);
+		} else {
 			usuarioRepository.incluiRegra(usuario.getId(), 3);
 		}
 		return "redirect:/usuarios/listar";

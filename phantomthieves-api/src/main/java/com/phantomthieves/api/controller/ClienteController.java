@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,19 +18,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.util.StringUtils;
 
 import com.phantomthieves.api.model.Cliente;
-import com.phantomthieves.api.model.Pedido;
-import com.phantomthieves.api.model.ItemPedido;
-import com.phantomthieves.api.model.Produto;
 import com.phantomthieves.api.model.Endereco;
+import com.phantomthieves.api.model.Pedido;
 import com.phantomthieves.api.model.Usuario;
 import com.phantomthieves.api.repository.ClienteRepository;
 import com.phantomthieves.api.repository.EnderecoRepository;
-import com.phantomthieves.api.repository.UsuarioRepository;
-import com.phantomthieves.api.repository.PedidoRepository;
 import com.phantomthieves.api.repository.ItemPedRepository;
+import com.phantomthieves.api.repository.PedidoRepository;
+import com.phantomthieves.api.repository.UsuarioRepository;
 
 @Controller
 @RequestMapping("/cliente")

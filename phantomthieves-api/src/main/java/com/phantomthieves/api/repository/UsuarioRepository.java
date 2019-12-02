@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import com.phantomthieves.api.model.Cliente;
-import com.phantomthieves.api.model.Produto;
 import com.phantomthieves.api.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario,Integer>{

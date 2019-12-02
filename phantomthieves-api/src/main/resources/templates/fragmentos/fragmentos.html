@@ -45,6 +45,8 @@ th:fragment="cabecalho">
 						<a class="dropdown-item" href="/produtos/listar">Produtos</a> <a
 							class="dropdown-item" href="/usuarios/listar">Usuários</a>
 					</div></li>
+				<li class="nav-item"><a class="nav-link" href="/estoquista/listarPedidos"
+				sec:authorize="hasRole('ROLE_ESTOQUISTA')">Status Pedido</a></li>
 			</ul>
 				
 			<a class="nav-link btn-dark" th:href="@{/cliente/inserir-dados-cliente}"  sec:authorize="!isAuthenticated()">Inscrever-se</a>

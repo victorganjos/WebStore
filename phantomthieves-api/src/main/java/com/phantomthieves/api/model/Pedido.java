@@ -31,6 +31,9 @@ public class Pedido {
 	@Column(name = "FORMAPAGAMENTO")
 	private String formaPagamento;
 	
+	@Column(name = "STATUS_PEDIDO")
+	private String statusPedido = "Aguardando Pagamento";
+	
 	public Pedido() {
 		
 	}
@@ -95,6 +98,16 @@ public class Pedido {
 
 	public void setFormaPagamento(String formaPagamento) {
 		this.formaPagamento = formaPagamento;
+	}
+
+
+	public String getStatusPedido() {
+		return statusPedido;
+	}
+
+
+	public void setStatusPedido(String statusPedido) {
+		this.statusPedido = statusPedido;
 	}
 	
 	

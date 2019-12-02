@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.phantomthieves.api.model.Imagem;
 import com.phantomthieves.api.model.Produto;
 import com.phantomthieves.api.model.Upload;
-import com.phantomthieves.api.repository.ImagemRepository;
 import com.phantomthieves.api.repository.ProdutoRepository;
 
 @Controller

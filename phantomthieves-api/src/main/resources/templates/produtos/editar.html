@@ -18,7 +18,7 @@
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container mt-4 border">
-		<h3>Inserção de novo Produto</h3>
+		<h3>Editar Produto</h3>
 		<form class="form-horizontal" action="/produtos/editar/{produto.id}" method="post"
 			th:object="${produto}">
 			<div class="row">

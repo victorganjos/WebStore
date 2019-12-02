@@ -5,17 +5,11 @@
  */
 package com.phantomthieves.api.model;
 
-
-import java.io.Serializable;
-
-
 /**
  *
  * @author CaioHenrique
  */
 public class ItemSelecionado {
-
-	private static final long serialVersionUID = 1L;
 
 	private Imagem item;
     
