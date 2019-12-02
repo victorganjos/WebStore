@@ -23,14 +23,9 @@
 			th:object="${usuario}">
 			<div class="row">
 				<div class="form-group col-md-3">
-					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('id')}">
-						<label th:errors="*{id}" class="validation-message"></label>
-					</div>
 					<label>Id:</label> <input type="text" class="form-control"
 						 ReadOnly>
-				</div>
-			
+				</div>			
 				<div class="form-group col-md-3">
 					<label>E-mail usuário:</label> <input type="email" class="form-control"
 						th:field="*{user}" required>
@@ -44,7 +39,7 @@
 					<label>Perfil:</label>
 					<select class="form-control" th:field="*{perfil}" required>
 					  <option value="Administrador">Administrador</option>
-					  <option value="Auxiliar">Auxiliar</option>
+					  <option value="Estoquista">Estoquista</option>
 					</select>
 				</div>
 			</div>

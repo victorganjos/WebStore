@@ -38,13 +38,15 @@ public class Usuario {
 
 	@Column(name = "PERFIL", length = 50, nullable = false)
 	@NotNull(message = "O perfil é obrigatório")
-	@Length(max = 50, min = 3, message = "O perfil de usuário deve conter entrer 3 e 50 caracteres")
 	private String perfil;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "ROLE_USERS", joinColumns = @JoinColumn(name = "COD_USUARIO"), inverseJoinColumns = @JoinColumn(name = "COD_ROLE"))
 	private Set<Roles> roles;
-
+	
+	@Column(name = "ATIVO")
+	private boolean ativo = true;
+	
 	public Usuario() {
 		super();
 	}
@@ -108,6 +110,16 @@ public class Usuario {
 
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
+	}
+	
+	
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override
