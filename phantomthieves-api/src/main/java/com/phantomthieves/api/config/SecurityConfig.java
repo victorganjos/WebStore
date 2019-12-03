@@ -34,7 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			"/usuarios/**",
 			"/produtos/detalheProduto2",
 			"/cliente/inserir-dados-cliente",
-			"/cliente/inserir-usuario-cliente"
+			"/cliente/inserir-usuario-cliente",
+			"/listarConsole",
+			"/listarAcessorios",
+			"/listarJogos"
 	};
 	
 	@Override

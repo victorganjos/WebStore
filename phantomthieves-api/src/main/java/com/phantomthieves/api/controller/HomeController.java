@@ -35,6 +35,51 @@ public class HomeController {
 		return resultado;
 	}
 
+	@GetMapping("/listarConsole")
+	public ModelAndView listarConsole() {
+		ModelAndView resultado = new ModelAndView("index");
+		List<Imagem> imagem = im.findImg();
+		List<Imagem> imagemConsole = new ArrayList<>();
+		for (Imagem i : imagem) {
+			if (i.getCodProduto().getCategoriaProduto().equals("console")) {
+				imagemConsole.add(i);
+			}
+		}
+		resultado.addObject("imagem", imagemConsole);
+
+		return resultado;
+	}
+	
+	@GetMapping("/listarAcessorios")
+	public ModelAndView listarAcessorios() {
+		ModelAndView resultado = new ModelAndView("index");
+		List<Imagem> imagem = im.findImg();
+		List<Imagem> imagemConsole = new ArrayList<>();
+		for (Imagem i : imagem) {
+			if (i.getCodProduto().getCategoriaProduto().equals("acessorio")) {
+				imagemConsole.add(i);
+			}
+		}
+		resultado.addObject("imagem", imagemConsole);
+
+		return resultado;
+	}
+	
+	@GetMapping("/listarJogos")
+	public ModelAndView listarJogos() {
+		ModelAndView resultado = new ModelAndView("index");
+		List<Imagem> imagem = im.findImg();
+		List<Imagem> imagemConsole = new ArrayList<>();
+		for (Imagem i : imagem) {
+			if (i.getCodProduto().getCategoriaProduto().equals("jogo")) {
+				imagemConsole.add(i);
+			}
+		}
+		resultado.addObject("imagem", imagemConsole);
+
+		return resultado;
+	}
+	
 	@PostMapping
 	public ModelAndView adicionarItem(@ModelAttribute("imagemId") Integer imagemId,
 			@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados,

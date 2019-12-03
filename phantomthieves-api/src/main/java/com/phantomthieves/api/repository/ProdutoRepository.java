@@ -33,5 +33,8 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 	
 	@Query(value = "SELECT * FROM PRODUTO WHERE COD_PRODUTO = ?1", nativeQuery = true)
 	Produto findAllByCodigo(Integer codProd);
+	
+	@Query(value = "SELECT * FROM PRODUTO WHERE CATEGORIA_PRODUTO = console;", nativeQuery = true)
+	List<Produto> buscaConsole();
 
 }
