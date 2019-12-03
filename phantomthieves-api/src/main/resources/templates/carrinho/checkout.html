@@ -65,7 +65,7 @@ body {
 
 					<tbody>
 						<tr th:each="enderecos:  ${enderecos}">
-							<td><input type="radio" th:value="${enderecos.id}" th:field="*{codEndereco}" ><br></td>
+							<td><input type="radio" th:value="${enderecos.id}" th:field="*{codEndereco}" required><br></td>
 							<td th:text="${enderecos.address}"></td>
 							<td th:text="${enderecos.addressNumber}"></td>
 						</tr>

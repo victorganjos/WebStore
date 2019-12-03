@@ -121,6 +121,7 @@ img {
 								<p class="card-title" th:text="'R$' + ${imagem.precoProduto}"></p>
 								<form method="post" th:action="@{/produtos/detalheProduto2}">
 									<input type="hidden" name="imagemNomeProduto" th:value="${imagem.nomeProduto}" />
+									<input type="hidden" name="imagemIdProduto" th:value="${imagem.id}" />
 									<button type="submit" class="btn btn-block"
 										th:style="'color: #fff; background-color: #48D1CC'">Detalhes</button>
 								</form>

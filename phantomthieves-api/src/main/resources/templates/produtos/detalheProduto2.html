@@ -52,7 +52,6 @@ html {
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<main role="main" class="container">
-		<form method="post" th:object="${produto}">
 			<div class="row">
 				<div class="col-md-6 text-center">
 					<br> <br>
@@ -63,9 +62,9 @@ html {
 							<div class="carousel-item active">
 								<div class="embed-responsive embed-responsive-1by1"
 									style="max-height: 500px;">
-									<iframe class="embed-responsive-item" allowfullscreen=""
-										src="https://www.youtube.com/embed/Z3xSGv3Hfio"
-										alt="Fifth slide"></iframe>
+									<img class="embed-responsive-item" allowfullscreen=""
+										th:src="${local}"
+										alt="Fifth slide"></img>
 								</div>
 							</div>
 						</div>
@@ -77,29 +76,15 @@ html {
 					<p th:text="${produto.descricaoDetalhada}"></p>
 					<h1 th:text="'Preço: R$' + ${produto.precoProduto}"></h1>
 					<br>
-					<p>Quantidade:</p>
 					<div class="form-row align-items-center">
-						<div class="col-auto my-1">
-							<label class="mr-sm-1 sr-only" for="inlineFormCustomSelect">Quantidade</label>
-							<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-								<!-- Campo Quantia em Estoque-->
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="3">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-							</select>
-						</div>
-						<button type="button" class="btn btn-primary"
-							onclick="alert('Em construção!')">Adicionar ao carrinho</button>
+					<form method="post" th:action="@{/}">
+						<input type="hidden" name="imagemId" th:value="${id}" />
+						<button type="submit" class="btn btn-block"
+							th:style="'color: #fff; background-color: #32CD32'">Carrinho</button>
+					</form>
 					</div>
 				</div>
 			</div>
-		</form>
 	</main>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
