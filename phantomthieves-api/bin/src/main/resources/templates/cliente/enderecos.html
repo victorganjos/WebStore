@@ -9,10 +9,10 @@
 	crossorigin="anonymous">
 </head>
 <style>
-	body {
+body {
 	min-height: 75rem;
 	padding-top: 4.5rem;
-	}
+}
 </style>
 <script>
 	function ConfirmaExclusao() {
@@ -21,26 +21,26 @@
 		else
 			return false;
 	}
-	
-	function confirm(){
+
+	function confirm() {
 		alert("Alterado com sucesso!");
 	}
-	function salvo(){
+	function salvo() {
 		alert("Salvo com sucesso!");
 	}
 </script>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container mt-4 border">
+		<label th:text="${msg}" style="background-color: red;"></label>
 		<h3>Meu Endereço Principal</h3>
 		<form class="form-horizontal"
 			action="/cliente/enderecos/editar-principal" method="post"
-			th:object="${clienteEndereco}">
+			th:object="${principal}">
 			<div class="row">
 				<div>
 					<input type="text" class="form-control" th:field="*{id}"
-						value="${clienteEndereco.id}" readonly="readonly" hidden="true"
-						required>
+						value="${principal.id}" readonly="readonly" hidden="true" required>
 				</div>
 				<div class="form-group col-md-6">
 					<div class="alert alert-danger" role="alert"
@@ -49,7 +49,7 @@
 					</div>
 					<label>Logradouro:</label> <input type="text" class="form-control"
 						th:field="*{address}" placeholder="Digite aqui seu o logradouro"
-						value="${clienteEndereco.address}" required>
+						value="${principal.address}" required>
 				</div>
 				<div class="form-group col-md-2">
 					<div class="alert alert-danger" role="alert"
@@ -58,7 +58,7 @@
 					</div>
 					<label>Nº:</label> <input type="text" class="form-control"
 						th:field="*{addressNumber}" placeholder="ex: A18"
-						value="${clienteEndereco.addressNumber}" required>
+						value="${principal.addressNumber}" required>
 				</div>
 				<div class="form-group col-md-2">
 					<div class="alert alert-danger" role="alert"
@@ -67,7 +67,7 @@
 					</div>
 					<label>CEP:</label> <input type="text" class="form-control"
 						th:field="*{cep}" placeholder="ex: 04855-070"
-						value="${clienteEndereco.cep}" required>
+						value="${principal.cep}" required>
 				</div>
 			</div>
 			<div class="row">
@@ -77,8 +77,8 @@
 						<label th:errors="*{complemento}" class="validation-message"></label>
 					</div>
 					<label>Complemento:</label> <input type="text" class="form-control"
-						th:field="*{complemento}" placeholder="Digite aqui o complemento"
-						required>
+						th:field="*{complemento}" value="${principal.complemento}"
+						placeholder="Digite aqui o complemento">
 				</div>
 				<div class="form-group col-md-4">
 					<div class="alert alert-danger" role="alert"
@@ -86,7 +86,7 @@
 						<label th:errors="*{bairro}" class="validation-message"></label>
 					</div>
 					<label>Bairro*:</label> <input type="text" class="form-control"
-						th:field="*{bairro}"
+						th:field="*{bairro}" value="${principal.bairro}"
 						placeholder="Digite aqui o bairro de sua residência" required>
 				</div>
 			</div>
@@ -97,11 +97,12 @@
 						<label th:errors="*{city}" class="validation-message"></label>
 					</div>
 					<label>Cidade*:</label> <input type="text" class="form-control"
-						th:field="*{city}" placeholder="Ex: São Paulo" required>
+						value="${principal.city}" th:field="*{city}"
+						placeholder="Ex: São Paulo" required>
 				</div>
 				<div class="form-group col-md-3">
 					<label>UF*:</label> <select class="form-control" th:field="*{uf}"
-						required>
+						value="${principal.uf}" required>
 						<option value="SP">SP</option>
 						<option value="AC">AC</option>
 						<option value="AL">AL</option>
@@ -132,8 +133,8 @@
 					</select>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary " onclick="confirm()">&nbsp Alterar
-				&nbsp &nbsp</button>
+			<button type="submit" class="btn btn-primary " onclick="confirm()">&nbsp
+				Alterar &nbsp &nbsp</button>
 		</form>
 		<br>
 	</div>
@@ -159,7 +160,7 @@
 					<br> <a class="btn btn-danger btn-sm"
 						th:href="@{/cliente/enderecos/inativar/{id}(id=${endereco.id})}">Inativar</a>
 				</div>
-			</div>
+			</div> 
 			<br>
 		</div>
 		<br>
@@ -202,8 +203,7 @@
 						<label th:errors="*{complemento}" class="validation-message"></label>
 					</div>
 					<label>Complemento:</label> <input type="text" class="form-control"
-						th:field="*{complemento}" placeholder="Digite aqui o complemento"
-						required>
+						th:field="*{complemento}" placeholder="Digite aqui o complemento">
 				</div>
 				<div class="form-group col-md-4">
 					<div class="alert alert-danger" role="alert"

@@ -23,34 +23,25 @@
 			th:object="${usuario}">
 			<div class="row">
 				<div class="form-group col-md-4">
-					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('user')}">
-						<label th:errors="*{user}" class="validation-message"></label>
-					</div>
 					<label>E-mail usuário:</label> <input type="email"
 						class="form-control" th:field="*{user}" required>
+						<label class="invalid-feedback d-block" role="alert" th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></label>
 				</div>
 				<div class="form-group col-md-4">
-					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('password')}">
-						<label th:errors="*{password}" class="validation-message"></label>
-					</div>
 					<label>Senha:</label> <input type="password"
 						class="form-control" th:field="*{password}" required>
+						<label class="invalid-feedback d-block" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></label>
 				</div>
 				<div class="form-group col-md-4">
-					<div class="alert alert-danger" role="alert"
-						th:if="${#fields.hasErrors('passwordConfirm')}">
-						<label th:errors="*{passwordConfirm}" class="validation-message"></label>
-					</div>
 					<label>Confirmação de Senha:</label> <input type="password"
 						class="form-control" th:field="*{passwordConfirm}" required>
+						<label class="invalid-feedback d-block" role="alert" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></label>
 				</div>
 				<div class="form-group col-md-4">
 					<label>Perfil:</label> <select class="form-control"
 						th:field="*{perfil}" required>
 						<option value="Administrador">Administrador</option>
-						<option value="Auxiliar">Auxiliar</option>
+						<option value="Estoquista">Estoquista</option>
 					</select>
 				</div>
 			</div>
