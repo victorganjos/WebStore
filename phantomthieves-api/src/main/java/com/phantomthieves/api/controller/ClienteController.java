@@ -1,8 +1,18 @@
 package com.phantomthieves.api.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.ParseException;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.phantomthieves.api.model.Cliente;
 import com.phantomthieves.api.model.Endereco;
 import com.phantomthieves.api.model.Pedido;
@@ -53,6 +64,9 @@ public class ClienteController {
 
 	@Autowired
 	private ItemPedRepository itePedRepo;
+
+	@Autowired
+	private static final CloseableHttpClient httpClient = HttpClients.createDefault();
 
 	@GetMapping("/inserir-dados-cliente")
 	public ModelAndView inserir() {
