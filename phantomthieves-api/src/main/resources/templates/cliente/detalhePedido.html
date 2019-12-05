@@ -1,66 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
-<link rel="icon" href="https://www.pngtube.com/myfile/detail/30-305853_ren-amamiya-is-the-protagonist-and-player-character.png">
+<link rel="icon"
+	href="https://www.pngtube.com/myfile/detail/30-305853_ren-amamiya-is-the-protagonist-and-player-character.png">
 <meta charset="UTF-8"></meta>
 <title>Usuários</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-
-<script>
-	function ConfirmaExclusao() {
-		if (confirm("Deseja excluir o usuário selecionado ?"))
-			return true;
-		else
-			return false;
-	}
-</script>
 </head>
 <style>
-	body {
+body {
 	min-height: 75rem;
 	padding-top: 4.5rem;
-	}
+}
 </style>
 <body>
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container">
-		<h2>Lista de Pedidos</h2>
-		<div class="row">
-			<div class="form-group col-md-12">
-				<form action="" method="post">
-					<label for="txt-pesquisa-pedido">Pedido a ser pesquisado</label>
-					<input name="pesquisaPed" type="number" id="txt-pesquisa-pedido"
-						class="form-control" />
-					<button type="submit" class="btn btn-success mt-1"
-						id="btn-pesquisa-pedido">Pesquisa</button>
-				</form>
-			</div>
-		</div>
 		<table class="table" id="tbl-pedido">
+			<label for=""><b>Dados do Pedido</b></label>
 			<thead>
 				<th>Id</th>
 				<th>Data Pedido</th>
-				<th>Valor Total</th>
+				<th>Valor Total + Frete</th>
 				<th>Forma Pag.</th>
-				<th>Detalhes</th>
 			</thead>
 			<tbody>
-				<tr th:each="pedido: ${pedidos}">
+				<tr th:each="pedido: ${ped}">
 					<td th:text="${pedido.id}"></td>
 					<td th:text="${pedido.dataPed}"></td>
 					<td th:text="${pedido.valorTotal}"></td>
 					<td th:text="${pedido.formaPagamento}"></td>
-					<td><a class="btn btn-warning"
-						th:href="@{/cliente/detalhePedido/{id}(id=${pedido.id})}">Detalhar</a>
-					</td>
-
 				</tr>
 			</tbody>
-		</table>	
-		
+		</table>
+
+		<br>
+		<br>
+
+		<table class="table" id="tbl-itensPedido">
+			<label for=""><b>Itens</b></label>
+			<thead>
+				<th>#</th>
+				<th>Produto</th>
+				<th>Quantidade</th>
+				<th>Valor</th>
+			</thead>
+			<tbody>
+				<tr th:each="itemPed: ${itensPed}">
+					<td> <img width="100" height="100" th:src="${itemPed.localArquivo}"> </td>
+					<td th:text="${itemPed.nomeProd}"></td>
+					<td th:text="${itemPed.qtde}"></td>
+					<td th:text="${itemPed.valor}"></td>				
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="

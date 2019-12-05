@@ -32,13 +32,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.phantomthieves.api.model.Cliente;
 import com.phantomthieves.api.model.Endereco;
+import com.phantomthieves.api.model.ItemPedido;
 import com.phantomthieves.api.model.Pedido;
 import com.phantomthieves.api.model.Usuario;
+import com.phantomthieves.api.model.Imagem;
+import com.phantomthieves.api.model.Produto;
 import com.phantomthieves.api.repository.ClienteRepository;
 import com.phantomthieves.api.repository.EnderecoRepository;
 import com.phantomthieves.api.repository.ItemPedRepository;
 import com.phantomthieves.api.repository.PedidoRepository;
 import com.phantomthieves.api.repository.UsuarioRepository;
+import com.phantomthieves.api.repository.ImagemRepository;
+import com.phantomthieves.api.repository.ProdutoRepository;
 
 @Controller
 @RequestMapping("/cliente")
@@ -64,6 +69,12 @@ public class ClienteController {
 
 	@Autowired
 	private ItemPedRepository itePedRepo;
+
+	@Autowired
+	private ImagemRepository imgRepo;
+	
+	@Autowired
+	private ProdutoRepository prodRepo;
 
 	@Autowired
 	private static final CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -294,6 +305,34 @@ public class ClienteController {
 		return resultado;
 	}
 
+	@GetMapping("/detalhePedido/{id}")
+	public ModelAndView detalhePedido(@PathVariable Integer id) {
+		ModelAndView resultado = new ModelAndView("cliente/detalhePedido");
+		int codPed = 0;
+		
+		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
+
+		Cliente cliente = clienteRepository.findByUser(authentication.getName());
+
+		Pedido peds = pedRepo.findAllByCodPed(id, cliente.getId());
+		resultado.addObject("ped", peds);
+	
+		codPed = peds.getId();
+
+		List<ItemPedido> itensPed = itePedRepo.findAllByCodPed(codPed);
+		
+		for(ItemPedido item : itensPed) {
+			Produto prod = prodRepo.findAllByCodigo(item.getCodProduto());
+			item.setNomeProd(prod.getNomeProduto());
+			
+			Imagem img = imgRepo.findImgByIdProd(item.getCodProduto());
+			item.setLocalArquivo(img.getLocalArquivo());
+		}
+		
+		resultado.addObject("itensPed", itensPed);
+		return resultado;
+	}
+	
 	@PostMapping("/listarPedidos")
 	public ModelAndView pesquisar(@RequestParam("pesquisaPed") Integer idPed) {
 		ModelAndView resultado = new ModelAndView("cliente/listarPedidos");

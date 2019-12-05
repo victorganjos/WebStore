@@ -9,5 +9,5 @@ import com.phantomthieves.api.model.ItemPedido;
 
 public interface ItemPedRepository extends JpaRepository<ItemPedido, Integer> {
 	@Query(value = "SELECT * FROM ITEM_PEDIDO WHERE COD_PEDIDO = ?1", nativeQuery = true)
-	List<ItemPedido> findAllByCodPed(String codPed);
+	List<ItemPedido> findAllByCodPed(Integer codPed);
 }

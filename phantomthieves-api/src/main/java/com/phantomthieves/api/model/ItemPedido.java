@@ -26,6 +26,10 @@ public class ItemPedido {
 	@Column(name = "COD_PEDIDO")
 	private Integer codPedido;
 	
+	private String nomeProd;
+	
+	private String localArquivo;
+	
 	public ItemPedido() {
 		
 	}
@@ -80,4 +84,20 @@ public class ItemPedido {
 		this.codPedido = codPedido;
 	}
 
+	public String getNomeProd() {
+		return nomeProd;
+	}
+
+	public void setNomeProd(String nomeProd) {
+		this.nomeProd = nomeProd;
+	}
+
+	public String getLocalArquivo() {
+		return localArquivo;
+	}
+
+	public void setLocalArquivo(String localArquivo) {
+		this.localArquivo = localArquivo;
+	}
+	
 }
