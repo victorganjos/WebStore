@@ -24,7 +24,7 @@ public class Endereco {
 	@Length(max = 150, min = 5, message = "O logradouro do usuário deve conter entrer 5 e 150 caracteres")
 	private String address;
 
-	@Column(name = "CEP_ENDERECO", length = 9, nullable = false)
+	@Column(name = "CEP_ENDERECO", length = 10, nullable = false)
 	@NotNull(message = "O CEP é obrigatório")
 	@Length(max = 9, min = 8, message = "O campo CEP deve ser preenchido corretamente (Excesso ou ausência de dígitos)")
 	private String cep;

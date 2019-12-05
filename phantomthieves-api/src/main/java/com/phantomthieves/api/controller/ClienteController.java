@@ -284,11 +284,11 @@ public class ClienteController {
 		List<Endereco> end = new ArrayList<Endereco>();
 		end = enderecoRepository.findAll();
 		if (end.get(0).getId() == id) {
-			return enderecos("Você deve manter ao menos um endereço cadastrado!");
+			return enderecos("O endereço principal só pode ser alterado!");
 		}
 		System.out.println(id);
 		enderecoRepository.inativarIdEndereco(id);
-		return enderecos("Operação realizada com sucesso!");
+		return enderecos("");
 	}
 
 	@GetMapping("/listarPedidos")

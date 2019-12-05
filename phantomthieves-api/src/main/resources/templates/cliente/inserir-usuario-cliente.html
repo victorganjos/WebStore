@@ -61,9 +61,9 @@
 					<label>Confirmação de Senha:</label> <input type="password" id="passwordConfirm"
 						class="form-control" th:field="*{passwordConfirm}" required>
 				</div>
-				<div class="form-group col-md-4">
-					<label>Perfil:</label> <select class="form-control"
-						th:field="*{perfil}" required>
+				<div class="form-group col-md-4" hidden="true">
+				 <select class="form-control"
+						th:field="*{perfil}" required >
 						<option value="Cliente">Cliente</option>
 					</select>
 				</div>
