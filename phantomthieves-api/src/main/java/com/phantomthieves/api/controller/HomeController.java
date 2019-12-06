@@ -148,18 +148,16 @@ public class HomeController {
 	public ModelAndView pesquisar(@RequestParam("buscaProduto") String buscaProduto) {
 		ModelAndView resultado = new ModelAndView("index");
 		List<Imagem> imagens = im.findImgByNomeProduto(buscaProduto);
-		resultado.addObject("imagem", imagens);
+		List<Imagem> aux = new ArrayList<>();
+		
+		for(Imagem img: imagens) {
+			if(img.getCodProduto().getQuantidadeProduto()>0) {
+				aux.add(img);
+				}
+			}
+			resultado.addObject("imagem", aux);
+
 		return resultado;
 	}
-
-	/*
-	 * @PostMapping("/carrinho/carrinho") public ModelAndView
-	 * carrinho(@ModelAttribute("itensSelecionados1") List<ItemSelecionado>
-	 * itensSelecionados) { ModelAndView resultado = new
-	 * ModelAndView("carrinho/carrinho"); resultado.addObject("itensSelecionados",
-	 * itensSelecionados);
-	 * 
-	 * return resultado; }
-	 */
 
 }

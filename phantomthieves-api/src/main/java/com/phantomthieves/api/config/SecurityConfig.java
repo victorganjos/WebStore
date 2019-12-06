@@ -62,7 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers(HttpMethod.POST, "/cliente/meus-dados").hasRole("CLIENT")
 			.anyRequest().authenticated()
 			.and().formLogin().permitAll().defaultSuccessUrl("/")
-			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");
+			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+			.and()
+            .exceptionHandling()
+            	.accessDeniedPage("/erro/403");
 	}
 	
 	@Bean

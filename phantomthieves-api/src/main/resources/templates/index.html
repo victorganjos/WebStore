@@ -10,6 +10,12 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+	
+<script>
+	function confirmado(){
+		alert("Produto adicionado");
+	}
+</script>
 </head>
 
 <style>
@@ -127,7 +133,7 @@ img {
 								<form method="post" th:action="@{/}">
 									<input type="hidden" name="imagemId" th:value="${imagem.id}" />
 									<button type="submit" class="btn btn-block"
-										th:style="'color: #fff; background-color: #32CD32'">Carrinho</button>
+										th:style="'color: #fff; background-color: #32CD32'" onclick="confirmado()">Carrinho</button>
 								</form>
 							</div>
 						</div>
