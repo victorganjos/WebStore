@@ -66,7 +66,7 @@
 						class="form-control" th:field="*{passwordConfirm}"
 						value="${usuario.passwordConfirm}" required>
 				</div>
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-4" hidden>
 					<label>Perfil:</label> <select class="form-control"
 						th:field="*{perfil}" required>
 						<option value="Cliente">Cliente</option>

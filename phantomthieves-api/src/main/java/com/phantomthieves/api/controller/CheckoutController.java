@@ -57,7 +57,7 @@ public class CheckoutController {
 	private ProdutoRepository produtoRespository;
 
 	@RequestMapping("/finalizado")
-	public ModelAndView volta(@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados1) {
+	public String volta(@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados1) {
 		ModelAndView resultado = new ModelAndView("index");
 		List<Imagem> imagem = im.findImg();
 		List<Imagem> aux = new ArrayList<Imagem>();
@@ -69,7 +69,7 @@ public class CheckoutController {
 		
 		resultado.addObject("imagem", aux);
 		itensSelecionados1.clear();
-		return resultado;
+		return "redirect:/";
 	}
 
 	@GetMapping("/checkout")

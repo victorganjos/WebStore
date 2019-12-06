@@ -24,6 +24,7 @@ body {
 			<thead>
 				<th>Id</th>
 				<th>Data Pedido</th>
+				<th>Status</th>
 				<th>Valor Total + Frete</th>
 				<th>Forma Pag.</th>
 			</thead>
@@ -31,6 +32,7 @@ body {
 				<tr th:each="pedido: ${ped}">
 					<td th:text="${pedido.id}"></td>
 					<td th:text="${pedido.dataPed}"></td>
+					<td th:text="${pedido.statusPedido}"></td>
 					<td th:text="${pedido.valorTotal}"></td>
 					<td th:text="${pedido.formaPagamento}"></td>
 				</tr>

@@ -294,12 +294,46 @@ public class ClienteController {
 	@GetMapping("/listarPedidos")
 	public ModelAndView listar() {
 		ModelAndView resultado = new ModelAndView("cliente/listarPedidos");
-
+		
+		String status = "";
+		
 		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
 
 		Cliente cliente = clienteRepository.findByUser(authentication.getName());
 
 		List<Pedido> pedidos = pedRepo.findAllByCodUsu(cliente.getId());
+		
+		for(Pedido ped : pedidos) {
+			status = ped.getStatusPedido();
+			
+			switch(status) {
+				case "aguardando_pagamento":
+					ped.setStatusPedido("Aguardando Pagamento");
+				break;
+				
+				case "pagamento_rejeitado":
+					ped.setStatusPedido("Pagamento rejeitado");
+				break;
+
+				case "pagamento_sucesso":
+					ped.setStatusPedido("Pagamento com sucesso");
+				break;
+				
+				case "aguardando_retirada":
+					ped.setStatusPedido("Aguardando retirada");
+				break;
+
+				case "pedido_transito":
+					ped.setStatusPedido("Pedido em transito");
+				break;
+
+				case "pedido_entregue":
+					ped.setStatusPedido("Pedido entregue");
+				break;
+			}
+			
+		}
+		
 		resultado.addObject("pedidos", pedidos);
 
 		return resultado;
@@ -309,6 +343,7 @@ public class ClienteController {
 	public ModelAndView detalhePedido(@PathVariable Integer id) {
 		ModelAndView resultado = new ModelAndView("cliente/detalhePedido");
 		int codPed = 0;
+		String status = "";
 		
 		Authentication authentication = (Authentication) SecurityContextHolder.getContext().getAuthentication();
 
@@ -316,7 +351,35 @@ public class ClienteController {
 
 		Pedido peds = pedRepo.findAllByCodPed(id, cliente.getId());
 		resultado.addObject("ped", peds);
-	
+		
+		status = peds.getStatusPedido();
+		
+		switch(status) {
+			case "aguardando_pagamento":
+				peds.setStatusPedido("Aguardando Pagamento");
+			break;
+			
+			case "pagamento_rejeitado":
+				peds.setStatusPedido("Pagamento rejeitado");
+			break;
+
+			case "pagamento_sucesso":
+				peds.setStatusPedido("Pagamento com sucesso");
+			break;
+			
+			case "aguardando_retirada":
+				peds.setStatusPedido("Aguardando retirada");
+			break;
+
+			case "pedido_transito":
+				peds.setStatusPedido("Pedido em transito");
+			break;
+
+			case "pedido_entregue":
+				peds.setStatusPedido("Pedido entregue");
+			break;
+		}
+		
 		codPed = peds.getId();
 
 		List<ItemPedido> itensPed = itePedRepo.findAllByCodPed(codPed);

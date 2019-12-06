@@ -45,6 +45,7 @@
 				<th>Data Pedido</th>
 				<th>Valor Total</th>
 				<th>Forma Pag.</th>
+				<th>Status</th>
 				<th>Detalhes</th>
 			</thead>
 			<tbody>
@@ -53,6 +54,7 @@
 					<td th:text="${pedido.dataPed}"></td>
 					<td th:text="${pedido.valorTotal}"></td>
 					<td th:text="${pedido.formaPagamento}"></td>
+					<td th:text="${pedido.statusPedido}"></td>
 					<td><a class="btn btn-warning"
 						th:href="@{/cliente/detalhePedido/{id}(id=${pedido.id})}">Detalhar</a>
 					</td>

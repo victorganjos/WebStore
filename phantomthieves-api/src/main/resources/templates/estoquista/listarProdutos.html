@@ -29,16 +29,6 @@
 	<div th:replace="fragmentos/fragmentos.html :: cabecalho"></div>
 	<div class="container">
 		<h2>Lista de Produtos</h2>
-		<a href="/produtos/inserir" class="btn btn-outline-dark">Adicionar Produto</a>
-		<div class="row">
-			<div class="form-group col-md-12">
-				<form action = "" method ="post">
-					<label for="txt-pesquisa-produto">Produto a ser pesquisado</label>
-					<input name = "nomepesquisa" type="text" id="txt-pesquisa-produto" class="form-control" />
-					<button type="submit" class="btn btn-success mt-1" id="btn-pesquisa-produto">Pesquisa</button>
-				</form>
-			</div>
-		</div>
 		<table class="table" id="tbl-produto">
 			<thead>
 				<th>Nome do Produto</th>

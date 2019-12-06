@@ -33,7 +33,41 @@ public class EstoqueController {
 	@GetMapping("/listarPedidos")
 	public ModelAndView listar() {
 		ModelAndView resultado = new ModelAndView("estoquista/listarPedidos");
+		String status = "";
+		
 		List<Pedido> pedidos = pedRepo.buscaTodosPedidosDecrescente();
+		
+		for(Pedido ped : pedidos) {
+			status = ped.getStatusPedido();
+			
+			switch(status) {
+				case "aguardando_pagamento":
+					ped.setStatusPedido("Aguardando Pagamento");
+				break;
+				
+				case "pagamento_rejeitado":
+					ped.setStatusPedido("Pagamento rejeitado");
+				break;
+
+				case "pagamento_sucesso":
+					ped.setStatusPedido("Pagamento com sucesso");
+				break;
+				
+				case "aguardando_retirada":
+					ped.setStatusPedido("Aguardando retirada");
+				break;
+
+				case "pedido_transito":
+					ped.setStatusPedido("Pedido em transito");
+				break;
+
+				case "pedido_entregue":
+					ped.setStatusPedido("Pedido entregue");
+				break;
+			}
+			
+		}
+		
 		resultado.addObject("pedidos", pedidos);
 
 		return resultado;

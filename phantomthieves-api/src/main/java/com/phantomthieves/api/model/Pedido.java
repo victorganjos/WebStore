@@ -32,7 +32,7 @@ public class Pedido {
 	private String formaPagamento;
 	
 	@Column(name = "STATUS_PEDIDO")
-	private String statusPedido = "Aguardando Pagamento";
+	private String statusPedido = "aguardando_pagamento";
 	
 	public Pedido() {
 		
