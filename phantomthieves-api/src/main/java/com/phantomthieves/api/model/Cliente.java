@@ -38,22 +38,18 @@ public class Cliente {
 	private String cpf;
 
 	@Column(name = "DDD_CLIENTE", length = 3, nullable = false)
-	@NotNull(message = "O DDD é um campo obrigatório")
 	//@Length(max = 3, min = 2, message = "O DDD deve conter entre 2 e 3 dígitos")
 	private String ddd;
 
 	@Column(name = "TELEPHONE_CLIENTE", length = 9, nullable = false)
-	@NotNull(message = "O Telefone é um campo obrigatório")
 	//@Length(max = 9, min = 8, message = "O telefone deve conter entre 8 e 9 dígitos")
 	private String telephone;
 
-	@Column(name = "DDD_CONTACT_CLIENTE", length = 3, nullable = false)
-	@NotNull(message = "O DDD é um campo obrigatório")
+	@Column(name = "DDD_CONTACT_CLIENTE")
 	//@Length(max = 3, min = 2, message = "O DDD deve conter entre 2 e 3 dígitos")
 	private String dddContactTwo;
-
-	@Column(name = "TELEPHONE_CONTACT_CLIENTE", length = 9, nullable = false)
-	@NotNull(message = "O Telefone é um campo obrigatório")
+ 
+	@Column(name = "TELEPHONE_CONTACT_CLIENTE")
 	//@Length(max = 9, min = 8, message = "O telefone deve conter entre 8 e 9 dígitos")
 	private String telephoneContactTwo;
 

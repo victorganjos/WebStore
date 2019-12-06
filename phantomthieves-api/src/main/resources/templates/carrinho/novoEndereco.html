@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-<link rel="icon" href="https://www.pngtube.com/myfile/detail/30-305853_ren-amamiya-is-the-protagonist-and-player-character.png">
+<link rel="icon"
+	href="https://www.pngtube.com/myfile/detail/30-305853_ren-amamiya-is-the-protagonist-and-player-character.png">
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +13,94 @@
 
 <!-- Principal CSS do Bootstrap -->
 <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
 
+						function limpa_formulário_cep() {
+							// Limpa valores do formulário de cep.
+							$("#address").val("");
+							$("#bairro").val("");
+							$("#city").val("");
+							$("#uf").val("");
+						}
+
+						//Quando o campo cep perde o foco.
+						$("#cep")
+								.blur(
+										function() {
+
+											//Nova variável "cep" somente com dígitos.
+											var cep = $(this).val().replace(
+													/\D/g, '');
+
+											//Verifica se campo cep possui valor informado.
+											if (cep != "") {
+
+												//Expressão regular para validar o CEP.
+												var validacep = /^[0-9]{8}$/;
+
+												//Valida o formato do CEP.
+												if (validacep.test(cep)) {
+
+													//Preenche os campos com "..." enquanto consulta webservice.
+													$("#address").val("...");
+													$("#bairro").val("...");
+													$("#city").val("...");
+													$("#uf").val("...");
+
+													//Consulta o webservice viacep.com.br/
+													$
+															.getJSON(
+																	"https://viacep.com.br/ws/"
+																			+ cep
+																			+ "/json/?callback=?",
+																	function(
+																			dados) {
+
+																		if (!("erro" in dados)) {
+																			//Atualiza os campos com os valores da consulta.
+																			$(
+																					"#address")
+																					.val(
+																							dados.logradouro);
+																			$(
+																					"#bairro")
+																					.val(
+																							dados.bairro);
+																			$(
+																					"#city")
+																					.val(
+																							dados.localidade);
+																			$(
+																					"#uf")
+																					.val(
+																							dados.uf);
+																		} //end if.
+																		else {
+																			//CEP pesquisado não foi encontrado.
+																			limpa_formulário_cep();
+																			alert("CEP não encontrado.");
+																		}
+																	});
+												} //end if.
+												else {
+													//cep é inválido.
+													limpa_formulário_cep();
+													alert("Formato de CEP inválido.");
+												}
+											} //end if.
+											else {
+												//cep sem valor, limpa formulário.
+												limpa_formulário_cep();
+											}
+										});
+					});
+</script>
 </head>
 
 <style>
@@ -121,17 +209,6 @@ body {
 		</form>
 		<br>
 	</div>
-	<!-- Principal JavaScript do Bootstrap
-    ================================================== -->
-	<!-- Foi colocado no final para a página carregar mais rápido -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-	</script>
 	<script src="../../assets/js/vendor/popper.min.js"></script>
 	<script src="../../dist/js/bootstrap.min.js"></script>
 	<script src="../../assets/js/vendor/holder.min.js"></script>

@@ -16,7 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.phantomthieves.api.model.Imagem;
 import com.phantomthieves.api.model.ItemSelecionado;
+import com.phantomthieves.api.model.Produto;
 import com.phantomthieves.api.repository.ImagemRepository;
+import com.phantomthieves.api.repository.ProdutoRepository;
 
 @Controller
 @RequestMapping("/")
@@ -26,11 +28,21 @@ public class HomeController {
 	@Autowired
 	private ImagemRepository im;
 
+	@Autowired
+	private ProdutoRepository produtoRepository;
+
 	@GetMapping
-	public ModelAndView listar() {
+	public ModelAndView listar(String msg) {
 		ModelAndView resultado = new ModelAndView("index");
 		List<Imagem> imagem = im.findImg();
-		resultado.addObject("imagem", imagem);
+		List<Imagem> aux = new ArrayList<Imagem>();
+		for(Imagem img: imagem) {
+			if(img.getCodProduto().getQuantidadeProduto()>0) {
+			aux.add(img);
+			}
+		}
+		resultado.addObject("imagem", aux);
+		resultado.addObject("msg", msg);
 
 		return resultado;
 	}
@@ -49,7 +61,7 @@ public class HomeController {
 
 		return resultado;
 	}
-	
+
 	@GetMapping("/listarAcessorios")
 	public ModelAndView listarAcessorios() {
 		ModelAndView resultado = new ModelAndView("index");
@@ -64,7 +76,7 @@ public class HomeController {
 
 		return resultado;
 	}
-	
+
 	@GetMapping("/listarJogos")
 	public ModelAndView listarJogos() {
 		ModelAndView resultado = new ModelAndView("index");
@@ -79,19 +91,28 @@ public class HomeController {
 
 		return resultado;
 	}
-	
+
 	@PostMapping
 	public ModelAndView adicionarItem(@ModelAttribute("imagemId") Integer imagemId,
 			@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados,
 			RedirectAttributes redirAttr) {
 
 		Imagem carrinho = im.findImgByIdImage(imagemId);
+		Produto produto = new Produto();
 
 		int qtSelecionada = 0;
 		boolean itemExiste = false;
 		int posicaoLista = 0;
 
 		for (ItemSelecionado item : itensSelecionados) {
+
+			produto = produtoRepository.getOne(item.getItem().getCodProduto().getId());
+			System.out.println(item.getQtCarrinho());
+			System.out.println(produto.getQuantidadeProduto());
+			if (produto.getQuantidadeProduto() == item.getQtCarrinho()) {
+				return listar("0");
+			}
+
 			if (item.getItem().getId() == carrinho.getId()) {
 				itemExiste = true;
 
