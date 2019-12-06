@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.phantomthieves.api.model.Pedido;
+import com.phantomthieves.api.model.Produto;
 import com.phantomthieves.api.repository.PedidoRepository;
+import com.phantomthieves.api.repository.ProdutoRepository;
 
 
 @Controller
@@ -25,7 +26,9 @@ public class EstoqueController {
 	
 	@Autowired
 	private PedidoRepository pedRepo;
-
+	
+	@Autowired
+	private ProdutoRepository produtoRepository;
 	
 	@GetMapping("/listarPedidos")
 	public ModelAndView listar() {
@@ -33,6 +36,14 @@ public class EstoqueController {
 		List<Pedido> pedidos = pedRepo.buscaTodosPedidosDecrescente();
 		resultado.addObject("pedidos", pedidos);
 
+		return resultado;
+	}
+	
+	@GetMapping("/listarProdutos")
+	public ModelAndView listarProdutos() {
+		ModelAndView resultado = new ModelAndView("estoquista/listarProdutos");
+		List<Produto> produtos = produtoRepository.findAll();
+		resultado.addObject("produtos", produtos);
 		return resultado;
 	}
 	
@@ -45,15 +56,36 @@ public class EstoqueController {
 
 	}
 	
+	
+	@GetMapping("/editarProduto/{id}")
+	public ModelAndView editarProduto(@PathVariable Integer id) {
+		ModelAndView resultado = new ModelAndView("estoquista/editarProduto");
+		Produto produto = produtoRepository.buscaPorId(id);
+		resultado.addObject("produto", produto);
+		return resultado;
+
+	}
+	
 	@Transactional
 	@PostMapping("/editar/{pedido.id}")
 	public String alterar(
 			@ModelAttribute("pedido") Pedido pedido,
 			BindingResult bindingResult,
             RedirectAttributes redirAttr) {
-		System.out.println("\n\nTeste: " +pedido.getStatusPedido()+ " Teste id: " +pedido.getId());
 		pedRepo.atualizaPedido(pedido.getStatusPedido(), pedido.getId());	
 	
 		return "redirect:/estoquista/listarPedidos";
+	}
+	
+	@Transactional
+	@PostMapping("/editarProduto/{produto.id}")
+	public String alterarProduto(
+			@ModelAttribute("produto") Produto produto,
+			BindingResult bindingResult,
+            RedirectAttributes redirAttr) {
+		System.out.println("\n\n teste vamos ver" +produto.getQuantidadeProduto()+ " id: " +produto.getId());
+		produtoRepository.atualizaProduto(produto.getQuantidadeProduto(), produto.getId());
+	
+		return "redirect:/estoquista/listarProdutos";
 	}
 }

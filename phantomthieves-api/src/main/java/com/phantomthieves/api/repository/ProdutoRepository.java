@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import com.phantomthieves.api.model.Pedido;
 import com.phantomthieves.api.model.Produto;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
@@ -36,5 +37,13 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 	
 	@Query(value = "SELECT * FROM PRODUTO WHERE CATEGORIA_PRODUTO = console;", nativeQuery = true)
 	List<Produto> buscaConsole();
+	
+	
+	@Query(value = "SELECT * FROM PRODUTO WHERE COD_PRODUTO = ?;", nativeQuery = true)
+	Produto buscaPorId(Integer id);
+	
+	@Modifying
+	@Query(value = "UPDATE PRODUTO SET QT_PRODUTO = ? WHERE COD_PRODUTO = ?;", nativeQuery = true)
+	void atualizaProduto(int quantidadeProduto ,Integer id);
 
 }
