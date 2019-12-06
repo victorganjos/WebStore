@@ -36,6 +36,7 @@ public class HomeController {
 		ModelAndView resultado = new ModelAndView("index");
 		List<Imagem> imagem = im.findImg();
 		List<Imagem> aux = new ArrayList<Imagem>();
+		
 		for(Imagem img: imagem) {
 			if(img.getCodProduto().getQuantidadeProduto()>0) {
 			aux.add(img);
@@ -53,7 +54,7 @@ public class HomeController {
 		List<Imagem> imagem = im.findImg();
 		List<Imagem> imagemConsole = new ArrayList<>();
 		for (Imagem i : imagem) {
-			if (i.getCodProduto().getCategoriaProduto().equals("console")) {
+			if (i.getCodProduto().getCategoriaProduto().equals("console") && (i.getCodProduto().getQuantidadeProduto()>0)) {
 				imagemConsole.add(i);
 			}
 		}
@@ -68,7 +69,7 @@ public class HomeController {
 		List<Imagem> imagem = im.findImg();
 		List<Imagem> imagemConsole = new ArrayList<>();
 		for (Imagem i : imagem) {
-			if (i.getCodProduto().getCategoriaProduto().equals("acessorio")) {
+			if (i.getCodProduto().getCategoriaProduto().equals("acessorio") && (i.getCodProduto().getQuantidadeProduto()>0)) {
 				imagemConsole.add(i);
 			}
 		}
@@ -83,7 +84,7 @@ public class HomeController {
 		List<Imagem> imagem = im.findImg();
 		List<Imagem> imagemConsole = new ArrayList<>();
 		for (Imagem i : imagem) {
-			if (i.getCodProduto().getCategoriaProduto().equals("jogo")) {
+			if (i.getCodProduto().getCategoriaProduto().equals("jogo") && (i.getCodProduto().getQuantidadeProduto()>0)) {
 				imagemConsole.add(i);
 			}
 		}
@@ -96,29 +97,31 @@ public class HomeController {
 	public ModelAndView adicionarItem(@ModelAttribute("imagemId") Integer imagemId,
 			@ModelAttribute("itensSelecionados1") List<ItemSelecionado> itensSelecionados,
 			RedirectAttributes redirAttr) {
-
+	
 		Imagem carrinho = im.findImgByIdImage(imagemId);
 		Produto produto = new Produto();
-
 		int qtSelecionada = 0;
 		boolean itemExiste = false;
 		int posicaoLista = 0;
-
-		for (ItemSelecionado item : itensSelecionados) {
-
-			produto = produtoRepository.getOne(item.getItem().getCodProduto().getId());
-			System.out.println(item.getQtCarrinho());
-			System.out.println(produto.getQuantidadeProduto());
-			if (produto.getQuantidadeProduto() == item.getQtCarrinho()) {
-				return listar("0");
+		
+		produto = produtoRepository.buscaPorId(imagemId);
+		
+		for(int i = 0; i < itensSelecionados.size(); i++) {
+			if(produto.getNomeProduto().equals(itensSelecionados.get(i).getItem().getNomeProduto())) {
+				if(produto.getQuantidadeProduto() == itensSelecionados.get(i).getQtCarrinho()) {
+					return listar("0");
+				}else {
+					continue;
+				}
 			}
-
+		}
+		
+		for (ItemSelecionado item : itensSelecionados) {
 			if (item.getItem().getId() == carrinho.getId()) {
 				itemExiste = true;
 
 				item.setQtCarrinho(item.getQtCarrinho() + 1);
 				item.setValorTotal(item.getQtCarrinho() * item.getItem().getPrecoProduto());
-
 				break;
 			}
 		}
@@ -132,7 +135,7 @@ public class HomeController {
 
 			itensSelecionados.add(itemSel);
 		}
-
+		System.out.println("\n\n Quero fazer um teste aqui: " +itensSelecionados.get(0).getItem().getNomeProduto());
 		return new ModelAndView("redirect:/");
 	}
 
